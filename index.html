@@ -2,21 +2,17 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>人類史追体験</title>
-  <style>
-    body { font-family: serif; background:#111; color:#eee; padding:20px; }
-    button { display:block; margin:8px 0; padding:10px; width:100%; }
-    #pre { opacity:0.7; white-space:pre-line; margin-bottom:10px; }
-    #text { white-space:pre-line; margin-bottom:20px; }
-  </style>
+  <title>TEST</title>
 </head>
 <body>
-  <h2 id="title"></h2>
-  <div id="pre"></div>
-  <div id="text"></div>
-  <div id="choices"></div>
+  <h1>表示テスト</h1>
+  <p>HTMLは表示されています</p>
 
-<script src="scenarios.js"></script>
-<script src="engine.js"></script>
+  <script>
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      "<p>JavaScriptも動いています</p>"
+    );
+  </script>
 </body>
 </html>
