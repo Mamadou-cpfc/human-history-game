@@ -119,6 +119,7 @@ const scenarios = [
     { text: "判断を急がない", effects: { timePressure: +2 }, next: 6 }
   ]
 },
+
 /* ===== 6 ===== */
 {
   title: "第6章：耕すという発想",
@@ -271,6 +272,7 @@ const scenarios = [
     { text: "次の変化を待つ", effects: { timePressure: +1 }, next: 13 }
   ]
 },
+
 {
   title: "第13章：従う理由",
 
@@ -370,6 +372,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第14章：祈りと規範",
 
@@ -476,7 +479,8 @@ const scenarios = [
     }
 
   ]
-}
+},
+
 {
   title: "第15章：選ばれた者たち",
 
@@ -581,6 +585,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第16章：忠誠の交換",
 
@@ -685,6 +690,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第17章：争いの継承",
 
@@ -788,7 +794,8 @@ const scenarios = [
     }
 
   ]
-}
+},
+
 {
   title: "第18章：中心の誕生",
 
@@ -892,6 +899,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第19章：王の言葉",
 
@@ -997,6 +1005,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第20章：従わない者たち",
 
@@ -1205,6 +1214,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第22章：集う者たち",
 
@@ -1306,6 +1316,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第23章：書かれた約束",
 
@@ -1415,6 +1426,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第24章：境界の外",
 
@@ -1524,6 +1536,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第25章：遠くの価値",
 
@@ -1631,6 +1644,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第26章：船と羅針",
 
@@ -1744,6 +1758,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第27章：帰らぬ船",
 
@@ -1844,6 +1859,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第28章：異国からの知らせ",
 
@@ -1938,6 +1954,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第29章：富の影",
 
@@ -2032,6 +2049,7 @@ const scenarios = [
 
   ]
 },
+
 {
   title: "第30章：世界が広がる音",
 
