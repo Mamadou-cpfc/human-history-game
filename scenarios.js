@@ -2510,7 +2510,7 @@
         B: +1,
         D: -1
       },
-      next: 25
+      next: 26
     },
 
     {
@@ -2524,7 +2524,7 @@
         A: +2,
         D: +2
       },
-      next: 25
+      next: 26
     },
 
     {
@@ -2538,7 +2538,7 @@
         D: +3,
         bias_narrative: 1
       },
-      next: 25
+      next: 26
     },
 
     {
@@ -2552,7 +2552,7 @@
         bias_avoidance: 1,
         timePressure: +4
       },
-      next: 25
+      next: 26
     }
 
   ]
