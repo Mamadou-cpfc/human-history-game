@@ -825,6 +825,218 @@ const scenarios = [
     }
   ]
 },
+/* ===== 20 ===== */
+{
+  title: "第20章：増え続ける仕事",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 70) t += "判断は慣習として繰り返され、形を持ち始めていた。\n";
+    if (s.D > 70) t += "従う理由は、ある程度言葉として共有されていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "守ること、集めること、裁くこと。\n" +
+    "それらは特別な判断ではなくなっていた。\n\n" +
+    "日々の作業は増え、\n" +
+    "誰かが決めなければ止まる仕事が積み重なっていく。\n\n" +
+    "最初は善意だった。\n" +
+    "だが今は、遅れれば責められ、\n" +
+    "忘れれば混乱が生じる。\n\n" +
+    "この仕事を、誰が担うのか。\n" +
+    "そして、それをどう位置づけるのか。\n" +
+    "避けられない問いが浮かび上がっていた。",
+  choices: [
+    { text: "役割として固定する", effects: { A: +3 }, next: 21 },
+    { text: "奉仕として位置づける", effects: { D: +2, bias_narrative: 1 }, next: 21 },
+    { text: "負担を分散する", effects: { bias_avoidance: 1, timePressure: +2 }, next: 21 },
+    { text: "強制的に割り当てる", effects: { B: +3, D: -2 }, next: 21 }
+  ]
+},
 
+/* ===== 21 ===== */
+{
+  title: "第21章：集めるという行為",
+  preText: (s) => {
+    let t = "";
+    if (s.bias_procedure > 0) t += "仕事は役割ごとに整理され始めていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "物を集める。\n" +
+    "それは単なる作業ではなかった。\n\n" +
+    "集める側と、集められる側。\n" +
+    "その差は、少しずつ意識され始めていた。\n\n" +
+    "なぜ差し出すのか。\n" +
+    "なぜ拒めないのか。\n\n" +
+    "問いはまだ小さい。\n" +
+    "だが、確かに存在していた。",
+  choices: [
+    { text: "必要性を説明する", effects: { D: +2 }, next: 22 },
+    { text: "規則として明文化する", effects: { A: +3 }, next: 22 },
+    { text: "慣例として続ける", effects: { bias_avoidance: 1 }, next: 22 },
+    { text: "拒否を許さない", effects: { B: +2, D: -2 }, next: 22 }
+  ]
+},
+
+/* ===== 22 ===== */
+{
+  title: "第22章：記録の重み",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 72) t += "記録は参照され、判断の根拠になっていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "書き留める者が現れた。\n" +
+    "誰が何を納め、\n" +
+    "誰が何を命じたのか。\n\n" +
+    "記録は便利だった。\n" +
+    "だが同時に、逃げ場を奪った。\n\n" +
+    "忘れることも、誤魔化すことも、\n" +
+    "少しずつ難しくなっていく。",
+  choices: [
+    { text: "記録を公開する", effects: { D: +3 }, next: 23 },
+    { text: "管理者のみが扱う", effects: { A: +2 }, next: 23 },
+    { text: "必要最小限に留める", effects: { bias_avoidance: 1 }, next: 23 },
+    { text: "力で記録を守らせる", effects: { B: +2 }, next: 23 }
+  ]
+},
+
+/* ===== 23 ===== */
+{
+  title: "第23章：異議",
+  preText: (s) => {
+    let t = "";
+    if (s.D < 70) t += "理由は、十分に行き渡っていなかった。\n";
+    return t.trim();
+  },
+  text: () =>
+    "記録を前に、声が上がった。\n\n" +
+    "「これは不公平だ」\n" +
+    "「前と違う」\n\n" +
+    "小さな異議は、\n" +
+    "まだ秩序を揺るがすほどではない。\n\n" +
+    "だが、無視すれば残る。\n" +
+    "応えれば、前例になる。",
+  choices: [
+    { text: "話を聞く", effects: { D: +2 }, next: 24 },
+    { text: "手続きに従わせる", effects: { A: +2 }, next: 24 },
+    { text: "その場で抑える", effects: { B: +2, D: -1 }, next: 24 },
+    { text: "今は対応しない", effects: { bias_avoidance: 1, timePressure: +2 }, next: 24 }
+  ]
+},
+
+/* ===== 24 ===== */
+{
+  title: "第24章：前例",
+  preText: () => "",
+  text: () =>
+    "一度応じた判断は、\n" +
+    "次も求められる。\n\n" +
+    "拒めば、なぜ今回は違うのかが問われる。\n" +
+    "応じれば、線引きが必要になる。\n\n" +
+    "前例は、静かに重くのしかかっていた。",
+  choices: [
+    { text: "基準を定める", effects: { A: +3 }, next: 25 },
+    { text: "説明を重ねる", effects: { D: +2 }, next: 25 },
+    { text: "例外として処理する", effects: { bias_avoidance: 1 }, next: 25 },
+    { text: "力で抑える", effects: { B: +2, D: -2 }, next: 25 }
+  ]
+},
+
+/* ===== 25 ===== */
+{
+  title: "第25章：担い手の固定化",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 75) t += "役割は人に結びつき始めていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "同じ顔が、\n" +
+    "同じ場所に立つようになった。\n\n" +
+    "それは安定を生んだ。\n" +
+    "同時に、距離も生んだ。",
+  choices: [
+    { text: "継続を認める", effects: { A: +2 }, next: 26 },
+    { text: "定期的に入れ替える", effects: { D: +1 }, next: 26 },
+    { text: "成果で評価する", effects: { bias_procedure: 1 }, next: 26 },
+    { text: "疑問を持たせない", effects: { B: +2 }, next: 26 }
+  ]
+},
+
+/* ===== 26 ===== */
+{
+  title: "第26章：境界の拡張",
+  preText: () => "",
+  text: () =>
+    "管理の及ぶ範囲は広がっていた。\n\n" +
+    "かつては曖昧だった境界が、\n" +
+    "今は言葉と記録で示されている。",
+  choices: [
+    { text: "段階的に広げる", effects: { A: +2 }, next: 27 },
+    { text: "意味を語る", effects: { D: +2 }, next: 27 },
+    { text: "様子を見る", effects: { bias_avoidance: 1 }, next: 27 },
+    { text: "力で従わせる", effects: { B: +2 }, next: 27 }
+  ]
+},
+
+/* ===== 27 ===== */
+{
+  title: "第27章：距離",
+  preText: () => "",
+  text: () =>
+    "中心と周縁。\n" +
+    "距離は、物理だけではなかった。\n\n" +
+    "遠い者ほど、\n" +
+    "決定を実感しにくくなる。",
+  choices: [
+    { text: "伝達を増やす", effects: { D: +2 }, next: 28 },
+    { text: "代理を置く", effects: { A: +2 }, next: 28 },
+    { text: "管理を緩める", effects: { bias_avoidance: 1 }, next: 28 },
+    { text: "服従を求める", effects: { B: +2, D: -2 }, next: 28 }
+  ]
+},
+
+/* ===== 28 ===== */
+{
+  title: "第28章：信頼と疑念",
+  preText: () => "",
+  text: () =>
+    "任せるとは、\n" +
+    "信じるということだった。\n\n" +
+    "だが信頼は、\n" +
+    "裏切られたとき、より深い傷を残す。",
+  choices: [
+    { text: "監査を入れる", effects: { A: +2 }, next: 29 },
+    { text: "説明を求める", effects: { D: +2 }, next: 29 },
+    { text: "見て見ぬふりをする", effects: { bias_avoidance: 1 }, next: 29 },
+    { text: "力で締め付ける", effects: { B: +2, D: -2 }, next: 29 }
+  ]
+},
+
+/* ===== 29 ===== */
+{
+  title: "第29章：形になった秩序",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 78) t += "秩序は制度として定着していた。\n";
+    if (s.D < 65) t += "だが、問いは完全には消えていなかった。\n";
+    return t.trim();
+  },
+  text: () =>
+    "決める者がいて、\n" +
+    "従う者がいる。\n\n" +
+    "それはもはや特別なことではない。\n\n" +
+    "だが、その形が\n" +
+    "いつまで続くのかは、\n" +
+    "まだ誰にも分からなかった。",
+  choices: [
+    { text: "現状を維持する", effects: { bias_avoidance: 1 }, next: 30 },
+    { text: "制度を洗練させる", effects: { A: +3 }, next: 30 },
+    { text: "理念を語り直す", effects: { D: +2 }, next: 30 },
+    { text: "力を強める", effects: { B: +2 }, next: 30 }
+  ]
+},
 
 ];
