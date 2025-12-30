@@ -254,7 +254,7 @@ const scenarios = [
     { text: "定住を前提に進む", effects: { A: +5 }, next: 12 },
     { text: "柔軟な移動を保つ", effects: { A: -5 }, next: 12 },
     { text: "方向性を語り合う", effects: { D: +5 }, next: 12 },
-    { text: "判断を保留する", effects: { timePressure: +5 }, next: 12 }
+    { text: "判断を保留する", effects: { timePressure: +5 }, next: 11 }
   ]
 }
 ];
