@@ -28,6 +28,26 @@ startBtn.onclick = () => {
   render();
 };
 
+/* ===== 選択肢可視数制御 ===== */
+function getVisibleChoices(scene, state) {
+  const minChoices = scene.minChoices ?? 2;
+  const maxChoices = scene.choices.length;
+
+  let visibleCount = maxChoices;
+
+  if (state.timePressure >= 12) {
+    visibleCount = 1;
+  } else if (state.bias_avoidance >= 6) {
+    visibleCount = 2;
+  } else if (state.A < 60 || state.D < 60) {
+    visibleCount = 3;
+  }
+
+  visibleCount = Math.max(visibleCount, minChoices);
+  return scene.choices.slice(0, visibleCount);
+}
+
+/* ===== 描画 ===== */
 function render() {
   const scene = scenarios[current];
 
@@ -37,7 +57,9 @@ function render() {
 
   choicesDiv.innerHTML = "";
 
-  scene.choices.forEach((choice, index) => {
+  const visibleChoices = getVisibleChoices(scene, state);
+
+  visibleChoices.forEach((choice, index) => {
     const btn = document.createElement("button");
     btn.className = "choice";
 
@@ -51,8 +73,8 @@ function render() {
   });
 }
 
+/* ===== 選択処理 ===== */
 function selectChoice(choice) {
-  // state反映
   if (choice.effects) {
     for (const key in choice.effects) {
       state[key] = (state[key] || 0) + choice.effects[key];
