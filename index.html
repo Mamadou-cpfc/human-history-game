@@ -2,13 +2,36 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>TEST</title>
+  <title>文明形成シミュレーション</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2 id="title"></h2>
-  <div id="pre"></div>
-  <div id="text"></div>
-  <div id="choices"></div>
+
+  <!-- 導入画面 -->
+  <div id="intro" class="screen">
+    <h1>文明形成シミュレーション</h1>
+    <p class="intro-text">
+      このゲームは、歴史や文明を「正しく導く」ものではありません。<br><br>
+      あなたが行うのは、<br>
+      その時点で「何を優先し、何を後回しにするか」を選び続けることです。<br><br>
+      選択の結果は、すぐには現れないかもしれません。<br>
+      しかしそれらは積み重なり、やがて「選べる判断そのもの」を変えていきます。<br><br>
+      正解は示されません。<br>
+      成功や失敗も明言されません。<br><br>
+      あなたが作るのは、<br>
+      決断の積み重ねによって歪んでいく、一つの社会です。
+    </p>
+
+    <button id="startBtn">次に進む</button>
+  </div>
+
+  <!-- ゲーム画面 -->
+  <div id="game" class="screen hidden">
+    <div id="title"></div>
+    <div id="pre"></div>
+    <div id="text"></div>
+    <div id="choices"></div>
+  </div>
 
   <script src="scenarios.js"></script>
   <script src="engine.js"></script>
