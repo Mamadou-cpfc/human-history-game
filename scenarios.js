@@ -379,27 +379,267 @@ const scenarios = [
       text: "強い調停で抑える",
       detail: "衝突を未然に防ぐため、力による制御を選ぶ姿勢。",
       effects: { bias_speed: 1, B: -5 },
-      next: 9
+      next: 10
     },
     {
       text: "衝突時の手順を定める",
       detail: "衝突そのものを前提に、被害を抑える考え方。",
       effects: { bias_procedure: 1, A: +5 },
-      next: 9
+      next: 10
     },
     {
       text: "共通の目的を語る",
       detail: "対立よりも、共有される意味を再確認する立場。",
       effects: { bias_narrative: 1, D: +5 },
-      next: 9
+      next: 10
     },
     {
       text: "事態が動くのを待つ",
       detail: "今は介入せず、状況の変化に委ねる判断。",
       effects: { bias_avoidance: 1, timePressure: +5 },
-      next: 9
+      next: 10
     }
   ]
 }
+/* ===== 10 ===== */
+{
+  title: "第10章：安定",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 75) t += "集団の運用は、一定の再現性を持つようになっていた。\n";
+    if (s.bias_avoidance > 1) t += "ただし、明確に処理されていない判断も残っていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "集団はしばらくの安定を得ていた。\n" +
+    "この状態をどう扱うかが、次の判断となった。",
+  choices: [
+    {
+      text: "現状を維持する",
+      detail: "今は問題を起こさず、安定を崩さないことを優先する判断。",
+      effects: { bias_avoidance: 1 },
+      next: 11
+    },
+    {
+      text: "仕組みを整理する",
+      detail: "安定している今のうちに、判断を整理し直そうとする姿勢。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 11
+    },
+    {
+      text: "価値観を再確認する",
+      detail: "なぜこの形に落ち着いたのかを、改めて共有しようとする立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 11
+    },
+    {
+      text: "次の拡張を考える",
+      detail: "安定を前提に、さらに広げる可能性を探る判断。",
+      effects: { bias_speed: 1 },
+      next: 11
+    }
+  ]
+},
 
+/* ===== 11 ===== */
+{
+  title: "第11章：役割の固定",
+  preText: (s) => {
+    let t = "";
+    if (s.bias_speed > 2) t += "判断は、特定の者に集中しがちになっていた。\n";
+    if (s.bias_procedure > 2) t += "役割は、手順として参照され始めていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "いつの間にか、同じ者が同じ判断を下すようになっていた。\n" +
+    "この状況をどう扱うかが問われた。",
+  choices: [
+    {
+      text: "自然な流れとして受け入れる",
+      detail: "慣れた役割分担を、あえて崩さない判断。",
+      effects: { bias_avoidance: 1 },
+      next: 12
+    },
+    {
+      text: "役割を明文化する",
+      detail: "暗黙の分担を、制度として固定しようとする姿勢。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 12
+    },
+    {
+      text: "役割の理由を共有する",
+      detail: "なぜその分担になったのかを説明し、納得を揃えようとする立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 12
+    },
+    {
+      text: "状況に応じて入れ替える",
+      detail: "固定化を避け、柔軟さを残そうとする判断。",
+      effects: { bias_speed: 1 },
+      next: 12
+    }
+  ]
+},
+
+/* ===== 12 ===== */
+{
+  title: "第12章：規範",
+  preText: (s) => {
+    let t = "";
+    if (s.D > 75) t += "集団内では、暗黙の理解が共有されていた。\n";
+    if (s.A > 80) t += "判断は、規則として参照される場面が増えていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "それが『普通』だとされる振る舞いが現れ始めた。\n" +
+    "この規範をどう扱うかが問われた。",
+  choices: [
+    {
+      text: "明確な規範として定める",
+      detail: "曖昧さを減らし、判断基準を揃えようとする考え方。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 13
+    },
+    {
+      text: "語られる規範として保つ",
+      detail: "柔軟さを残しつつ、共有理解に委ねる立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 13
+    },
+    {
+      text: "状況次第で解釈する",
+      detail: "規範よりも、その場の判断を優先する姿勢。",
+      effects: { bias_speed: 1 },
+      next: 13
+    },
+    {
+      text: "特に定義しない",
+      detail: "規範化による縛りを避ける判断。",
+      effects: { bias_avoidance: 1 },
+      next: 13
+    }
+  ]
+},
+
+/* ===== 13 ===== */
+{
+  title: "第13章：緊張の再来",
+  preText: (s) => {
+    let t = "";
+    if (s.timePressure > 45) t += "処理されていない判断が、再び表面化していた。\n";
+    if (s.A < 70) t += "判断の参照点は、人に依存していた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "小さな衝突が、再び目立ち始めていた。\n" +
+    "これをどう扱うかが試されていた。",
+  choices: [
+    {
+      text: "早めに抑え込む",
+      detail: "拡大する前に、力によって沈静化させる判断。",
+      effects: { bias_speed: 1, B: -5 },
+      next: 14
+    },
+    {
+      text: "対処手順を整える",
+      detail: "衝突が起きることを前提に、被害を抑える姿勢。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 14
+    },
+    {
+      text: "意味を問い直す",
+      detail: "なぜ衝突が起きるのかを、言葉で整理しようとする立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 14
+    },
+    {
+      text: "様子を見る",
+      detail: "今は介入せず、事態の推移を待つ判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 14
+    }
+  ]
+},
+
+/* ===== 14 ===== */
+{
+  title: "第14章：継承",
+  preText: (s) => {
+    let t = "";
+    if (s.bias_speed > 3) t += "判断は、特定の経験に強く依存していた。\n";
+    if (s.bias_procedure > 3) t += "判断は、仕組みとして残り始めていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "これまでの判断を、次の世代にどう引き継ぐか。\n" +
+    "継承の形が問われた。",
+  choices: [
+    {
+      text: "経験を重ねて学ばせる",
+      detail: "明文化せず、実地で覚えさせる考え方。",
+      effects: { bias_speed: 1 },
+      next: 15
+    },
+    {
+      text: "仕組みとして伝える",
+      detail: "誰が担っても同じ判断ができるようにする姿勢。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 15
+    },
+    {
+      text: "考え方を語り継ぐ",
+      detail: "何を大切にしてきたかを物語として残す立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 15
+    },
+    {
+      text: "その時に任せる",
+      detail: "継承を固定せず、次に委ねる判断。",
+      effects: { bias_avoidance: 1 },
+      next: 15
+    }
+  ]
+},
+
+/* ===== 15 ===== */
+{
+  title: "第15章：分岐点",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 85) t += "判断は、制度として自律し始めていた。\n";
+    if (s.D > 85) t += "集団のあり方は、言葉として共有されていた。\n";
+    if (s.bias_speed > 4) t += "即断が、当然の前提になっていた。\n";
+    if (s.timePressure > 50) t += "未処理の判断が、重く蓄積していた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "この集団は、ある方向へと進み始めていた。\n" +
+    "それがどのような形になるのかは、まだ確定していなかった。",
+  choices: [
+    {
+      text: "この形を押し進める",
+      detail: "これまでの判断を肯定し、その延長に賭ける姿勢。",
+      effects: { bias_speed: 1 },
+      next: 15
+    },
+    {
+      text: "立ち止まって再設計する",
+      detail: "一度流れを止め、判断の前提から見直そうとする判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 15
+    },
+    {
+      text: "意味を問い続ける",
+      detail: "結論を急がず、問いを持ち続ける立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 15
+    },
+    {
+      text: "先送りする",
+      detail: "決定を保留し、状況の変化に委ねる判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 15
+    }
+  ]
+}
 ];
