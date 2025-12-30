@@ -1,42 +1,64 @@
 let state = {
-  A: 50, B: 50, C: 50, D: 50,
   bias_speed: 0,
   bias_procedure: 0,
   bias_narrative: 0,
   bias_avoidance: 0,
-  timePressure: 0,
-  externalPressure: 0
+  A: 70,
+  B: 70,
+  D: 70,
+  timePressure: 0
 };
 
 let current = 0;
 
+// DOM
+const intro = document.getElementById("intro");
+const game = document.getElementById("game");
+const startBtn = document.getElementById("startBtn");
+
+const titleDiv = document.getElementById("title");
+const preDiv = document.getElementById("pre");
+const textDiv = document.getElementById("text");
+const choicesDiv = document.getElementById("choices");
+
+// 導入 → ゲーム開始
+startBtn.onclick = () => {
+  intro.classList.add("hidden");
+  game.classList.remove("hidden");
+  render();
+};
+
 function render() {
-  const sc = scenarios[current];
+  const scene = scenarios[current];
 
-  document.getElementById("title").innerText = sc.title;
-  document.getElementById("pre").innerText = sc.preText ? sc.preText(state) : "";
-  document.getElementById("text").innerText = sc.text(state);
+  titleDiv.textContent = scene.title;
+  preDiv.textContent = scene.preText ? scene.preText(state) : "";
+  textDiv.textContent = scene.text(state);
 
-  const choices = [...sc.choices].sort(() => Math.random() - 0.5);
-  const area = document.getElementById("choices");
-  area.innerHTML = "";
+  choicesDiv.innerHTML = "";
 
-  choices.forEach(c => {
+  scene.choices.forEach((choice, index) => {
     const btn = document.createElement("button");
-    btn.innerText = c.text;
-    btn.onclick = () => choose(c);
-    area.appendChild(btn);
+    btn.className = "choice";
+
+    btn.innerHTML = `
+      <div class="choice-title">(${index + 1}) ${choice.text}</div>
+      <div class="choice-detail">${choice.detail || ""}</div>
+    `;
+
+    btn.onclick = () => selectChoice(choice);
+    choicesDiv.appendChild(btn);
   });
 }
 
-function choose(choice) {
+function selectChoice(choice) {
+  // state反映
   if (choice.effects) {
-    Object.keys(choice.effects).forEach(k => {
-      state[k] = (state[k] || 0) + choice.effects[k];
-    });
+    for (const key in choice.effects) {
+      state[key] = (state[key] || 0) + choice.effects[key];
+    }
   }
+
   current = choice.next;
   render();
 }
-
-window.onload = render;
