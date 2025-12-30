@@ -2248,6 +2248,378 @@ const scenarios = [
   ]
 },
 
+/* ===== 31 ===== */
+{
+  title: "第31章：記録の必要",
+  preText: () =>
+    "人が増え、出来事が積み重なるにつれ、\n" +
+    "『覚えておく』こと自体が難しくなっていた。",
+  text: () =>
+    "過去の判断が参照できないことで、\n" +
+    "同じ議論が何度も繰り返され始めた。\n" +
+    "出来事を残す必要が語られる。",
+  choices: [
+    {
+      text: "判断の内容を簡潔に残す",
+      detail: "事実だけを記し、評価は含めない。",
+      effects: { A: +2 },
+      next: 32
+    },
+    {
+      text: "判断の経緯まで書き残す",
+      detail: "理由を残すことで、再検討を容易にする。",
+      effects: { A: +1, D: +1 },
+      next: 32
+    },
+    {
+      text: "語り手に記憶を委ねる",
+      detail: "書くよりも、伝えることを重視する。",
+      effects: { bias_narrative: +1 },
+      next: 32
+    },
+    {
+      text: "特に残さず、慣習に任せる",
+      detail: "記録は固定化を生むと考える。",
+      effects: { bias_avoidance: +1 },
+      next: 32
+    }
+  ]
+},
+
+/* ===== 32 ===== */
+{
+  title: "第32章：書く者",
+  preText: () =>
+    "記録は自然に、\n" +
+    "判断の場に近い者によって書かれるようになった。",
+  text: () =>
+    "誰が書くかは決められていない。\n" +
+    "だが、書き続ける者が『書く者』になっていく。",
+  choices: [
+    {
+      text: "判断者自身が記す",
+      detail: "判断と記録を切り離さない。",
+      effects: { bias_speed: +1 },
+      next: 33
+    },
+    {
+      text: "専任の記録役を置く",
+      detail: "判断から距離を取らせる。",
+      effects: { A: +2 },
+      next: 33
+    },
+    {
+      text: "複数人で確認しながら残す",
+      detail: "内容の偏りを防ごうとする。",
+      effects: { D: +1 },
+      next: 33
+    },
+    {
+      text: "特定せず、任意に任せる",
+      detail: "固定化を避ける選択。",
+      effects: { bias_avoidance: +1 },
+      next: 33
+    }
+  ]
+},
+
+/* ===== 33 ===== */
+{
+  title: "第33章：言葉の固定",
+  preText: () =>
+    "同じ出来事が、\n" +
+    "似た言葉で繰り返し書かれるようになった。",
+  text: () =>
+    "表現が揃うことで、\n" +
+    "過去を素早く参照できるようになる。\n" +
+    "その一方で、別の言い方は減っていく。",
+  choices: [
+    {
+      text: "用語を統一する",
+      detail: "理解の速さを優先する。",
+      effects: { A: +2 },
+      next: 34
+    },
+    {
+      text: "複数の表現を併記する",
+      detail: "意味の幅を残そうとする。",
+      effects: { D: +1 },
+      next: 34
+    },
+    {
+      text: "語り口を重視する",
+      detail: "言葉よりも印象を残す。",
+      effects: { bias_narrative: +1 },
+      next: 34
+    },
+    {
+      text: "特に意識しない",
+      detail: "自然な変化に任せる。",
+      effects: { bias_avoidance: +1 },
+      next: 34
+    }
+  ]
+},
+
+/* ===== 34 ===== */
+{
+  title: "第34章：正しさの参照点",
+  preText: () =>
+    "記録は次第に、\n" +
+    "『前はどうだったか』を示す基準になった。",
+  text: () =>
+    "過去に書かれた内容が、\n" +
+    "現在の判断を縛り始める。\n" +
+    "記録は助言から、根拠へと変わる。",
+  choices: [
+    {
+      text: "記録を判断材料として扱う",
+      detail: "最終判断は現在に委ねる。",
+      effects: { D: +1 },
+      next: 35
+    },
+    {
+      text: "記録を原則として尊重する",
+      detail: "安定を優先する。",
+      effects: { A: +2 },
+      next: 35
+    },
+    {
+      text: "記録の解釈を語る",
+      detail: "意味を更新しようとする。",
+      effects: { bias_narrative: +1 },
+      next: 35
+    },
+    {
+      text: "特に位置づけない",
+      detail: "参照はするが従わない。",
+      effects: { bias_avoidance: +1 },
+      next: 35
+    }
+  ]
+},
+
+/* ===== 35 ===== */
+{
+  title: "第35章：例外の扱い",
+  preText: () =>
+    "すべてが記録通りには進まなかった。",
+  text: () =>
+    "例外的な出来事が起きる。\n" +
+    "それをどう扱うかが問われる。",
+  choices: [
+    {
+      text: "例外として個別処理する",
+      detail: "原則は崩さない。",
+      effects: { A: +1 },
+      next: 36
+    },
+    {
+      text: "記録を書き換える",
+      detail: "現実に合わせて更新する。",
+      effects: { D: +1 },
+      next: 36
+    },
+    {
+      text: "物語として説明する",
+      detail: "意味づけで吸収する。",
+      effects: { bias_narrative: +1 },
+      next: 36
+    },
+    {
+      text: "深く扱わない",
+      detail: "再発しないことを期待する。",
+      effects: { bias_avoidance: +1 },
+      next: 36
+    }
+  ]
+},
+
+/* ===== 36 ===== */
+{
+  title: "第36章：語りの始まり",
+  preText: () =>
+    "出来事の背後に、\n" +
+    "理由や意味が語られ始めた。",
+  text: () =>
+    "判断は事実だけでは伝わらない。\n" +
+    "なぜそうなったのかが求められる。",
+  choices: [
+    {
+      text: "事実を優先する",
+      detail: "意味づけは最小限にする。",
+      effects: { A: +1 },
+      next: 37
+    },
+    {
+      text: "意味を添えて語る",
+      detail: "納得を重視する。",
+      effects: { D: +1 },
+      next: 37
+    },
+    {
+      text: "象徴的に語る",
+      detail: "覚えやすさを優先する。",
+      effects: { bias_narrative: +1 },
+      next: 37
+    },
+    {
+      text: "語りを避ける",
+      detail: "誤解を恐れる。",
+      effects: { bias_avoidance: +1 },
+      next: 37
+    }
+  ]
+},
+
+/* ===== 37 ===== */
+{
+  title: "第37章：共有される意味",
+  preText: () =>
+    "同じ語りが、\n" +
+    "何度も繰り返される。",
+  text: () =>
+    "出来事の理解が揃っていく。\n" +
+    "異なる解釈は減っていった。",
+  choices: [
+    {
+      text: "共通理解を重視する",
+      detail: "混乱を避ける。",
+      effects: { A: +1 },
+      next: 38
+    },
+    {
+      text: "解釈の余地を残す",
+      detail: "多様性を守る。",
+      effects: { D: +1 },
+      next: 38
+    },
+    {
+      text: "語りを洗練させる",
+      detail: "より強い印象を与える。",
+      effects: { bias_narrative: +1 },
+      next: 38
+    },
+    {
+      text: "特に整理しない",
+      detail: "自然な収束に任せる。",
+      effects: { bias_avoidance: +1 },
+      next: 38
+    }
+  ]
+},
+
+/* ===== 38 ===== */
+{
+  title: "第38章：語り手",
+  preText: () =>
+    "語ることに慣れた者が現れた。",
+  text: () =>
+    "彼らは命じない。\n" +
+    "ただ、説明する。\n" +
+    "だが説明は力を持ち始める。",
+  choices: [
+    {
+      text: "役割として認める",
+      detail: "説明を安定させる。",
+      effects: { A: +1 },
+      next: 39
+    },
+    {
+      text: "複数の語り手を保つ",
+      detail: "集中を避ける。",
+      effects: { D: +1 },
+      next: 39
+    },
+    {
+      text: "象徴的存在にする",
+      detail: "語りを集約する。",
+      effects: { bias_narrative: +1 },
+      next: 39
+    },
+    {
+      text: "固定しない",
+      detail: "流動性を保つ。",
+      effects: { bias_avoidance: +1 },
+      next: 39
+    }
+  ]
+},
+
+/* ===== 39 ===== */
+{
+  title: "第39章：異なる語り",
+  preText: () =>
+    "別の説明が生まれる。",
+  text: () =>
+    "それは選択肢ではなく、\n" +
+    "混乱として扱われ始める。",
+  choices: [
+    {
+      text: "統一を優先する",
+      detail: "衝突を防ぐ。",
+      effects: { A: +2 },
+      next: 40
+    },
+    {
+      text: "併存を許す",
+      detail: "時間をかけて整理する。",
+      effects: { D: +1 },
+      next: 40
+    },
+    {
+      text: "物語として吸収する",
+      detail: "差異を意味に変える。",
+      effects: { bias_narrative: +1 },
+      next: 40
+    },
+    {
+      text: "触れない",
+      detail: "自然消滅を期待する。",
+      effects: { bias_avoidance: +1 },
+      next: 40
+    }
+  ]
+},
+
+/* ===== 40 ===== */
+{
+  title: "第40章：沈黙の選択",
+  preText: () =>
+    "語らない者が現れる。",
+  text: () =>
+    "反論ではない。\n" +
+    "拒否でもない。\n" +
+    "沈黙が、最も安全な態度になる。",
+  choices: [
+    {
+      text: "沈黙を尊重する",
+      detail: "無理に語らせない。",
+      effects: { D: +1 },
+      next: 41
+    },
+    {
+      text: "説明を促す",
+      detail: "理解を求める。",
+      effects: { A: +1 },
+      next: 41
+    },
+    {
+      text: "沈黙に意味を与える",
+      detail: "語らない理由を物語る。",
+      effects: { bias_narrative: +1 },
+      next: 41
+    },
+    {
+      text: "特に扱わない",
+      detail: "問題視しない。",
+      effects: { bias_avoidance: +1 },
+      next: 41
+    }
+  ]
+},
+
+
 
 ];
 
