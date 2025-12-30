@@ -2619,6 +2619,261 @@ const scenarios = [
   ]
 },
 
+/* ===== 41 ===== */
+{
+  title: "第41章：役割の固定",
+  preText: () =>
+    "語る者、書く者、決める者。\n" +
+    "役割は自然に固定され始めていた。",
+  text: () =>
+    "誰が何を担うのかが、\n" +
+    "暗黙の了解として共有されていく。",
+  choices: [
+    { text: "役割を明文化する", detail: "責任の所在を明確にする。", effects: { A: +2 }, next: 42 },
+    { text: "慣習として維持する", detail: "柔軟さを残す。", effects: { D: +1 }, next: 42 },
+    { text: "象徴的に位置づける", detail: "意味づけを優先する。", effects: { bias_narrative: +1 }, next: 42 },
+    { text: "特に触れない", detail: "変化を恐れない。", effects: { bias_avoidance: +1 }, next: 42 }
+  ]
+},
+
+/* ===== 42 ===== */
+{
+  title: "第42章：内部の差異",
+  preText: () =>
+    "役割の違いは、\n" +
+    "次第に待遇の差として現れ始めた。",
+  text: () =>
+    "同じ集団でありながら、\n" +
+    "生活の質に差が生まれる。",
+  choices: [
+    { text: "差異を是正する", detail: "不満の芽を摘む。", effects: { D: +1 }, next: 43 },
+    { text: "差異を認める", detail: "役割に応じた報いと考える。", effects: { A: +1 }, next: 43 },
+    { text: "物語として説明する", detail: "納得を誘導する。", effects: { bias_narrative: +1 }, next: 43 },
+    { text: "問題視しない", detail: "自然な分化とみなす。", effects: { bias_avoidance: +1 }, next: 43 }
+  ]
+},
+
+/* ===== 43 ===== */
+{
+  title: "第43章：外との接触",
+  preText: () =>
+    "集団の周囲には、\n" +
+    "同じように定住する別の集団が存在していた。",
+  text: () =>
+    "交易か、警戒か。\n" +
+    "外部との関係が意識され始める。",
+  choices: [
+    { text: "交流を試みる", detail: "資源と知識の交換を期待する。", effects: { D: +1 }, next: 44 },
+    { text: "距離を保つ", detail: "内部の安定を優先する。", effects: { A: +1 }, next: 44 },
+    { text: "語りによって位置づける", detail: "我々と彼らを説明する。", effects: { bias_narrative: +1 }, next: 44 },
+    { text: "特に対応しない", detail: "偶発的接触に任せる。", effects: { bias_avoidance: +1 }, next: 44 }
+  ]
+},
+
+/* ===== 44 ===== */
+{
+  title: "第44章：交換の拡大",
+  preText: () =>
+    "物や情報が、\n" +
+    "集団の外から流入し始めた。",
+  text: () =>
+    "交換は利益をもたらすが、\n" +
+    "同時に依存も生む。",
+  choices: [
+    { text: "交換を管理する", detail: "流れを把握する。", effects: { A: +2 }, next: 45 },
+    { text: "自由に任せる", detail: "活力を重視する。", effects: { D: +1 }, next: 45 },
+    { text: "意味づけを行う", detail: "正当な交換として語る。", effects: { bias_narrative: +1 }, next: 45 },
+    { text: "限定的に留める", detail: "依存を避ける。", effects: { bias_avoidance: +1 }, next: 45 }
+  ]
+},
+
+/* ===== 45 ===== */
+{
+  title: "第45章：蓄積の集中",
+  preText: () =>
+    "交換の中心には、\n" +
+    "常に同じ者たちがいた。",
+  text: () =>
+    "富と情報が、\n" +
+    "特定の場所に集まり始める。",
+  choices: [
+    { text: "集中を認める", detail: "効率を重視する。", effects: { A: +2 }, next: 46 },
+    { text: "分散を促す", detail: "均衡を保つ。", effects: { D: +1 }, next: 46 },
+    { text: "象徴化する", detail: "中心として語る。", effects: { bias_narrative: +1 }, next: 46 },
+    { text: "意識しない", detail: "自然な流れとみなす。", effects: { bias_avoidance: +1 }, next: 46 }
+  ]
+},
+
+/* ===== 46 ===== */
+{
+  title: "第46章：守る力",
+  preText: () =>
+    "蓄積は、\n" +
+    "守る対象となった。",
+  text: () =>
+    "外から奪われる可能性が、\n" +
+    "現実のものとして語られる。",
+  choices: [
+    { text: "守る役割を定める", detail: "秩序を保つ。", effects: { A: +2 }, next: 47 },
+    { text: "全員で備える", detail: "責任を共有する。", effects: { D: +1 }, next: 47 },
+    { text: "脅威を語る", detail: "結束を促す。", effects: { bias_narrative: +1 }, next: 47 },
+    { text: "過度に考えない", detail: "平時を優先する。", effects: { bias_avoidance: +1 }, next: 47 }
+  ]
+},
+
+/* ===== 47 ===== */
+{
+  title: "第47章：武の専門化",
+  preText: () =>
+    "守る役割は、\n" +
+    "専門の者へと集約されていく。",
+  text: () =>
+    "武を扱う者は、\n" +
+    "次第に発言力を持ち始める。",
+  choices: [
+    { text: "役割を限定する", detail: "武の影響を抑える。", effects: { D: +1 }, next: 48 },
+    { text: "権限を与える", detail: "迅速な対応を期待する。", effects: { A: +2 }, next: 48 },
+    { text: "物語で位置づける", detail: "守護者として語る。", effects: { bias_narrative: +1 }, next: 48 },
+    { text: "曖昧に保つ", detail: "力の所在をぼかす。", effects: { bias_avoidance: +1 }, next: 48 }
+  ]
+},
+
+/* ===== 48 ===== */
+{
+  title: "第48章：命令と従属",
+  preText: () =>
+    "守るための命令が、\n" +
+    "日常にも及び始めた。",
+  text: () =>
+    "安全の名のもとに、\n" +
+    "従うことが求められる。",
+  choices: [
+    { text: "範囲を制限する", detail: "生活への介入を抑える。", effects: { D: +1 }, next: 49 },
+    { text: "命令系統を整える", detail: "統制を重視する。", effects: { A: +2 }, next: 49 },
+    { text: "必要性を語る", detail: "納得を求める。", effects: { bias_narrative: +1 }, next: 49 },
+    { text: "慣れに任せる", detail: "抵抗が減るのを待つ。", effects: { bias_avoidance: +1 }, next: 49 }
+  ]
+},
+
+/* ===== 49 ===== */
+{
+  title: "第49章：信じるもの",
+  preText: () =>
+    "不安が高まると、\n" +
+    "人は拠り所を求める。",
+  text: () =>
+    "説明できない出来事に、\n" +
+    "意味が与えられ始めた。",
+  choices: [
+    { text: "共通の信仰を整える", detail: "統一感を持たせる。", effects: { A: +1 }, next: 50 },
+    { text: "多様な信を認める", detail: "対立を避ける。", effects: { D: +1 }, next: 50 },
+    { text: "象徴として語る", detail: "行動規範に結びつける。", effects: { bias_narrative: +1 }, next: 50 },
+    { text: "深く関与しない", detail: "私的領域とする。", effects: { bias_avoidance: +1 }, next: 50 }
+  ]
+},
+
+/* ===== 50 ===== */
+{
+  title: "第50章：正当性",
+  preText: () =>
+    "信じるものは、\n" +
+    "判断を正当化する力を持つ。",
+  text: () =>
+    "決定が、\n" +
+    "疑われにくくなっていく。",
+  choices: [
+    { text: "信仰と判断を結びつける", detail: "強い正当性を得る。", effects: { A: +2 }, next: 51 },
+    { text: "距離を保つ", detail: "利用を避ける。", effects: { D: +1 }, next: 51 },
+    { text: "物語化する", detail: "理解しやすくする。", effects: { bias_narrative: +1 }, next: 51 },
+    { text: "曖昧にする", detail: "対立を先送りする。", effects: { bias_avoidance: +1 }, next: 51 }
+  ]
+},
+
+/* ===== 51 ===== */
+{
+  title: "第51章：疑問の抑制",
+  preText: () =>
+    "疑問は、\n" +
+    "秩序を乱すものとして扱われ始めた。",
+  text: () =>
+    "問いかけること自体が、\n" +
+    "勇気を要する行為になる。",
+  choices: [
+    { text: "疑問を受け止める", detail: "健全性を保つ。", effects: { D: +1 }, next: 52 },
+    { text: "手続きを設ける", detail: "管理された批判を許す。", effects: { A: +1 }, next: 52 },
+    { text: "語りで包む", detail: "違和感を和らげる。", effects: { bias_narrative: +1 }, next: 52 },
+    { text: "問題視しない", detail: "静けさを優先する。", effects: { bias_avoidance: +1 }, next: 52 }
+  ]
+},
+
+/* ===== 52 ===== */
+{
+  title: "第52章：境界線",
+  preText: () =>
+    "内と外、\n" +
+    "正と異が明確になっていく。",
+  text: () =>
+    "境界は安心を与えるが、\n" +
+    "越える者を生む。",
+  choices: [
+    { text: "境界を厳格にする", detail: "秩序を守る。", effects: { A: +2 }, next: 53 },
+    { text: "緩やかに保つ", detail: "摩擦を減らす。", effects: { D: +1 }, next: 53 },
+    { text: "物語で説明する", detail: "納得を与える。", effects: { bias_narrative: +1 }, next: 53 },
+    { text: "明示しない", detail: "曖昧さを残す。", effects: { bias_avoidance: +1 }, next: 53 }
+  ]
+},
+
+/* ===== 53 ===== */
+{
+  title: "第53章：亀裂",
+  preText: () =>
+    "境界の内側でも、\n" +
+    "違いは存在していた。",
+  text: () =>
+    "小さな不一致が、\n" +
+    "集団を分け始める。",
+  choices: [
+    { text: "調整を試みる", detail: "分裂を防ぐ。", effects: { D: +1 }, next: 54 },
+    { text: "力で抑える", detail: "即時の安定を取る。", effects: { A: +2 }, next: 54 },
+    { text: "意味づけする", detail: "対立を語り直す。", effects: { bias_narrative: +1 }, next: 54 },
+    { text: "放置する", detail: "自然な帰結に任せる。", effects: { bias_avoidance: +1 }, next: 54 }
+  ]
+},
+
+/* ===== 54 ===== */
+{
+  title: "第54章：離脱",
+  preText: () =>
+    "従わない者が、\n" +
+    "去る選択をする。",
+  text: () =>
+    "それは反逆ではない。\n" +
+    "静かな断絶だった。",
+  choices: [
+    { text: "引き留める", detail: "対話を試みる。", effects: { D: +1 }, next: 55 },
+    { text: "規律を示す", detail: "見せしめとする。", effects: { A: +2 }, next: 55 },
+    { text: "物語化する", detail: "去った理由を語る。", effects: { bias_narrative: +1 }, next: 55 },
+    { text: "黙認する", detail: "影響を最小化する。", effects: { bias_avoidance: +1 }, next: 55 }
+  ]
+},
+
+/* ===== 55 ===== */
+{
+  title: "第55章：継続か断絶か",
+  preText: () =>
+    "集団は、\n" +
+    "まだ存在している。\n" +
+    "だが、以前とは同じではない。",
+  text: () =>
+    "秩序は続いている。\n" +
+    "同時に、終わりの形も見え始めていた。",
+  choices: [
+    { text: "再構築を試みる", detail: "変化を受け入れつつ続ける。", effects: { D: +2 }, next: 56 },
+    { text: "強化を選ぶ", detail: "失われたものを切り捨てる。", effects: { A: +2 }, next: 56 },
+    { text: "意味を再定義する", detail: "新たな物語を紡ぐ。", effects: { bias_narrative: +2 }, next: 56 },
+    { text: "流れに任せる", detail: "帰結を受け入れる。", effects: { bias_avoidance: +2 }, next: 56 }
+  ]
+},
 
 
 ];
