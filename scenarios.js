@@ -379,25 +379,25 @@ const scenarios = [
       text: "強い調停で抑える",
       detail: "衝突を未然に防ぐため、力による制御を選ぶ姿勢。",
       effects: { bias_speed: 1, B: -5 },
-      next: 10
+      next: 9
     },
     {
       text: "衝突時の手順を定める",
       detail: "衝突そのものを前提に、被害を抑える考え方。",
       effects: { bias_procedure: 1, A: +5 },
-      next: 10
+      next: 9
     },
     {
       text: "共通の目的を語る",
       detail: "対立よりも、共有される意味を再確認する立場。",
       effects: { bias_narrative: 1, D: +5 },
-      next: 10
+      next: 9
     },
     {
       text: "事態が動くのを待つ",
       detail: "今は介入せず、状況の変化に委ねる判断。",
       effects: { bias_avoidance: 1, timePressure: +5 },
-      next: 10
+      next: 9
     }
   ]
 }
