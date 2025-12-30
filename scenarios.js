@@ -13,21 +13,25 @@ const scenarios = [
   choices: [
     {
       text: "その場で最も経験のある者が分配を決める",
+      detail: "形式や合意よりも、即時性と実地の知恵を信頼する判断。",
       effects: { bias_speed: 1, A: -5, D: -5 },
       next: 1
     },
     {
       text: "役割を定め、分配の手順を決める",
+      detail: "人ではなく、やり方に判断を委ねようとする姿勢。",
       effects: { bias_procedure: 1, A: +5 },
       next: 1
     },
     {
       text: "なぜそう分けるのかを全員に説明する",
+      detail: "配分そのものより、納得される過程を重視する考え方。",
       effects: { bias_narrative: 1, D: +5 },
       next: 1
     },
     {
       text: "今回は明確に決めず、状況を見ながら対応する",
+      detail: "今は踏み込まず、柔軟さを保つことを選ぶ判断。",
       effects: { bias_avoidance: 1, timePressure: +5 },
       next: 1
     }
@@ -50,10 +54,30 @@ const scenarios = [
     "分配の結果に対して、不満を示す者が現れ始めた。\n" +
     "誰がその不満を受け止め、どのように対応するのかを決める必要があった。",
   choices: [
-    { text: "影響力のある者がその場で調整する", effects: { bias_speed: 1, D: -5 }, next: 2 },
-    { text: "不満を受け取る手順を定める", effects: { bias_procedure: 1, A: +5 }, next: 2 },
-    { text: "分配の考え方を改めて説明する", effects: { bias_narrative: 1, D: +5 }, next: 2 },
-    { text: "今は深刻ではないとして様子を見る", effects: { bias_avoidance: 1, timePressure: +5 }, next: 2 }
+    {
+      text: "影響力のある者がその場で調整する",
+      detail: "手続きを整えるより、今の不満を抑えることを優先する。",
+      effects: { bias_speed: 1, D: -5 },
+      next: 2
+    },
+    {
+      text: "不満を受け取る手順を定める",
+      detail: "誰の不満でも同じように扱える形を残そうとする判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 2
+    },
+    {
+      text: "分配の考え方を改めて説明する",
+      detail: "納得されることを通じて、対立を和らげようとする姿勢。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 2
+    },
+    {
+      text: "今は深刻ではないとして様子を見る",
+      detail: "問題を確定させず、事態の推移に委ねる判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 2
+    }
   ]
 },
 
@@ -71,10 +95,30 @@ const scenarios = [
     "季節の変化により、資源が不足し始めた。\n" +
     "不足への対応を、誰がどのように決めるのかが問われていた。",
   choices: [
-    { text: "経験のある者が配分を調整する", effects: { bias_speed: 1, D: -5 }, next: 3 },
-    { text: "不足時の配分規則を定める", effects: { bias_procedure: 1, A: +5 }, next: 3 },
-    { text: "不足の理由を共有する", effects: { bias_narrative: 1, D: +5 }, next: 3 },
-    { text: "自然回復を待つ", effects: { bias_avoidance: 1, timePressure: +5 }, next: 3 }
+    {
+      text: "経験のある者が配分を調整する",
+      detail: "緊急時には個人の判断力に頼るという考え方。",
+      effects: { bias_speed: 1, D: -5 },
+      next: 3
+    },
+    {
+      text: "不足時の配分規則を定める",
+      detail: "今回だけでなく、次の不足も想定して判断を残す姿勢。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 3
+    },
+    {
+      text: "不足の理由を共有する",
+      detail: "不満を抑えるより、理解される状況を作ろうとする立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 3
+    },
+    {
+      text: "自然回復を待つ",
+      detail: "人為的な調整を控え、環境の変化に賭ける判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 3
+    }
   ]
 },
 
@@ -91,10 +135,30 @@ const scenarios = [
     "分配に従わない者が現れ始めた。\n" +
     "逸脱への対処をどう決めるかが求められた。",
   choices: [
-    { text: "影響力のある者が裁定する", effects: { bias_speed: 1, B: -5 }, next: 4 },
-    { text: "逸脱時の手続きを定める", effects: { bias_procedure: 1, A: +5 }, next: 4 },
-    { text: "規範を説明し直す", effects: { bias_narrative: 1, D: +5 }, next: 4 },
-    { text: "深刻化するまで待つ", effects: { bias_avoidance: 1, timePressure: +5 }, next: 4 }
+    {
+      text: "影響力のある者が裁定する",
+      detail: "秩序の維持を優先し、判断を権威に集中させる考え方。",
+      effects: { bias_speed: 1, B: -5 },
+      next: 4
+    },
+    {
+      text: "逸脱時の手続きを定める",
+      detail: "誰が逸脱しても同じ扱いになる状態を目指す判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 4
+    },
+    {
+      text: "規範を説明し直す",
+      detail: "従わせるのではなく、理解されることを重視する姿勢。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 4
+    },
+    {
+      text: "深刻化するまで待つ",
+      detail: "今は介入せず、問題が明確になるのを待つ判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 4
+    }
   ]
 },
 
@@ -111,10 +175,30 @@ const scenarios = [
     "新たな成員が加わり、集団は拡大し始めた。\n" +
     "受け入れの基準をどう決めるかが問題となった。",
   choices: [
-    { text: "その都度判断する", effects: { bias_speed: 1 }, next: 5 },
-    { text: "受け入れの基準を定める", effects: { bias_procedure: 1, A: +5 }, next: 5 },
-    { text: "集団の考え方を共有する", effects: { bias_narrative: 1, D: +5 }, next: 5 },
-    { text: "明確な基準を設けない", effects: { bias_avoidance: 1 }, next: 5 }
+    {
+      text: "その都度判断する",
+      detail: "明確な基準を設けず、状況対応を重ねる姿勢。",
+      effects: { bias_speed: 1 },
+      next: 5
+    },
+    {
+      text: "受け入れの基準を定める",
+      detail: "拡大による混乱を防ぐため、線引きを明確にする判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 5
+    },
+    {
+      text: "集団の考え方を共有する",
+      detail: "価値観への同意を重視して、受け入れを進める立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 5
+    },
+    {
+      text: "明確な基準を設けない",
+      detail: "排除を避け、柔軟さを保つことを優先する判断。",
+      effects: { bias_avoidance: 1 },
+      next: 5
+    }
   ]
 },
 
@@ -131,10 +215,30 @@ const scenarios = [
     "集団の内と外を分ける必要が語られ始めた。\n" +
     "境界をどう決めるかが問われた。",
   choices: [
-    { text: "明確な線を引く", effects: { D: -5 }, next: 6 },
-    { text: "柔軟な境界を保つ", effects: { D: +5 }, next: 6 },
-    { text: "警戒を強める", effects: { B: -5 }, next: 6 },
-    { text: "判断を先送りする", effects: { bias_avoidance: 1, timePressure: +5 }, next: 6 }
+    {
+      text: "明確な線を引く",
+      detail: "内と外をはっきり区別し、秩序を保とうとする判断。",
+      effects: { D: -5 },
+      next: 6
+    },
+    {
+      text: "柔軟な境界を保つ",
+      detail: "状況に応じて関係を変えられる余地を残す姿勢。",
+      effects: { D: +5 },
+      next: 6
+    },
+    {
+      text: "警戒を強める",
+      detail: "外部との摩擦を前提に、防御的に構える考え方。",
+      effects: { B: -5 },
+      next: 6
+    },
+    {
+      text: "判断を先送りする",
+      detail: "境界を確定させず、曖昧さを維持する判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 6
+    }
   ]
 },
 
@@ -151,10 +255,30 @@ const scenarios = [
     "移動ではなく、留まるという選択が現実味を帯びてきた。\n" +
     "定住に向けた判断をどう進めるかが求められた。",
   choices: [
-    { text: "経験を頼りに判断する", effects: { bias_speed: 1 }, next: 7 },
-    { text: "定住に関する取り決めを作る", effects: { bias_procedure: 1, A: +5 }, next: 7 },
-    { text: "定住の意味を共有する", effects: { bias_narrative: 1, D: +5 }, next: 7 },
-    { text: "決断を先延ばしにする", effects: { bias_avoidance: 1, timePressure: +5 }, next: 7 }
+    {
+      text: "経験を頼りに判断する",
+      detail: "過去の成功体験を基準に、柔軟に進める姿勢。",
+      effects: { bias_speed: 1 },
+      next: 7
+    },
+    {
+      text: "定住に関する取り決めを作る",
+      detail: "留まることを前提に、長期運用を考え始める判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 7
+    },
+    {
+      text: "定住の意味を共有する",
+      detail: "なぜ留まるのかを言葉で揃えようとする立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 7
+    },
+    {
+      text: "決断を先延ばしにする",
+      detail: "移動と定住のどちらにも賭けず、判断を保留する姿勢。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 7
+    }
   ]
 },
 
@@ -171,10 +295,30 @@ const scenarios = [
     "資源が蓄えられるようになった。\n" +
     "蓄積の管理をどう決めるかが問われた。",
   choices: [
-    { text: "信頼できる者に任せる", effects: { bias_speed: 1 }, next: 8 },
-    { text: "管理の仕組みを作る", effects: { bias_procedure: 1, A: +5 }, next: 8 },
-    { text: "管理方針を説明する", effects: { bias_narrative: 1, D: +5 }, next: 8 },
-    { text: "特に決めずに運用する", effects: { bias_avoidance: 1 }, next: 8 }
+    {
+      text: "信頼できる者に任せる",
+      detail: "仕組みよりも人間関係に管理を委ねる考え方。",
+      effects: { bias_speed: 1 },
+      next: 8
+    },
+    {
+      text: "管理の仕組みを作る",
+      detail: "人が変わっても続く管理方法を残そうとする判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 8
+    },
+    {
+      text: "管理方針を説明する",
+      detail: "蓄積の扱いについて納得を得ることを重視する姿勢。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 8
+    },
+    {
+      text: "特に決めずに運用する",
+      detail: "明文化を避け、慣行に任せる判断。",
+      effects: { bias_avoidance: 1 },
+      next: 8
+    }
   ]
 },
 
@@ -191,10 +335,30 @@ const scenarios = [
     "蓄積の偏りが指摘され始めた。\n" +
     "不均衡への対応をどう決めるかが必要だった。",
   choices: [
-    { text: "その場で調整する", effects: { bias_speed: 1 }, next: 9 },
-    { text: "再配分の基準を作る", effects: { bias_procedure: 1, A: +5 }, next: 9 },
-    { text: "納得を得るため説明する", effects: { bias_narrative: 1, D: +5 }, next: 9 },
-    { text: "大きな問題ではないとする", effects: { bias_avoidance: 1 }, next: 9 }
+    {
+      text: "その場で調整する",
+      detail: "不満が出た都度、即応的に修正する姿勢。",
+      effects: { bias_speed: 1 },
+      next: 9
+    },
+    {
+      text: "再配分の基準を作る",
+      detail: "偏りが生じた場合の対処を事前に決めておく判断。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 9
+    },
+    {
+      text: "納得を得るため説明する",
+      detail: "数値よりも、理解される理由を重視する立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 9
+    },
+    {
+      text: "大きな問題ではないとする",
+      detail: "現時点では許容範囲とみなし、介入を控える判断。",
+      effects: { bias_avoidance: 1 },
+      next: 9
+    }
   ]
 },
 
@@ -211,50 +375,31 @@ const scenarios = [
     "集団内の緊張が高まっていた。\n" +
     "衝突をどう防ぐかを決める必要があった。",
   choices: [
-    { text: "強い調停で抑える", effects: { bias_speed: 1, B: -5 }, next: 10 },
-    { text: "衝突時の手順を定める", effects: { bias_procedure: 1, A: +5 }, next: 10 },
-    { text: "共通の目的を語る", effects: { bias_narrative: 1, D: +5 }, next: 10 },
-    { text: "事態が動くのを待つ", effects: { bias_avoidance: 1, timePressure: +5 }, next: 10 }
+    {
+      text: "強い調停で抑える",
+      detail: "衝突を未然に防ぐため、力による制御を選ぶ姿勢。",
+      effects: { bias_speed: 1, B: -5 },
+      next: 10
+    },
+    {
+      text: "衝突時の手順を定める",
+      detail: "衝突そのものを前提に、被害を抑える考え方。",
+      effects: { bias_procedure: 1, A: +5 },
+      next: 10
+    },
+    {
+      text: "共通の目的を語る",
+      detail: "対立よりも、共有される意味を再確認する立場。",
+      effects: { bias_narrative: 1, D: +5 },
+      next: 10
+    },
+    {
+      text: "事態が動くのを待つ",
+      detail: "今は介入せず、状況の変化に委ねる判断。",
+      effects: { bias_avoidance: 1, timePressure: +5 },
+      next: 10
+    }
   ]
 }
-,
-/* ===== 10 ===== */
-{
-  title: "第10章：安定",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 75) t += "運用は一定の安定を見せていた。\n";
-    if (s.bias_avoidance > 1) t += "未処理の問題も残っていた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "集団は、しばらくの安定を得ていた。\n" +
-    "この状態をどう扱うかが次の判断となった。",
-  choices: [
-    { text: "現状を維持する", effects: { bias_avoidance: 1 }, next: 11 },
-    { text: "仕組みを整理する", effects: { bias_procedure: 1, A: +5 }, next: 11 },
-    { text: "価値観を再確認する", effects: { bias_narrative: 1, D: +5 }, next: 11 },
-    { text: "次の拡張を考える", effects: { bias_speed: 1 }, next: 11 }
-  ]
-},
 
-/* ===== 11 ===== */
-{
-  title: "第11章：転換点",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_procedure > 2) t += "判断は手順として定着しつつあった。\n";
-    if (s.bias_narrative > 2) t += "集団の意味は語られ続けていた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "移動と定住、拡張と維持のどちらを選ぶか。\n" +
-    "集団は転換点に差し掛かっていた。",
-  choices: [
-    { text: "定住を前提に進む", effects: { A: +5 }, next: 12 },
-    { text: "柔軟な移動を保つ", effects: { A: -5 }, next: 12 },
-    { text: "方向性を語り合う", effects: { D: +5 }, next: 12 },
-    { text: "判断を保留する", effects: { timePressure: +5 }, next: 11 }
-  ]
-}
 ];
