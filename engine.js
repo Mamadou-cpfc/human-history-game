@@ -6,7 +6,12 @@ let state = {
   A: 70,
   B: 70,
   D: 70,
-  timePressure: 0
+  timePressure: 0,
+
+  legitimacy_source: null, // "belief" | "lineage" | "law"
+  belief_strength: 0,
+  lineage_strength: 0,
+  law_strength: 0
 };
 
 let current = 0;
@@ -28,12 +33,43 @@ startBtn.onclick = () => {
   render();
 };
 
+/* ===== フェードアウト判定 ===== */
+function checkFadeOut(state) {
+  if (state.D <= 40 && state.timePressure >= 25) {
+    return {
+      title: "断絶",
+      text:
+        "理由は語られなくなり、問いは残されたままだった。\n" +
+        "人々は従わなくなり、構造は静かに解体されていった。\n" +
+        "この集団は、次の時代へ何も残せなかった。"
+    };
+  }
+
+  if (state.A <= 45 && state.bias_avoidance >= 6) {
+    return {
+      title: "消散",
+      text:
+        "決められないことが常態となり、判断は先送りされ続けた。\n" +
+        "集団は留まる理由を失い、やがて散っていった。"
+    };
+  }
+
+  if (state.B <= 40 && state.D <= 50) {
+    return {
+      title: "崩壊",
+      text:
+        "力によって保たれた秩序は、力を失った瞬間に瓦解した。\n" +
+        "従っていたのではなく、耐えていただけだった。"
+    };
+  }
+
+  return null;
+}
+
 /* ===== 選択肢可視数制御 ===== */
 function getVisibleChoices(scene, state) {
   const minChoices = scene.minChoices ?? 2;
-  const maxChoices = scene.choices.length;
-
-  let visibleCount = maxChoices;
+  let visibleCount = scene.choices.length;
 
   if (state.timePressure >= 12) {
     visibleCount = 1;
@@ -49,25 +85,29 @@ function getVisibleChoices(scene, state) {
 
 /* ===== 描画 ===== */
 function render() {
-  const scene = scenarios[current];
+  const fade = checkFadeOut(state);
+  if (fade) {
+    titleDiv.textContent = fade.title;
+    preDiv.textContent = "";
+    textDiv.textContent = fade.text;
+    choicesDiv.innerHTML = "";
+    return;
+  }
 
+  const scene = scenarios[current];
   titleDiv.textContent = scene.title;
   preDiv.textContent = scene.preText ? scene.preText(state) : "";
   textDiv.textContent = scene.text(state);
-
   choicesDiv.innerHTML = "";
 
   const visibleChoices = getVisibleChoices(scene, state);
-
   visibleChoices.forEach((choice, index) => {
     const btn = document.createElement("button");
     btn.className = "choice";
-
     btn.innerHTML = `
       <div class="choice-title">(${index + 1}) ${choice.text}</div>
       <div class="choice-detail">${choice.detail || ""}</div>
     `;
-
     btn.onclick = () => selectChoice(choice);
     choicesDiv.appendChild(btn);
   });
@@ -80,7 +120,6 @@ function selectChoice(choice) {
       state[key] = (state[key] || 0) + choice.effects[key];
     }
   }
-
   current = choice.next;
   render();
 }
