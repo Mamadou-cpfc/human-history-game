@@ -1,14 +1,19 @@
+/* ===============================
+   STATE
+=============================== */
 let state = {
   bias_speed: 0,
   bias_procedure: 0,
   bias_narrative: 0,
   bias_avoidance: 0,
-  A: 70,
-  B: 70,
-  D: 70,
+
+  A: 70, // 制度
+  B: 70, // 強制
+  D: 70, // 正当性
+
   timePressure: 0,
 
-  legitimacy_source: null,
+  legitimacy_source: null, // "belief" | "lineage" | "law"
   belief_strength: 0,
   lineage_strength: 0,
   law_strength: 0
@@ -16,7 +21,9 @@ let state = {
 
 let current = 0;
 
-// DOM
+/* ===============================
+   DOM
+=============================== */
 const intro = document.getElementById("intro");
 const game = document.getElementById("game");
 const startBtn = document.getElementById("startBtn");
@@ -26,28 +33,34 @@ const preDiv = document.getElementById("pre");
 const textDiv = document.getElementById("text");
 const choicesDiv = document.getElementById("choices");
 
-// 導入
+/* ===============================
+   START
+=============================== */
 startBtn.onclick = () => {
   intro.classList.add("hidden");
   game.classList.remove("hidden");
   render();
 };
 
-/* ===== フェードアウト判定 ===== */
+/* ===============================
+   FADE OUT CHECK
+=============================== */
 function checkFadeOut(state, current) {
   if (current < 70) return null;
 
+  // 正当性断絶
   if (state.D <= 40 && state.timePressure >= 25) {
     return {
       title: "断絶",
       text:
-        "理由は語られなくなり、問いは残されたままだった。\n" +
+        "理由は語られなくなり、問いだけが残された。\n" +
         "人々は従わなくなり、構造は静かに解体されていった。\n\n" +
         "反乱も革命も起きなかった。\n" +
         "ただ、この集団は次の時代へ何も残せなかった。"
     };
   }
 
+  // 制度疲弊
   if (state.A <= 45 && state.bias_avoidance >= 6) {
     return {
       title: "消散",
@@ -59,12 +72,13 @@ function checkFadeOut(state, current) {
     };
   }
 
+  // 強制依存崩壊
   if (state.B >= 80 && state.D <= 50) {
     return {
       title: "崩壊",
       text:
         "秩序は力によって保たれていた。\n" +
-        "だが、それが理由ではなかった。\n\n" +
+        "だが、それは理由ではなかった。\n\n" +
         "力が揺らいだ瞬間、\n" +
         "従っていたのではなく耐えていたことが露わになった。\n\n" +
         "王国は、音を立てて崩れた。"
@@ -74,7 +88,9 @@ function checkFadeOut(state, current) {
   return null;
 }
 
-/* ===== 予兆レベル ===== */
+/* ===============================
+   OMEN
+=============================== */
 function getOmenLevel(state, current) {
   if (current < 70) return 0;
 
@@ -84,7 +100,7 @@ function getOmenLevel(state, current) {
   if (state.timePressure > 20) omen++;
   if (state.bias_avoidance >= 6) omen++;
 
-  return omen;
+  return omen; // 0〜4
 }
 
 function getOmenText(level) {
@@ -102,7 +118,9 @@ function getOmenText(level) {
   }
 }
 
-/* ===== 選択肢可視数制御 ===== */
+/* ===============================
+   CHOICE VISIBILITY
+=============================== */
 function getVisibleChoices(scene, state) {
   const minChoices = scene.minChoices ?? 2;
   let visibleCount = scene.choices.length;
@@ -119,7 +137,29 @@ function getVisibleChoices(scene, state) {
   return scene.choices.slice(0, visibleCount);
 }
 
-/* ===== 描画 ===== */
+/* ===============================
+   STRUCTURAL DECAY
+=============================== */
+function applyStructuralDecay(state) {
+  // 制度疲弊
+  if (state.bias_avoidance >= 5 && state.timePressure >= 10) {
+    state.A -= 1;
+  }
+
+  // 正当性摩耗
+  if (state.bias_speed >= 5 && state.bias_narrative < 2) {
+    state.D -= 1;
+  }
+
+  // 強制依存
+  if (state.B >= 80 && state.bias_narrative < 3) {
+    state.D -= 1;
+  }
+}
+
+/* ===============================
+   RENDER
+=============================== */
 function render() {
   const fade = checkFadeOut(state, current);
   if (fade) {
@@ -155,27 +195,23 @@ function render() {
     choicesDiv.appendChild(btn);
   });
 }
-// 各章終了時に評価
-function applyStructuralDecay(state) {
-  if (state.bias_avoidance >= 5 && state.timePressure >= 10) {
-    state.A -= 1;
-  }
 
-  if (state.bias_speed >= 5 && state.bias_narrative < 2) {
-    state.D -= 1;
-  }
-
-  if (state.B >= 80 && state.bias_narrative < 3) {
-    state.D -= 1;
-  }
-}
-/* ===== 選択処理 ===== */
+/* ===============================
+   SELECT
+=============================== */
 function selectChoice(choice) {
   if (choice.effects) {
     for (const key in choice.effects) {
       state[key] = (state[key] || 0) + choice.effects[key];
     }
   }
+
   current = choice.next;
+
+  // ★ 10章以降・3章に1回だけ自然減耗
+  if (current >= 10 && current % 3 === 0) {
+    applyStructuralDecay(state);
+  }
+
   render();
 }
