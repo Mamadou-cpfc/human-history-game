@@ -155,7 +155,20 @@ function render() {
     choicesDiv.appendChild(btn);
   });
 }
+// 各章終了時に評価
+function applyStructuralDecay(state) {
+  if (state.bias_avoidance >= 5 && state.timePressure >= 10) {
+    state.A -= 1;
+  }
 
+  if (state.bias_speed >= 5 && state.bias_narrative < 2) {
+    state.D -= 1;
+  }
+
+  if (state.B >= 80 && state.bias_narrative < 3) {
+    state.D -= 1;
+  }
+}
 /* ===== 選択処理 ===== */
 function selectChoice(choice) {
   if (choice.effects) {
