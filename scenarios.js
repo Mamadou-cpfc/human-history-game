@@ -1628,6 +1628,415 @@ const scenarios = [
       next: 40
     }
   ]
-}
+},
+/* ===== 40 ===== */
+{
+  title: "第40章：金が足りない",
+  preText: (s) => {
+    let t = "";
+    if (s.B > 75) t += "武装と防衛の維持が、常態となっていた。\n";
+    if (s.A > 75) t += "制度は整っていたが、費用は増え続けていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "守るためには、金が要る。\n\n" +
+    "兵を養い、\n" +
+    "設備を維持し、\n" +
+    "境界を保つ。\n\n" +
+    "これまでのやり方では、\n" +
+    "明らかに足りなくなっていた。",
+  choices: [
+    {
+      text: "恒常的な徴収を始める",
+      detail: "安定した収入を確保するが、生活への影響は避けられない。",
+      effects: { A: +2, D: -1 },
+      next: 41
+    },
+    {
+      text: "一時的な負担として説明する",
+      detail: "理由を語ることで理解を求める。",
+      effects: { D: +2 },
+      next: 41
+    },
+    {
+      text: "曖昧な形で集める",
+      detail: "明確な説明を避ける。不満は見えにくい。",
+      effects: { bias_avoidance: 1, timePressure: +2 },
+      next: 41
+    },
+    {
+      text: "力で徴収する",
+      detail: "迅速だが反感を買う。",
+      effects: { B: +2, D: -2 },
+      next: 41
+    }
+  ]
+},
+
+/* ===== 41 ===== */
+{
+  title: "第41章：払う理由",
+  preText: (s) => {
+    let t = "";
+    if (s.D < 65) t += "なぜ負担するのか、理解は十分ではなかった。\n";
+    return t.trim();
+  },
+  text: () =>
+    "人々は問う。\n\n" +
+    "――なぜ、払わなければならないのか。\n\n" +
+    "守られている実感があれば、\n" +
+    "納得は生まれる。\n\n" +
+    "だが、それが見えなくなれば、\n" +
+    "疑問だけが残る。",
+  choices: [
+    {
+      text: "防衛の成果を示す",
+      detail: "何が守られているのかを具体的に示す。",
+      effects: { D: +2 },
+      next: 42
+    },
+    {
+      text: "制度として当然とする",
+      detail: "理由を説明せず、義務として扱う。",
+      effects: { A: +2, D: -1 },
+      next: 42
+    },
+    {
+      text: "説明を後回しにする",
+      detail: "今は急務として処理する。",
+      effects: { bias_avoidance: 1, timePressure: +2 },
+      next: 42
+    },
+    {
+      text: "不満を抑え込む",
+      detail: "異論を力で封じる。",
+      effects: { B: +2, D: -2 },
+      next: 42
+    }
+  ]
+},
+
+/* ===== 42 ===== */
+{
+  title: "第42章：声を持つ者",
+  preText: () => "",
+  text: () =>
+    "負担を求めるなら、\n" +
+    "声を聞くべきではないか。\n\n" +
+    "そう考える者が現れ始めた。\n\n" +
+    "それは要求であり、\n" +
+    "交渉の始まりでもあった。",
+  choices: [
+    {
+      text: "意見を聞く場を設ける",
+      detail: "同意を得る手続きを始める。",
+      effects: { A: +2, D: +1 },
+      next: 43
+    },
+    {
+      text: "限定的に聞く",
+      detail: "有力者のみを対象とする。",
+      effects: { A: +1 },
+      next: 43
+    },
+    {
+      text: "形式だけ整える",
+      detail: "実質的な反映はしない。",
+      effects: { bias_avoidance: 1 },
+      next: 43
+    },
+    {
+      text: "聞く必要はないとする",
+      detail: "決定権は一方にあると示す。",
+      effects: { B: +2, D: -2 },
+      next: 43
+    }
+  ]
+},
+
+/* ===== 43 ===== */
+{
+  title: "第43章：代表という発想",
+  preText: (s) => {
+    let t = "";
+    if (s.A > 78) t += "制度的な調整が求められていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "全員の声を聞くことはできない。\n\n" +
+    "ならば、誰かが代わりに語る。\n\n" +
+    "この考えは、\n" +
+    "秩序を変える可能性を秘めていた。",
+  choices: [
+    {
+      text: "代表を公式に認める",
+      detail: "交渉の窓口を設ける。",
+      effects: { A: +2, D: +1 },
+      next: 44
+    },
+    {
+      text: "暫定的な役割とする",
+      detail: "恒常化は避ける。",
+      effects: { bias_avoidance: 1 },
+      next: 44
+    },
+    {
+      text: "助言として扱う",
+      detail: "決定権は保持する。",
+      effects: { A: +1 },
+      next: 44
+    },
+    {
+      text: "危険視する",
+      detail: "力の集中を恐れる。",
+      effects: { B: +2, D: -1 },
+      next: 44
+    }
+  ]
+},
+
+/* ===== 44 ===== */
+{
+  title: "第44章：合意の重み",
+  preText: () => "",
+  text: () =>
+    "合意は、\n" +
+    "決定を遅らせる。\n\n" +
+    "だが、\n" +
+    "合意なき決定は、\n" +
+    "長くは続かない。",
+  choices: [
+    {
+      text: "合意を必須とする",
+      detail: "時間はかかるが正当性は高まる。",
+      effects: { D: +2, A: +1 },
+      next: 45
+    },
+    {
+      text: "重要事項のみ合意を取る",
+      detail: "柔軟性を残す。",
+      effects: { A: +2 },
+      next: 45
+    },
+    {
+      text: "合意を形式化する",
+      detail: "実質より手続きを重視する。",
+      effects: { bias_avoidance: 1 },
+      next: 45
+    },
+    {
+      text: "合意を軽視する",
+      detail: "迅速さを優先する。",
+      effects: { B: +2, D: -2 },
+      next: 45
+    }
+  ]
+},
+
+/* ===== 45 ===== */
+{
+  title: "第45章：戦いの負担",
+  preText: (s) => {
+    let t = "";
+    if (s.B > 75) t += "防衛は常に想定されていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "戦いは、\n" +
+    "遠い出来事ではなくなった。\n\n" +
+    "負担は日常に入り込み、\n" +
+    "誰もが無関係ではいられない。",
+  choices: [
+    {
+      text: "負担を公平に配分する",
+      detail: "納得は広がるが管理は複雑になる。",
+      effects: { D: +2, A: +1 },
+      next: 46
+    },
+    {
+      text: "役割ごとに分ける",
+      detail: "効率は良いが不満は残る。",
+      effects: { A: +2 },
+      next: 46
+    },
+    {
+      text: "慣例に任せる",
+      detail: "調整を避ける。",
+      effects: { bias_avoidance: 1 },
+      next: 46
+    },
+    {
+      text: "強制する",
+      detail: "即応性は高い。",
+      effects: { B: +2, D: -2 },
+      next: 46
+    }
+  ]
+},
+
+/* ===== 46 ===== */
+{
+  title: "第46章：制度の疲れ",
+  preText: (s) => {
+    let t = "";
+    if (s.timePressure > 10) t += "未処理の問題が増えていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "決まりは増え、\n" +
+    "調整は重なり、\n" +
+    "判断は遅くなる。\n\n" +
+    "制度は、\n" +
+    "守るためにあるはずだった。",
+  choices: [
+    {
+      text: "整理し直す",
+      detail: "制度を簡素化する。",
+      effects: { A: +2 },
+      next: 47
+    },
+    {
+      text: "意味を再確認する",
+      detail: "なぜ必要かを語り直す。",
+      effects: { D: +2 },
+      next: 47
+    },
+    {
+      text: "放置する",
+      detail: "今は耐えられると判断する。",
+      effects: { bias_avoidance: 1, timePressure: +2 },
+      next: 47
+    },
+    {
+      text: "力で押し切る",
+      detail: "不満を抑え込む。",
+      effects: { B: +2, D: -2 },
+      next: 47
+    }
+  ]
+},
+
+/* ===== 47 ===== */
+{
+  title: "第47章：誰のための秩序か",
+  preText: () => "",
+  text: () =>
+    "秩序は守られている。\n\n" +
+    "だが、\n" +
+    "誰のために。\n\n" +
+    "この問いは、\n" +
+    "もはや無視できなかった。",
+  choices: [
+    {
+      text: "全体の利益を語る",
+      detail: "共通善を強調する。",
+      effects: { D: +2 },
+      next: 48
+    },
+    {
+      text: "役割ごとの責任を示す",
+      detail: "分担を明確にする。",
+      effects: { A: +2 },
+      next: 48
+    },
+    {
+      text: "答えを曖昧にする",
+      detail: "議論を避ける。",
+      effects: { bias_avoidance: 1 },
+      next: 48
+    },
+    {
+      text: "疑問を封じる",
+      detail: "問いそのものを危険視する。",
+      effects: { B: +2, D: -2 },
+      next: 48
+    }
+  ]
+},
+
+/* ===== 48 ===== */
+{
+  title: "第48章：限界の兆し",
+  preText: (s) => {
+    let t = "";
+    if (s.D < 60) t += "納得は確実に薄れていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "秩序は保たれている。\n\n" +
+    "だが、\n" +
+    "支える理由は、\n" +
+    "弱くなっていた。",
+  choices: [
+    {
+      text: "調整を重ねる",
+      detail: "対話を続ける。",
+      effects: { D: +2 },
+      next: 49
+    },
+    {
+      text: "制度を補強する",
+      detail: "仕組みで支える。",
+      effects: { A: +2 },
+      next: 49
+    },
+    {
+      text: "様子を見る",
+      detail: "決定を先送りする。",
+      effects: { bias_avoidance: 1, timePressure: +2 },
+      next: 49
+    },
+    {
+      text: "力を集中させる",
+      detail: "統制を強める。",
+      effects: { B: +2, D: -2 },
+      next: 49
+    }
+  ]
+},
+
+/* ===== 49 ===== */
+{
+  title: "第49章：次の問い",
+  preText: (s) => {
+    let t = "";
+    if (s.timePressure > 12) t += "未解決の歪みは、限界に近づいていた。\n";
+    return t.trim();
+  },
+  text: () =>
+    "問いは消えない。\n\n" +
+    "押さえ込めば、\n" +
+    "形を変える。\n\n" +
+    "ここまでの選択は、\n" +
+    "次の時代に、\n" +
+    "確実に影を落とす。",
+  choices: [
+    {
+      text: "現状を受け入れる",
+      detail: "変化を最小限に抑える。",
+      effects: { bias_avoidance: 1 },
+      next: 50
+    },
+    {
+      text: "制度改革を進める",
+      detail: "次の段階へ備える。",
+      effects: { A: +3 },
+      next: 50
+    },
+    {
+      text: "正当性を再構築する",
+      detail: "支配の理由を問い直す。",
+      effects: { D: +3 },
+      next: 50
+    },
+    {
+      text: "強制力を明確にする",
+      detail: "従わぬ場合の対応を示す。",
+      effects: { B: +3, D: -2 },
+      next: 50
+    }
+  ]
+},
+
 
 ];
