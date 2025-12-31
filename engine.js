@@ -8,7 +8,7 @@ let state = {
   D: 70,
   timePressure: 0,
 
-  legitimacy_source: null, // "belief" | "lineage" | "law"
+  legitimacy_source: null,
   belief_strength: 0,
   lineage_strength: 0,
   law_strength: 0
@@ -26,7 +26,7 @@ const preDiv = document.getElementById("pre");
 const textDiv = document.getElementById("text");
 const choicesDiv = document.getElementById("choices");
 
-// 導入 → ゲーム開始
+// 導入
 startBtn.onclick = () => {
   intro.classList.add("hidden");
   game.classList.remove("hidden");
@@ -35,10 +35,8 @@ startBtn.onclick = () => {
 
 /* ===== フェードアウト判定 ===== */
 function checkFadeOut(state, current) {
-  // 70章未満では絶対に起きない
   if (current < 70) return null;
 
-  // ① 正当性の断絶（静かな消滅）
   if (state.D <= 40 && state.timePressure >= 25) {
     return {
       title: "断絶",
@@ -50,7 +48,6 @@ function checkFadeOut(state, current) {
     };
   }
 
-  // ② 制度疲弊による消散
   if (state.A <= 45 && state.bias_avoidance >= 6) {
     return {
       title: "消散",
@@ -62,7 +59,6 @@ function checkFadeOut(state, current) {
     };
   }
 
-  // ③ 強制依存の崩壊（革命・内戦）
   if (state.B >= 80 && state.D <= 50) {
     return {
       title: "崩壊",
@@ -77,6 +73,33 @@ function checkFadeOut(state, current) {
 
   return null;
 }
+
+/* ===== 予兆レベル ===== */
+function getOmenLevel(state, current) {
+  if (current < 70) return 0;
+
+  let omen = 0;
+  if (state.D < 55) omen++;
+  if (state.A < 55) omen++;
+  if (state.timePressure > 20) omen++;
+  if (state.bias_avoidance >= 6) omen++;
+
+  return omen;
+}
+
+function getOmenText(level) {
+  switch (level) {
+    case 1:
+      return "決定は行われているはずだったが、手応えは薄かった。";
+    case 2:
+      return "命令と現実のあいだに、わずかなズレが生じていた。";
+    case 3:
+      return "人々は従っていたが、納得しているようには見えなかった。";
+    case 4:
+      return "この仕組みが、いつまで機能するのかは誰にも分からなかった。";
+    default:
+      return "";
+  }
 }
 
 /* ===== 選択肢可視数制御 ===== */
@@ -111,12 +134,16 @@ function render() {
 
   titleDiv.textContent = scene.title;
   preDiv.textContent = scene.preText ? scene.preText(state) : "";
-  textDiv.textContent = scene.text(state);
 
+  const omen = getOmenLevel(state, current);
+  if (omen > 0) {
+    preDiv.textContent += "\n" + getOmenText(omen);
+  }
+
+  textDiv.textContent = scene.text(state);
   choicesDiv.innerHTML = "";
 
   const visibleChoices = getVisibleChoices(scene, state);
-
   visibleChoices.forEach((choice, index) => {
     const btn = document.createElement("button");
     btn.className = "choice";
