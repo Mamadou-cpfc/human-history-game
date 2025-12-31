@@ -2,38 +2,44 @@ const scenarios = [
 
 /* ===== 0 ===== */
 {
-  title: "第0章：分けるという行為",
+  title: "第0章：最初の判断",
   preText: () =>
     "人々は移動しながら生きていた。\n" +
-    "獲物を追い、水を探し、季節に応じて居場所を変える生活が続いていた。",
+    "狩りと採集は、長いあいだ続いてきたやり方だった。\n" +
+    "季節に従い、獲物を追い、水を求めて移動する。\n\n" +
+    "だが近頃、同じ場所に留まる時間が、わずかに長くなり始めていた。",
   text: () =>
-    "同じ場所に戻る回数が増え、集団は一時的に留まるようになっていた。\n" +
-    "獲物や食料をどう分けるかは、もはや偶然に任せられない問題となっていた。\n" +
-    "誰が、どのように分配を決めるのか。\n" +
-    "それは生存と同時に、従う・従わないの境界を作る行為だった。",
+    "得られた食料を、どう分けるか。\n" +
+    "それはこれまで、特別に決められることのない行為だった。\n\n" +
+    "空腹でなければ分け合い、\n" +
+    "足りなければ我慢する。\n\n" +
+    "だが今は違う。\n" +
+    "分け方そのものが、生き残りを左右し始めていた。\n" +
+    "誰が多く、誰が少ないのか。\n" +
+    "その差が、記憶に残るようになっていた。",
   choices: [
     {
-      text: "経験のある狩人が判断する",
-      detail: "即応性は高いが、理由は共有されない。",
-      effects: { bias_speed: 1, D: -5 },
+      text: "経験のある者が、その場で分配を決める",
+      detail: "長く生き延びてきた者の判断に、自然と視線が集まる。",
+      effects: { bias_speed: 1, D: -1 },
       next: 1
     },
     {
-      text: "年長者たちで話し合って決める",
-      detail: "手順は曖昧だが、合意を重視する。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "役割を決め、分配の手順を定める",
+      detail: "誰が獲り、誰が配るのかを明確にする。",
+      effects: { bias_procedure: 1, A: +1 },
       next: 1
     },
     {
-      text: "なぜそう分けるかを皆に語る",
-      detail: "時間はかかるが、納得を生む。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "分配の理由を皆に説明する",
+      detail: "なぜこの分け方なのかを、言葉として共有する。",
+      effects: { bias_narrative: 1, D: +1 },
       next: 1
     },
     {
-      text: "明確に決めず、その都度対応する",
-      detail: "衝突は避けられるが、未決が残る。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "今回は決めず、状況に任せる",
+      detail: "衝突を避け、これまで通りに振る舞う。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 1
     }
   ]
@@ -41,42 +47,42 @@ const scenarios = [
 
 /* ===== 1 ===== */
 {
-  title: "第1章：残る者、足りぬ者",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_speed > 0) t += "判断は素早く下されていた。\n";
-    if (s.bias_narrative > 0) t += "分配の理由は、言葉として共有されていた。\n";
-    if (s.bias_avoidance > 0) t += "判断は曖昧なまま残されていた。\n";
-    return t.trim();
-  },
+  title: "第1章：繰り返し",
+  preText: (s) =>
+    s.bias_speed > 0
+      ? "判断は速く、迷いは少なかった。\n決める者の存在が、自然に受け入れられていた。"
+      : s.bias_avoidance > 0
+      ? "判断は曖昧なまま、時間だけが過ぎていった。\n誰も強く主張しなかった。"
+      : "分配は、一定の形を持ち始めていた。\n人々はそれを意識し始めていた。",
   text: () =>
-    "分配の後、満腹な者と空腹な者が生まれていた。\n" +
-    "露骨な不満はまだない。\n" +
-    "だが視線が変わり、集まりから距離を取る者が現れ始めていた。\n" +
-    "その兆しに、誰がどう対応するかが問われていた。",
+    "同じような判断が、何度も繰り返された。\n" +
+    "最初は偶然に見えた選択も、\n" +
+    "やがて『いつものやり方』として認識されるようになった。\n\n" +
+    "人々は、次第にそれを疑わなくなっていた。\n" +
+    "変えないことが、安心につながり始めていた。",
   choices: [
     {
-      text: "不満を示す者に直接声をかける",
-      detail: "個別対応で場を収めようとする。",
+      text: "慣れたやり方を続ける",
+      detail: "変えないことで、余計な摩擦を避ける。",
+      effects: { bias_avoidance: 1 },
+      next: 2
+    },
+    {
+      text: "毎回判断者を変える",
+      detail: "特定の人物に決定が集中するのを避ける。",
+      effects: { bias_procedure: 1 },
+      next: 2
+    },
+    {
+      text: "判断の理由を確認する",
+      detail: "なぜそう決めたのかを、改めて振り返る。",
+      effects: { bias_narrative: 1 },
+      next: 2
+    },
+    {
+      text: "即座に決断することを重視する",
+      detail: "迷うよりも動くことを価値とする。",
       effects: { bias_speed: 1 },
-      next: 2
-    },
-    {
-      text: "分配のやり方を見直す場を設ける",
-      detail: "再発防止を狙う。",
-      effects: { bias_procedure: 1, A: +5 },
-      next: 2
-    },
-    {
-      text: "集団の存続を理由に語る",
-      detail: "納得を重ねることを選ぶ。",
-      effects: { bias_narrative: 1, D: +5 },
-      next: 2
-    },
-    {
-      text: "今は問題化していないとして放置する",
-      detail: "摩擦を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
       next: 2
     }
   ]
@@ -84,41 +90,38 @@ const scenarios = [
 
 /* ===== 2 ===== */
 {
-  title: "第2章：戻る場所",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 5) t += "未決の不満は解消されていなかった。\n";
-    if (s.A > 75) t += "一定の秩序は保たれていた。\n";
-    return t.trim();
-  },
+  title: "第2章：不足",
+  preText: () =>
+    "季節の変化は、食料の量を安定させなかった。\n" +
+    "得られる日と、得られない日の差が大きくなっていた。",
   text: () =>
-    "季節が巡り、人々は再び同じ場所へ戻ってきた。\n" +
-    "ここが安全であることは、すでに皆が知っていた。\n" +
-    "だが『戻る場所』は、『離れない場所』へと変わりつつあった。\n" +
-    "定住の兆しが、問題を複雑にしていた。",
+    "十分な量が得られない日が、確実に増え始めていた。\n" +
+    "分け合えば足りない。\n" +
+    "だが、誰かが多く取れば、別の誰かが耐えることになる。\n\n" +
+    "この選択は、感情を伴うものになっていた。",
   choices: [
     {
-      text: "経験者の判断に任せ続ける",
-      detail: "柔軟だが、属人的になる。",
+      text: "その都度、状況を見て配分を変える",
+      detail: "柔軟だが、毎回説明が必要になる。",
       effects: { bias_speed: 1 },
       next: 3
     },
     {
-      text: "留まる前提で取り決めを考え始める",
-      detail: "将来を見据える。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "不足時の分配ルールを作る",
+      detail: "苦しい時のための基準を設ける。",
+      effects: { bias_procedure: 1 },
       next: 3
     },
     {
-      text: "ここに留まる意味を共有する",
-      detail: "意識を揃える。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "不足の理由を共有する",
+      detail: "なぜ足りないのかを、皆で理解する。",
+      effects: { bias_narrative: 1 },
       next: 3
     },
     {
-      text: "まだ仮の滞在だと考える",
-      detail: "決断を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "深刻になるまで様子を見る",
+      detail: "まだ耐えられると考える。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 3
     }
   ]
@@ -126,41 +129,37 @@ const scenarios = [
 
 /* ===== 3 ===== */
 {
-  title: "第3章：従わない者",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "判断の理由は十分に共有されていなかった。\n";
-    if (s.A > 70) t += "取り決めは参照され始めていた。\n";
-    return t.trim();
-  },
+  title: "第3章：不満",
+  preText: () =>
+    "分配に対する違和感が、はっきりと言葉になる前に漂っていた。",
   text: () =>
-    "分配や取り決めに従わない者が現れた。\n" +
-    "彼らは声高に反発したわけではない。\n" +
-    "ただ、従わなかった。\n" +
-    "その行為が許されるかどうかが、集団全体に影響を及ぼし始めていた。",
+    "誰も声を荒らげてはいない。\n" +
+    "だが、沈黙が増えていた。\n\n" +
+    "目を合わせない者が増え、\n" +
+    "食事の場が短くなっていた。",
   choices: [
     {
-      text: "影響力のある者が裁定する",
-      detail: "即時性はあるが、反感を残す。",
-      effects: { bias_speed: 1, B: -5 },
+      text: "不満を聞き、場を収める",
+      detail: "その場での衝突を避ける。",
+      effects: { bias_speed: 1 },
       next: 4
     },
     {
-      text: "従わない場合の対応を定める",
-      detail: "再発防止を狙う。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "不満を扱う手順を決める",
+      detail: "次に備え、扱い方を定める。",
+      effects: { bias_procedure: 1 },
       next: 4
     },
     {
-      text: "なぜ従う必要があるかを語る",
-      detail: "納得を積み重ねる。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "分配の考え方を説明し直す",
+      detail: "納得を得ることを目指す。",
+      effects: { bias_narrative: 1 },
       next: 4
     },
     {
-      text: "様子を見る",
-      detail: "衝突を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "今は問題にしない",
+      detail: "沈黙が続くことを選ぶ。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 4
     }
   ]
@@ -168,40 +167,36 @@ const scenarios = [
 
 /* ===== 4 ===== */
 {
-  title: "第4章：境界の意識",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_narrative > 1) t += "集団の意味は言葉として共有されていた。\n";
-    if (s.bias_speed > 1) t += "判断は特定の者に集中していた。\n";
-    return t.trim();
-  },
+  title: "第4章：集まり",
+  preText: () =>
+    "人々は以前よりも、同じ場所で過ごす時間が長くなっていた。",
   text: () =>
-    "集団の内と外を意識するようになっていた。\n" +
-    "ここに属する者と、そうでない者。\n" +
-    "その境界をどう扱うかが、次の問題となった。",
+    "移動の頻度が減り、\n" +
+    "ここに留まる理由が少しずつ増えていた。\n\n" +
+    "焚き火の周りで、同じ顔を見る日が続いていた。",
   choices: [
     {
-      text: "明確な線を引く",
-      detail: "秩序は保たれるが、排除が生じる。",
-      effects: { D: -5 },
-      next: 5
-    },
-    {
-      text: "状況に応じて判断する",
-      detail: "柔軟だが曖昧さが残る。",
+      text: "経験者の判断に任せる",
+      detail: "慣れ親しんだ判断を重視する。",
       effects: { bias_speed: 1 },
       next: 5
     },
     {
-      text: "境界の意味を語る",
-      detail: "納得を重視する。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "集まりごとの決まりを作る",
+      detail: "続くことを前提に考える。",
+      effects: { bias_procedure: 1 },
       next: 5
     },
     {
-      text: "明確に決めない",
-      detail: "対立を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "集まる意味を言葉にする",
+      detail: "なぜ共にいるのかを語る。",
+      effects: { bias_narrative: 1 },
+      next: 5
+    },
+    {
+      text: "特に決めない",
+      detail: "自然な流れに任せる。",
+      effects: { bias_avoidance: 1 },
       next: 5
     }
   ]
@@ -209,40 +204,37 @@ const scenarios = [
 
 /* ===== 5 ===== */
 {
-  title: "第5章：留まるという選択",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 10) t += "先送りされた判断が重なっていた。\n";
-    if (s.A > 75) t += "運用は安定し始めていた。\n";
-    return t.trim();
-  },
+  title: "第5章：蓄え",
+  preText: () =>
+    "すべてを使い切らなくても、生き延びられる日が現れ始めていた。",
   text: () =>
-    "移動ではなく、留まることが現実的な選択となっていた。\n" +
-    "留まるということは、逃げないということでもあった。\n" +
-    "問題は積み重なり、無視できなくなっていた。",
+    "余った食料を残すという発想は、\n" +
+    "安心と同時に、新たな問題を生み始めていた。\n\n" +
+    "それを誰が管理するのか。\n" +
+    "いつ使うのか。",
   choices: [
     {
-      text: "経験を重ねながら対応する",
-      detail: "柔軟性を保つ。",
+      text: "信頼できる者に任せる",
+      detail: "管理を単純化する。",
       effects: { bias_speed: 1 },
       next: 6
     },
     {
-      text: "定住を前提とした取り決めを作る",
-      detail: "長期運用を意識する。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "蓄えの扱いを決める",
+      detail: "後で揉めないようにする。",
+      effects: { bias_procedure: 1 },
       next: 6
     },
     {
-      text: "定住の意味を言葉にする",
-      detail: "意識を揃える。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "蓄える理由を説明する",
+      detail: "納得を得ることを優先する。",
+      effects: { bias_narrative: 1 },
       next: 6
     },
     {
-      text: "決断を避ける",
-      detail: "衝突を先送りする。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "特に管理しない",
+      detail: "問題が起きてから考える。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 6
     }
   ]
@@ -250,40 +242,36 @@ const scenarios = [
 
 /* ===== 6 ===== */
 {
-  title: "第6章：蓄え",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_procedure > 1) t += "運用は繰り返され、形を持ち始めていた。\n";
-    if (s.D > 75) t += "判断は納得を伴っていた。\n";
-    return t.trim();
-  },
+  title: "第6章：役割",
+  preText: () =>
+    "同じ作業を繰り返す者が、自然と現れていた。",
   text: () =>
-    "余剰が生まれ、蓄えが必要となっていた。\n" +
-    "誰が管理するのか。\n" +
-    "それは信頼と支配の境界に触れる問題だった。",
+    "獲る者、守る者、配る者。\n" +
+    "その分かれ方は、まだ固定されてはいない。\n\n" +
+    "だが、期待は生まれ始めていた。",
   choices: [
     {
-      text: "信頼できる者に任せる",
-      detail: "迅速だが属人的。",
+      text: "自然な流れに任せる",
+      detail: "役割を固定しない。",
+      effects: { bias_avoidance: 1 },
+      next: 7
+    },
+    {
+      text: "役割をはっきりさせる",
+      detail: "誰が何を担うかを決める。",
+      effects: { bias_procedure: 1 },
+      next: 7
+    },
+    {
+      text: "役割の意味を説明する",
+      detail: "なぜその役割なのかを語る。",
+      effects: { bias_narrative: 1 },
+      next: 7
+    },
+    {
+      text: "判断はその都度行う",
+      detail: "柔軟さを保つ。",
       effects: { bias_speed: 1 },
-      next: 7
-    },
-    {
-      text: "管理の仕組みを作る",
-      detail: "再現性を重視する。",
-      effects: { bias_procedure: 1, A: +5 },
-      next: 7
-    },
-    {
-      text: "管理理由を共有する",
-      detail: "納得を積み重ねる。",
-      effects: { bias_narrative: 1, D: +5 },
-      next: 7
-    },
-    {
-      text: "特に決めない",
-      detail: "摩擦を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
       next: 7
     }
   ]
@@ -291,40 +279,36 @@ const scenarios = [
 
 /* ===== 7 ===== */
 {
-  title: "第7章：偏り",
-  preText: (s) => {
-    let t = "";
-    if (s.A < 65) t += "管理は人に依存していた。\n";
-    if (s.bias_speed > 2) t += "判断は集中していた。\n";
-    return t.trim();
-  },
+  title: "第7章：境界",
+  preText: () =>
+    "外から来る者との接触が、少しずつ増えていた。",
   text: () =>
-    "蓄えに偏りが生まれていた。\n" +
-    "疑念はまだ小さい。\n" +
-    "だが、見過ごせるものではなくなりつつあった。",
+    "ここに属する者と、そうでない者。\n" +
+    "その区別は、意識され始めていた。\n\n" +
+    "だが、線はまだ曖昧だった。",
   choices: [
     {
-      text: "その場で調整する",
-      detail: "即応する。",
+      text: "状況に応じて対応する",
+      detail: "明確な線は引かない。",
       effects: { bias_speed: 1 },
       next: 8
     },
     {
-      text: "再配分の基準を設ける",
-      detail: "制度化する。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "受け入れの基準を作る",
+      detail: "内と外を分ける。",
+      effects: { bias_procedure: 1 },
       next: 8
     },
     {
-      text: "理由を説明する",
-      detail: "納得を試みる。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "集団の考えを伝える",
+      detail: "理解を求める。",
+      effects: { bias_narrative: 1 },
       next: 8
     },
     {
-      text: "問題視しない",
-      detail: "摩擦を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "判断を避ける",
+      detail: "衝突を避ける。",
+      effects: { bias_avoidance: 1 },
       next: 8
     }
   ]
@@ -332,40 +316,36 @@ const scenarios = [
 
 /* ===== 8 ===== */
 {
-  title: "第8章：緊張",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "不満は解消されていなかった。\n";
-    if (s.timePressure > 15) t += "未決が積み重なっていた。\n";
-    return t.trim();
-  },
+  title: "第8章：留まる理由",
+  preText: () =>
+    "移動しなくても、生きていける感覚が芽生えていた。",
   text: () =>
-    "集団内の空気は変わっていた。\n" +
-    "言葉は減り、距離が増えた。\n" +
-    "衝突は避けられているが、消えてはいなかった。",
+    "ここを離れない理由が、\n" +
+    "少しずつ積み重なっていた。\n\n" +
+    "離れる理由の方が、思いつきにくくなっていた。",
   choices: [
     {
-      text: "強い調停で抑える",
-      detail: "短期的安定。",
-      effects: { bias_speed: 1, B: -5 },
+      text: "経験に基づいて判断する",
+      detail: "慣れたやり方を信じる。",
+      effects: { bias_speed: 1 },
       next: 9
     },
     {
-      text: "衝突時の手順を決める",
-      detail: "再発を防ぐ。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "定住を前提に考え始める",
+      detail: "続く形を想定する。",
+      effects: { bias_procedure: 1 },
       next: 9
     },
     {
-      text: "共通の目的を語る",
-      detail: "結束を試みる。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "留まる意味を語る",
+      detail: "理由を共有する。",
+      effects: { bias_narrative: 1 },
       next: 9
     },
     {
-      text: "事態が動くのを待つ",
-      detail: "決断を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "まだ決めない",
+      detail: "選択を保留する。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 9
     }
   ]
@@ -373,40 +353,37 @@ const scenarios = [
 
 /* ===== 9 ===== */
 {
-  title: "第9章：定着",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 80) t += "運用は安定していた。\n";
-    if (s.bias_avoidance > 2) t += "未解決の問題は残っていた。\n";
-    return t.trim();
-  },
+  title: "第9章：形になり始めたもの",
+  preText: () =>
+    "判断は、個人のものではなくなりつつあった。",
   text: () =>
-    "集団は、一定の形を保っていた。\n" +
-    "従う理由は、まだ完全ではない。\n" +
-    "だが、ここまで来たこと自体が一つの結果だった。\n" +
-    "この構造は、次の段階へと引き継がれていく。",
+    "誰かが決め、\n" +
+    "多くがそれに従う。\n\n" +
+    "それはまだ制度ではない。\n" +
+    "だが、偶然でもなかった。\n\n" +
+    "この形は、次の段階へ進もうとしていた。",
   choices: [
     {
-      text: "現状を維持する",
-      detail: "安定を優先する。",
+      text: "この形を続ける",
+      detail: "今のやり方を信じる。",
       effects: { bias_avoidance: 1 },
       next: 10
     },
     {
-      text: "仕組みを整理する",
-      detail: "次を見据える。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "形を整理する",
+      detail: "続けるために整える。",
+      effects: { bias_procedure: 1 },
       next: 10
     },
     {
-      text: "価値観を再確認する",
-      detail: "意味を固める。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "意味を言葉にする",
+      detail: "なぜ従うのかを考える。",
+      effects: { bias_narrative: 1 },
       next: 10
     },
     {
-      text: "拡張を考え始める",
-      detail: "新たな段階へ進む。",
+      text: "即断を重ねる",
+      detail: "速さを優先する。",
       effects: { bias_speed: 1 },
       next: 10
     }
@@ -414,41 +391,39 @@ const scenarios = [
 },
 /* ===== 10 ===== */
 {
-  title: "第10章：決める者の固定",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 80) t += "取り決めは繰り返され、参照されるものになっていた。\n";
-    if (s.bias_speed > 2) t += "判断は特定の者に集中していた。\n";
-    return t.trim();
-  },
+  title: "第10章：耕すという選択",
+  preText: () =>
+    "同じ場所に留まる時間が、はっきりと長くなっていた。\n" +
+    "移動よりも、環境を変えるという発想が芽生え始めていた。",
   text: () =>
-    "判断は、その場ごとではなくなっていた。\n" +
-    "誰が決めるかは、暗黙のうちに固定されつつあった。\n" +
-    "それは効率を生み、同時に問いを生んだ。\n" +
-    "――なぜ、その者が決めるのか。",
+    "地面を掘り返し、種を落とす。\n" +
+    "それは、すぐに成果が出る行為ではなかった。\n\n" +
+    "狩りのような確実さはない。\n" +
+    "だが、成功すれば戻らずに済む。\n\n" +
+    "この試みは、集団の時間感覚そのものを変えようとしていた。",
   choices: [
     {
-      text: "経験と実績を理由に据える",
-      detail: "能力による正当化。",
-      effects: { bias_speed: 1, D: -5 },
+      text: "経験者の判断で試みを進める",
+      detail: "成果よりも判断の速さを重視する。",
+      effects: { bias_speed: 1 },
       next: 11
     },
     {
-      text: "役割として明文化する",
-      detail: "制度として固定する。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "作業手順を決めて取り組む",
+      detail: "耕し方や分担を明確にする。",
+      effects: { bias_procedure: 1 },
       next: 11
     },
     {
-      text: "語りとして共有する",
-      detail: "意味づけを行う。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "なぜ耕すのかを説明する",
+      detail: "不安を減らすことを優先する。",
+      effects: { bias_narrative: 1 },
       next: 11
     },
     {
-      text: "深く考えず流れに任せる",
-      detail: "問いを避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "本格化は見送る",
+      detail: "失敗のリスクを避ける。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 11
     }
   ]
@@ -456,41 +431,37 @@ const scenarios = [
 
 /* ===== 11 ===== */
 {
-  title: "第11章：従うという行為",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "判断の理由は十分に共有されていなかった。\n";
-    if (s.B < 70) t += "強制はまだ限定的だった。\n";
-    return t.trim();
-  },
+  title: "第11章：余剰の発生",
+  preText: () =>
+    "すべてを使い切らずに済む日が、確実に増えていた。",
   text: () =>
-    "決定に従う者が増えていた。\n" +
-    "それは納得からか、慣れからか、恐れからか。\n" +
-    "理由は一様ではなかったが、行動は揃っていた。\n" +
-    "この状態をどう扱うかが問われていた。",
+    "食料が余るという事実は、安心と同時に緊張を生んだ。\n\n" +
+    "それは力になり得る。\n" +
+    "だが、誰がそれを持つのかという問題も生んでいた。\n\n" +
+    "余剰は、初めて『守る対象』となった。",
   choices: [
     {
-      text: "従うことを当然とする",
-      detail: "慣習に委ねる。",
+      text: "信頼できる者に管理を任せる",
+      detail: "単純で分かりやすい方法を取る。",
       effects: { bias_speed: 1 },
       next: 12
     },
     {
-      text: "従う条件を整理する",
-      detail: "制度的に明確化。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "管理の規則を設ける",
+      detail: "後の争いを防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 12
     },
     {
-      text: "従う理由を語り続ける",
-      detail: "正当性を積み上げる。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "管理の理由を説明する",
+      detail: "納得を得ることを重視する。",
+      effects: { bias_narrative: 1 },
       next: 12
     },
     {
-      text: "問いを避ける",
-      detail: "摩擦を回避。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "特別な管理はしない",
+      detail: "問題が起きてから考える。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 12
     }
   ]
@@ -498,40 +469,37 @@ const scenarios = [
 
 /* ===== 12 ===== */
 {
-  title: "第12章：命令と実行",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_procedure > 2) t += "判断は手順として定着していた。\n";
-    if (s.bias_speed > 3) t += "即断が常態化していた。\n";
-    return t.trim();
-  },
+  title: "第12章：守る者の出現",
+  preText: () =>
+    "余剰は、奪われる可能性を同時に生んでいた。",
   text: () =>
-    "決定は、指示となり、実行されるようになった。\n" +
-    "誰かが命じ、誰かが従う。\n" +
-    "その分離は、集団を効率化すると同時に、緊張を孕んでいた。",
+    "夜の見張りが必要になった。\n" +
+    "外から来る者への警戒が強まっていた。\n\n" +
+    "守る役割を担う者は、\n" +
+    "次第に特別な存在として見られ始めていた。",
   choices: [
     {
-      text: "命令を迅速に下す",
-      detail: "速度を優先。",
-      effects: { bias_speed: 1, B: -5 },
+      text: "力のある者に任せる",
+      detail: "即応性を優先する。",
+      effects: { bias_speed: 1, B: +1 },
       next: 13
     },
     {
-      text: "命令の手順を定める",
-      detail: "責任を整理する。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "守りの役割を定める",
+      detail: "責任の所在を明確にする。",
+      effects: { bias_procedure: 1 },
       next: 13
     },
     {
-      text: "命令の意味を説明する",
-      detail: "納得を補う。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "守る理由を共有する",
+      detail: "恐れだけに依存しない。",
+      effects: { bias_narrative: 1 },
       next: 13
     },
     {
-      text: "命令を最小限に留める",
-      detail: "摩擦を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "最低限の警戒に留める",
+      detail: "緊張の高まりを避ける。",
+      effects: { bias_avoidance: 1 },
       next: 13
     }
   ]
@@ -539,40 +507,38 @@ const scenarios = [
 
 /* ===== 13 ===== */
 {
-  title: "第13章：反発",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 60) t += "納得は十分ではなかった。\n";
-    if (s.timePressure > 20) t += "未処理の不満が蓄積していた。\n";
-    return t.trim();
-  },
+  title: "第13章：差の固定化",
+  preText: () =>
+    "守る者、管理する者、従う者。\n" +
+    "役割の差は、次第に固定されていった。",
   text: () =>
-    "命令に従わない動きが、部分的に現れた。\n" +
-    "それは反乱ではない。\n" +
-    "だが、無視できるものでもなかった。",
+    "いつも前に立つ者がいる。\n" +
+    "いつも後ろに下がる者がいる。\n\n" +
+    "それは効率的だったが、\n" +
+    "同時に疑問の種でもあった。",
   choices: [
     {
-      text: "力で抑える",
-      detail: "即時的な安定。",
-      effects: { bias_speed: 1, B: -10 },
+      text: "効率を優先する",
+      detail: "役割の固定を受け入れる。",
+      effects: { bias_speed: 1 },
       next: 14
     },
     {
-      text: "対応手続きを設ける",
-      detail: "再発防止。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "役割を制度として整理する",
+      detail: "恣意性を減らす。",
+      effects: { bias_procedure: 1 },
       next: 14
     },
     {
-      text: "不満の理由を聞く",
-      detail: "正当性を補う。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "差が生まれる理由を説明する",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
       next: 14
     },
     {
-      text: "事態が収まるのを待つ",
-      detail: "判断を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "深く考えない",
+      detail: "波風を立てない。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 14
     }
   ]
@@ -580,40 +546,37 @@ const scenarios = [
 
 /* ===== 14 ===== */
 {
-  title: "第14章：守る者",
-  preText: (s) => {
-    let t = "";
-    if (s.B < 65) t += "強制力はまだ限定的だった。\n";
-    if (s.A > 80) t += "秩序は維持されていた。\n";
-    return t.trim();
-  },
+  title: "第14章：命令という言葉",
+  preText: () =>
+    "お願いではなく、命令が使われ始めていた。",
   text: () =>
-    "集団を守る役割が明確になり始めていた。\n" +
-    "外からの脅威、内なる衝突。\n" +
-    "それに対応する者の存在は、疑いなく認識されていた。",
+    "従うことが前提となる言葉。\n" +
+    "それは便利で、速かった。\n\n" +
+    "だが、理由を伴わない命令は、\n" +
+    "静かな反発を生み始めていた。",
   choices: [
     {
-      text: "実力のある者に任せる",
-      detail: "即応性を重視。",
-      effects: { bias_speed: 1, B: -5 },
+      text: "強く命じる",
+      detail: "迷いを許さない。",
+      effects: { bias_speed: 1, B: +1 },
       next: 15
     },
     {
-      text: "守る役割を制度化する",
-      detail: "権限を明確化。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "命令の範囲を定める",
+      detail: "乱用を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 15
     },
     {
-      text: "守る理由を語る",
+      text: "命令の理由を語る",
       detail: "納得を伴わせる。",
-      effects: { bias_narrative: 1, D: +5 },
+      effects: { bias_narrative: 1 },
       next: 15
     },
     {
-      text: "必要時のみ対応する",
-      detail: "常設を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "命令を避ける",
+      detail: "摩擦を減らす。",
+      effects: { bias_avoidance: 1 },
       next: 15
     }
   ]
@@ -621,41 +584,37 @@ const scenarios = [
 
 /* ===== 15 ===== */
 {
-  title: "第15章：秩序の輪郭",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 85) t += "秩序は安定していた。\n";
-    if (s.D < 60) t += "正当性は揺らいでいた。\n";
-    return t.trim();
-  },
+  title: "第15章：従属の感覚",
+  preText: () =>
+    "従うことが、選択ではなく習慣になりつつあった。",
   text: () =>
-    "守る者と従う者。\n" +
-    "決める者と実行する者。\n" +
-    "役割は分かれ、秩序は形を持ち始めていた。\n" +
-    "それは、国家以前の構造だった。",
+    "命じられたから動く。\n" +
+    "考えるよりも、従う方が楽だった。\n\n" +
+    "だが、その楽さは、\n" +
+    "自分で決める力を奪い始めていた。",
   choices: [
     {
-      text: "現状を維持する",
-      detail: "安定を優先。",
-      effects: { bias_avoidance: 1 },
-      next: 16
-    },
-    {
-      text: "役割関係を整理する",
-      detail: "制度を固める。",
-      effects: { bias_procedure: 1, A: +5 },
-      next: 16
-    },
-    {
-      text: "秩序の意味を再確認する",
-      detail: "正当性を補強。",
-      effects: { bias_narrative: 1, D: +5 },
-      next: 16
-    },
-    {
-      text: "さらなる拡張を考える",
-      detail: "次段階へ。",
+      text: "従属を当然とする",
+      detail: "秩序を優先する。",
       effects: { bias_speed: 1 },
+      next: 16
+    },
+    {
+      text: "従属の範囲を定める",
+      detail: "無制限にしない。",
+      effects: { bias_procedure: 1 },
+      next: 16
+    },
+    {
+      text: "なぜ従うのかを問う",
+      detail: "言葉にする。",
+      effects: { bias_narrative: 1 },
+      next: 16
+    },
+    {
+      text: "問いを避ける",
+      detail: "安定を保つ。",
+      effects: { bias_avoidance: 1 },
       next: 16
     }
   ]
@@ -663,40 +622,36 @@ const scenarios = [
 
 /* ===== 16 ===== */
 {
-  title: "第16章：境界の外",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_speed > 3) t += "判断は内向きだった。\n";
-    if (s.bias_narrative > 3) t += "内的結束は強まっていた。\n";
-    return t.trim();
-  },
+  title: "第16章：集団の拡大",
+  preText: () =>
+    "外から来る者が、明確に増えていた。",
   text: () =>
-    "集団の外との接触が増えていた。\n" +
-    "交易、衝突、あるいは吸収。\n" +
-    "外との関係は、内の構造を揺さぶった。",
+    "余剰と秩序は、人を引き寄せた。\n\n" +
+    "だが、人数が増えるほど、\n" +
+    "全員を知ることは難しくなっていた。",
   choices: [
     {
-      text: "力を示す",
-      detail: "威圧による安定。",
-      effects: { bias_speed: 1, B: -5 },
+      text: "力で統制する",
+      detail: "即効性を重視する。",
+      effects: { bias_speed: 1, B: +1 },
       next: 17
     },
     {
-      text: "関係性を取り決める",
-      detail: "秩序を外へ延ばす。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "受け入れ手続きを設ける",
+      detail: "管理可能な形にする。",
+      effects: { bias_procedure: 1 },
       next: 17
     },
     {
-      text: "関係の意味を語る",
-      detail: "正当化を試みる。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "集団の価値を伝える",
+      detail: "同化を促す。",
+      effects: { bias_narrative: 1 },
       next: 17
     },
     {
-      text: "深く関わらない",
-      detail: "摩擦を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "増加を深く考えない",
+      detail: "流れに任せる。",
+      effects: { bias_avoidance: 1 },
       next: 17
     }
   ]
@@ -704,40 +659,37 @@ const scenarios = [
 
 /* ===== 17 ===== */
 {
-  title: "第17章：負担",
-  preText: (s) => {
-    let t = "";
-    if (s.A < 70) t += "運用は不安定だった。\n";
-    if (s.B < 60) t += "強制力は限定的だった。\n";
-    return t.trim();
-  },
+  title: "第17章：裁き",
+  preText: () =>
+    "争いは、避けられなくなっていた。",
   text: () =>
-    "守る者、決める者を維持するための負担が生じていた。\n" +
-    "誰がそれを支えるのか。\n" +
-    "負担の配分は、新たな緊張を生んでいた。",
+    "奪い合い。\n" +
+    "規則違反。\n\n" +
+    "それらを誰が裁くのか。\n" +
+    "沈黙は、もはや選択肢ではなかった。",
   choices: [
     {
-      text: "一部に集中させる",
-      detail: "迅速だが反発を招く。",
-      effects: { bias_speed: 1, D: -5 },
+      text: "力ある者が裁く",
+      detail: "迅速だが偏りやすい。",
+      effects: { bias_speed: 1, B: +1 },
       next: 18
     },
     {
-      text: "負担の仕組みを整える",
-      detail: "制度的対応。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "裁きの手順を決める",
+      detail: "一貫性を重視する。",
+      effects: { bias_procedure: 1 },
       next: 18
     },
     {
-      text: "負担の理由を説明する",
-      detail: "納得を試みる。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "裁きの理由を説明する",
+      detail: "納得を重視する。",
+      effects: { bias_narrative: 1 },
       next: 18
     },
     {
-      text: "明確に決めない",
-      detail: "衝突を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "強く介入しない",
+      detail: "自然解決を期待する。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 18
     }
   ]
@@ -745,41 +697,37 @@ const scenarios = [
 
 /* ===== 18 ===== */
 {
-  title: "第18章：亀裂",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 60) t += "納得は失われつつあった。\n";
-    if (s.timePressure > 25) t += "未決の問題が限界に近づいていた。\n";
-    return t.trim();
-  },
+  title: "第18章：権威の芽",
+  preText: () =>
+    "判断する者の言葉が、重みを持ち始めていた。",
   text: () =>
-    "秩序は保たれていた。\n" +
-    "だが、その内側に亀裂が走っていた。\n" +
-    "まだ壊れてはいない。\n" +
-    "しかし、元には戻らない兆しがあった。",
+    "命令し、裁き、分配する者。\n" +
+    "その存在は、\n" +
+    "もはや単なる役割ではなかった。\n\n" +
+    "人々は、それを疑う前に従い始めていた。",
   choices: [
     {
-      text: "力で抑え込む",
-      detail: "短期的安定。",
-      effects: { bias_speed: 1, B: -10 },
+      text: "権威を前面に出す",
+      detail: "秩序を固める。",
+      effects: { bias_speed: 1, B: +1 },
       next: 19
     },
     {
-      text: "制度を補強する",
-      detail: "崩壊を防ぐ。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "権威を制度に組み込む",
+      detail: "個人依存を減らす。",
+      effects: { bias_procedure: 1 },
       next: 19
     },
     {
-      text: "意味を語り直す",
-      detail: "正当性の再構築。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "権威の理由を語る",
+      detail: "正当性を築く。",
+      effects: { bias_narrative: 1 },
       next: 19
     },
     {
-      text: "限界を見ないふりをする",
-      detail: "決断を避ける。",
-      effects: { bias_avoidance: 1, timePressure: +5 },
+      text: "権威を曖昧にする",
+      detail: "反発を避ける。",
+      effects: { bias_avoidance: 1 },
       next: 19
     }
   ]
@@ -787,83 +735,78 @@ const scenarios = [
 
 /* ===== 19 ===== */
 {
-  title: "第19章：不可逆",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 85) t += "秩序は強固だった。\n";
-    if (s.D < 55) t += "正当性は深刻に損なわれていた。\n";
-    return t.trim();
-  },
+  title: "第19章：首長制の成立",
+  preText: () =>
+    "判断は、一点に集まりつつあった。",
   text: () =>
-    "ここまで積み重ねられた判断は、もはや単独では戻せなかった。\n" +
-    "構造は形成され、歪みもまた固定されていた。\n" +
-    "この先に待つのは、拡大か、分裂か、あるいは断絶だった。",
+    "誰が決めるのか。\n" +
+    "その問いは、すでに過去のものになりつつあった。\n\n" +
+    "人々は、決める者がいる世界に慣れていた。\n\n" +
+    "この構造は、\n" +
+    "さらに大きな段階へ進もうとしていた。",
   choices: [
     {
-      text: "現状を受け入れる",
-      detail: "次の段階へ。",
+      text: "この体制を維持する",
+      detail: "安定を選ぶ。",
       effects: { bias_avoidance: 1 },
       next: 20
     },
     {
-      text: "構造を再設計する",
-      detail: "大きな転換。",
-      effects: { bias_procedure: 1, A: +5 },
+      text: "制度として固める",
+      detail: "次代に残す形にする。",
+      effects: { bias_procedure: 1 },
       next: 20
     },
     {
-      text: "正当性を再構築する",
-      detail: "語り直す。",
-      effects: { bias_narrative: 1, D: +5 },
+      text: "支配の意味を言葉にする",
+      detail: "正当性を明確にする。",
+      effects: { bias_narrative: 1 },
       next: 20
     },
     {
-      text: "力による統合を進める",
-      detail: "抑圧的安定。",
-      effects: { bias_speed: 1, B: -10 },
+      text: "決断を速める",
+      detail: "拡張に備える。",
+      effects: { bias_speed: 1 },
       next: 20
     }
   ]
 },
 /* ===== 20 ===== */
 {
-  title: "第20章：増え続ける仕事",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 70) t += "判断は慣習として繰り返され、役割として認識され始めていた。\n";
-    if (s.D > 70) t += "多くの者は、なぜ従うのかを言葉で説明できた。\n";
-    return t.trim();
-  },
+  title: "第20章：水を引く",
+  preText: () =>
+    "定住が続くにつれ、雨任せでは足りなくなっていた。\n" +
+    "川は近くにあるが、気まぐれだった。",
   text: () =>
-    "集める、守る、裁く。\n" +
-    "かつては例外だった判断が、日常の仕事になっていた。\n\n" +
-    "仕事は増え続け、\n" +
-    "誰かが引き受けなければ止まる。\n\n" +
-    "善意だけでは回らない段階に、\n" +
-    "この集団は差し掛かっていた。",
+    "水を引くという発想が現実味を帯びてきた。\n" +
+    "溝を掘り、流れを変える。\n\n" +
+    "成功すれば作物は安定する。\n" +
+    "だが、失敗すれば労力は無駄になり、責任の所在が問われる。\n\n" +
+    "誰が決め、誰が指揮を執るのか。\n" +
+    "この判断は、共同体の力関係を露わにする。",
   choices: [
     {
-      text: "役割として固定する",
-      detail: "特定の仕事を恒常的な役割として割り当てる。効率は上がるが、立場の固定化が始まる。",
-      effects: { A: +3 },
+      text: "経験者の判断で一気に進める",
+      detail: "迷いを排し、速さを優先する。",
+      effects: { bias_speed: 1 },
       next: 21
     },
     {
-      text: "奉仕として位置づける",
-      detail: "仕事を名誉や貢献として語る。自発性は保たれるが、継続性に不安が残る。",
-      effects: { D: +2, bias_narrative: 1 },
+      text: "掘削と管理の手順を定める",
+      detail: "失敗時の責任も含めて整理する。",
+      effects: { bias_procedure: 1 },
       next: 21
     },
     {
-      text: "負担を分散する",
-      detail: "仕事を持ち回りにする。公平感はあるが、判断の質が安定しない。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "なぜ水路が必要かを説明する",
+      detail: "不安を抑え、協力を引き出す。",
+      effects: { bias_narrative: 1 },
       next: 21
     },
     {
-      text: "強制的に割り当てる",
-      detail: "拒否を許さず命じる。即効性は高いが、反発と正当性の低下を招く。",
-      effects: { B: +3, D: -2 },
+      text: "本格工事は見送る",
+      detail: "自然に任せ、負担を避ける。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 21
     }
   ]
@@ -871,86 +814,79 @@ const scenarios = [
 
 /* ===== 21 ===== */
 {
-  title: "第21章：集めるという行為",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 72) t += "集める行為は、役割として制度に組み込まれつつあった。\n";
-    return t.trim();
-  },
+  title: "第21章：聖なる場所",
+  preText: () =>
+    "収穫の成否を、偶然だけで説明することが難しくなっていた。",
   text: () =>
-    "物を集める者と、差し出す者。\n\n" +
-    "それまでは曖昧だった差が、\n" +
-    "徐々に意識され始めていた。\n\n" +
-    "なぜ差し出すのか。\n" +
-    "なぜ拒めないのか。\n\n" +
-    "問いはまだ小さいが、確かに存在している。",
+    "丘の上、古木の根元、湧き水のそば。\n" +
+    "人々が集まり、祈る場所が定まってきた。\n\n" +
+    "そこでは、作物の話だけでなく、\n" +
+    "生と死、災いの理由が語られた。\n\n" +
+    "この場を誰が管理するのかは、\n" +
+    "目に見えない力の扱い方を決めることでもあった。",
   choices: [
     {
-      text: "必要性を説明する",
-      detail: "集める理由と使途を語る。納得は得やすいが、説明責任が増える。",
-      effects: { D: +2 },
+      text: "有力者が管理する",
+      detail: "世俗の力で場を守る。",
+      effects: { bias_speed: 1, B: +1 },
       next: 22
     },
     {
-      text: "規則として明文化する",
-      detail: "定めとして文章に残す。運用は安定するが、柔軟性を失う。",
-      effects: { A: +3 },
+      text: "管理の役割を定める",
+      detail: "宗教行為を秩序に組み込む。",
+      effects: { bias_procedure: 1 },
       next: 22
     },
     {
-      text: "慣例として続ける",
-      detail: "今まで通りを理由に続ける。衝突は少ないが、不満は蓄積する。",
+      text: "意味や由来を語り継ぐ",
+      detail: "信仰の物語を整える。",
+      effects: { bias_narrative: 1, belief_strength: +1 },
+      next: 22
+    },
+    {
+      text: "自然発生に任せる",
+      detail: "統制を最小限にする。",
       effects: { bias_avoidance: 1 },
-      next: 22
-    },
-    {
-      text: "拒否を許さない",
-      detail: "力で従わせる。短期的には安定するが、支配への疑念が強まる。",
-      effects: { B: +2, D: -2 },
       next: 22
     }
   ]
 },
+
 /* ===== 22 ===== */
 {
-  title: "第22章：記録の重み",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 72) t += "決定は記録され、後から参照されるようになっていた。\n";
-    if (s.D < 70) t += "ただし、その理由が常に理解されているわけではなかった。\n";
-    return t.trim();
-  },
+  title: "第22章：祭司の役割",
+  preText: () =>
+    "祈りの言葉を覚え、儀式を主導する者が現れていた。",
   text: () =>
-    "書き留める者が現れた。\n\n" +
-    "誰が何を納め、\n" +
-    "誰が何を命じ、\n" +
-    "誰が従ったのか。\n\n" +
-    "記録は便利だった。\n" +
-    "だが同時に、\n" +
-    "『忘れる自由』を奪い始めていた。",
+    "彼らは作業をしない代わりに、\n" +
+    "天候や病、死の意味を語った。\n\n" +
+    "人々は半信半疑ながらも耳を傾けた。\n" +
+    "不確かな世界で、説明は力だった。\n\n" +
+    "この役割をどう扱うかは、\n" +
+    "後の支配構造に影を落とす。",
   choices: [
     {
-      text: "記録を公開する",
-      detail: "誰でも確認できるようにする。透明性は高まるが、異議も増える。",
-      effects: { D: +3 },
+      text: "守護下に置く",
+      detail: "権力と結びつける。",
+      effects: { bias_speed: 1, B: +1 },
       next: 23
     },
     {
-      text: "管理者のみが扱う",
-      detail: "記録を専門の手に委ねる。運用は安定するが、距離が生まれる。",
-      effects: { A: +2 },
+      text: "役割と権限を定める",
+      detail: "越権を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 23
     },
     {
-      text: "必要最小限に留める",
-      detail: "負担を減らすため簡略化する。柔軟だが、混乱の種を残す。",
+      text: "教えの内容を共有する",
+      detail: "独占を避ける。",
+      effects: { bias_narrative: 1, belief_strength: +1 },
+      next: 23
+    },
+    {
+      text: "深く関与しない",
+      detail: "距離を保つ。",
       effects: { bias_avoidance: 1 },
-      next: 23
-    },
-    {
-      text: "力で守らせる",
-      detail: "記録への異議を力で封じる。短期的には秩序を保つ。",
-      effects: { B: +2, D: -2 },
       next: 23
     }
   ]
@@ -958,41 +894,39 @@ const scenarios = [
 
 /* ===== 23 ===== */
 {
-  title: "第23章：異議",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 70) t += "決定の理由は、必ずしも共有されていなかった。\n";
-    return t.trim();
-  },
+  title: "第23章：血縁の重み",
+  preText: () =>
+    "誰の子であるかが、次第に意味を持ち始めていた。",
   text: () =>
-    "記録を前に、声が上がった。\n\n" +
-    "「これは不公平だ」\n" +
-    "「以前は違った」\n\n" +
-    "異議はまだ小さい。\n" +
-    "だが、放置すれば前例になる。",
+    "土地、役割、発言権。\n" +
+    "それらが血縁と結びつく場面が増えていた。\n\n" +
+    "長く守ってきた家系には、\n" +
+    "自然と敬意が集まる。\n\n" +
+    "この流れを認めるかどうかは、\n" +
+    "不平等を制度化する一歩でもあった。",
   choices: [
     {
-      text: "話を聞く",
-      detail: "異議を受け止め、理由を探る。納得は得られるが、時間がかかる。",
-      effects: { D: +2 },
+      text: "有力な血縁を優先する",
+      detail: "秩序を安定させる。",
+      effects: { bias_speed: 1, lineage_strength: +1 },
       next: 24
     },
     {
-      text: "手続きに従わせる",
-      detail: "定められた流れを優先する。秩序は守られるが、不満は残る。",
-      effects: { A: +2 },
+      text: "血縁の扱いを規定する",
+      detail: "際限なき特権化を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 24
     },
     {
-      text: "その場で抑える",
-      detail: "問題を拡大させないため即座に封じる。恐れが広がる。",
-      effects: { B: +2, D: -1 },
+      text: "功績との関係を語る",
+      detail: "正当性を説明する。",
+      effects: { bias_narrative: 1 },
       next: 24
     },
     {
-      text: "今は対応しない",
-      detail: "様子を見ることで衝突を避ける。だが問題は消えない。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "明確に定めない",
+      detail: "対立を避ける。",
+      effects: { bias_avoidance: 1 },
       next: 24
     }
   ]
@@ -1000,36 +934,38 @@ const scenarios = [
 
 /* ===== 24 ===== */
 {
-  title: "第24章：前例",
-  preText: () => "",
+  title: "第24章：外との取引",
+  preText: () =>
+    "他の集団との接触が増えていた。",
   text: () =>
-    "一度応じた判断は、\n" +
-    "次も求められる。\n\n" +
-    "拒めば『なぜ今回は違うのか』が問われる。\n" +
-    "応じれば、基準が必要になる。",
+    "石、金属、装飾品。\n" +
+    "自分たちにないものが、外にはあった。\n\n" +
+    "取引は富をもたらす。\n" +
+    "同時に、争いの火種にもなり得る。\n\n" +
+    "誰が交渉し、条件を決めるのかが問われた。",
   choices: [
     {
-      text: "基準を定める",
-      detail: "例外を減らすため明確な線を引く。制度は強化される。",
-      effects: { A: +3 },
+      text: "有力者が交渉する",
+      detail: "即断即決を重視する。",
+      effects: { bias_speed: 1 },
       next: 25
     },
     {
-      text: "説明を重ねる",
-      detail: "一つ一つ理由を語る。理解は進むが負担が増す。",
-      effects: { D: +2 },
+      text: "交渉の手順を決める",
+      detail: "損失を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 25
     },
     {
-      text: "例外として処理する",
-      detail: "柔軟に対応する。だが一貫性が失われる。",
+      text: "取引の意味を共有する",
+      detail: "不信を抑える。",
+      effects: { bias_narrative: 1 },
+      next: 25
+    },
+    {
+      text: "取引を最小限にする",
+      detail: "外部依存を避ける。",
       effects: { bias_avoidance: 1 },
-      next: 25
-    },
-    {
-      text: "力で抑える",
-      detail: "前例を作らせないため威圧する。反感が残る。",
-      effects: { B: +2, D: -2 },
       next: 25
     }
   ]
@@ -1037,40 +973,38 @@ const scenarios = [
 
 /* ===== 25 ===== */
 {
-  title: "第25章：担い手の固定化",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 75) t += "役割は、人ではなく立場として意識され始めていた。\n";
-    return t.trim();
-  },
+  title: "第25章：富の集中",
+  preText: () =>
+    "交易と余剰により、明確な差が生まれていた。",
   text: () =>
-    "同じ者が、\n" +
-    "同じ場所に立つようになった。\n\n" +
-    "それは安定を生んだ。\n" +
-    "同時に、距離も生んだ。",
+    "持つ者と、持たない者。\n" +
+    "その差は、努力だけでは説明できなかった。\n\n" +
+    "不満は囁きとして広がり、\n" +
+    "一方で秩序は効率を増していた。\n\n" +
+    "この不均衡をどう扱うかが、試されていた。",
   choices: [
     {
-      text: "継続を認める",
-      detail: "経験を重視し同じ者に任せ続ける。効率は上がる。",
-      effects: { A: +2 },
+      text: "現状を受け入れる",
+      detail: "成長を優先する。",
+      effects: { bias_speed: 1 },
       next: 26
     },
     {
-      text: "定期的に入れ替える",
-      detail: "立場の固定化を防ぐ。だが判断の質が揺らぐ。",
-      effects: { D: +1 },
-      next: 26
-    },
-    {
-      text: "成果で評価する",
-      detail: "結果を基準に立場を保たせる。競争が生まれる。",
+      text: "分配の規則を整える",
+      detail: "暴発を防ぐ。",
       effects: { bias_procedure: 1 },
       next: 26
     },
     {
-      text: "疑問を持たせない",
-      detail: "立場への疑問を許さない。支配は強まる。",
-      effects: { B: +2 },
+      text: "不均衡の理由を説明する",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
+      next: 26
+    },
+    {
+      text: "深く触れない",
+      detail: "波風を立てない。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 26
     }
   ]
@@ -1078,36 +1012,38 @@ const scenarios = [
 
 /* ===== 26 ===== */
 {
-  title: "第26章：境界の拡張",
-  preText: () => "",
+  title: "第26章：壁と門",
+  preText: () =>
+    "外敵への不安が、具体的な形を求めていた。",
   text: () =>
-    "管理の及ぶ範囲は、\n" +
-    "少しずつ広がっていた。\n\n" +
-    "かつて曖昧だった境界が、\n" +
-    "言葉と記録で示され始めている。",
+    "柵や壁を築く案が出た。\n" +
+    "それは内と外を明確に分ける行為だった。\n\n" +
+    "守られる安心と、\n" +
+    "閉ざされる不自由。\n\n" +
+    "どこまで防ぐのかが議論となった。",
   choices: [
     {
-      text: "段階的に広げる",
-      detail: "混乱を避けつつ支配を拡張する。時間はかかる。",
-      effects: { A: +2 },
+      text: "強固な防備を築く",
+      detail: "安全を最優先する。",
+      effects: { bias_speed: 1, B: +1 },
       next: 27
     },
     {
-      text: "意味を語る",
-      detail: "なぜ広げるのかを説明する。理解は進む。",
-      effects: { D: +2 },
+      text: "建設と管理を制度化する",
+      detail: "負担を均す。",
+      effects: { bias_procedure: 1 },
       next: 27
     },
     {
-      text: "様子を見る",
-      detail: "反発を恐れ拡張を急がない。問題を先送りする。",
+      text: "防備の意味を共有する",
+      detail: "恐怖を煽りすぎない。",
+      effects: { bias_narrative: 1 },
+      next: 27
+    },
+    {
+      text: "最小限に留める",
+      detail: "開放性を保つ。",
       effects: { bias_avoidance: 1 },
-      next: 27
-    },
-    {
-      text: "力で従わせる",
-      detail: "境界を力で押し広げる。反発は強まる。",
-      effects: { B: +2 },
       next: 27
     }
   ]
@@ -1115,36 +1051,38 @@ const scenarios = [
 
 /* ===== 27 ===== */
 {
-  title: "第27章：距離",
-  preText: () => "",
+  title: "第27章：掟の言葉",
+  preText: () =>
+    "判断は、口伝えから固定された言葉へ向かっていた。",
   text: () =>
-    "中心から離れるほど、\n" +
-    "決定は遠く感じられる。\n\n" +
-    "従ってはいる。\n" +
-    "だが、納得しているとは限らない。",
+    "これはしてよい。\n" +
+    "これは許されない。\n\n" +
+    "掟が言葉として整えられ始めた。\n\n" +
+    "書き留めるかどうか。\n" +
+    "それは記憶から権威を切り離す選択でもあった。",
   choices: [
     {
-      text: "伝達を増やす",
-      detail: "決定を丁寧に伝える。負担は増えるが理解は深まる。",
-      effects: { D: +2 },
+      text: "強制力を持たせる",
+      detail: "違反を許さない。",
+      effects: { bias_speed: 1, B: +1 },
       next: 28
     },
     {
-      text: "代理を置く",
-      detail: "現地に判断役を置く。制度は広がる。",
-      effects: { A: +2 },
+      text: "掟を制度に組み込む",
+      detail: "運用を安定させる。",
+      effects: { bias_procedure: 1, law_strength: +1 },
       next: 28
     },
     {
-      text: "管理を緩める",
-      detail: "細部に口出ししない。だが統一性が失われる。",
+      text: "掟の理由を語る",
+      detail: "理解を促す。",
+      effects: { bias_narrative: 1 },
+      next: 28
+    },
+    {
+      text: "柔軟に扱う",
+      detail: "硬直を避ける。",
       effects: { bias_avoidance: 1 },
-      next: 28
-    },
-    {
-      text: "服従を求める",
-      detail: "疑問を許さず従わせる。恐れが支配を支える。",
-      effects: { B: +2, D: -2 },
       next: 28
     }
   ]
@@ -1152,37 +1090,39 @@ const scenarios = [
 
 /* ===== 28 ===== */
 {
-  title: "第28章：信頼と疑念",
-  preText: () => "",
+  title: "第28章：違反と裁定",
+  preText: () =>
+    "掟がある以上、破る者も現れた。",
   text: () =>
-    "任せるとは、\n" +
-    "信じるということだった。\n\n" +
-    "だが信頼は、\n" +
-    "裏切られたとき、\n" +
-    "より深い傷を残す。",
+    "罰を与えるのか。\n" +
+    "赦すのか。\n\n" +
+    "判断のたびに、\n" +
+    "掟の重さと支配の性質が示された。\n\n" +
+    "一貫性か、情状か。\n" +
+    "選択は共同体の記憶に残る。",
   choices: [
     {
-      text: "監査を入れる",
-      detail: "定期的に確認する。制度は安定する。",
-      effects: { A: +2 },
+      text: "厳罰で臨む",
+      detail: "見せしめを重視する。",
+      effects: { bias_speed: 1, B: +1 },
       next: 29
     },
     {
-      text: "説明を求める",
-      detail: "行動の理由を語らせる。正当性が補強される。",
-      effects: { D: +2 },
+      text: "裁定手順を厳格に守る",
+      detail: "恣意性を排する。",
+      effects: { bias_procedure: 1 },
       next: 29
     },
     {
-      text: "見て見ぬふりをする",
-      detail: "波風を立てない。だが疑念は残る。",
+      text: "裁定理由を丁寧に説明する",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
+      next: 29
+    },
+    {
+      text: "状況に応じて判断する",
+      detail: "柔軟性を優先する。",
       effects: { bias_avoidance: 1 },
-      next: 29
-    },
-    {
-      text: "力で締め付ける",
-      detail: "不信を力で抑える。支配は強まる。",
-      effects: { B: +2, D: -2 },
       next: 29
     }
   ]
@@ -1190,85 +1130,79 @@ const scenarios = [
 
 /* ===== 29 ===== */
 {
-  title: "第29章：形になった秩序",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 78) t += "秩序は制度として定着していた。\n";
-    if (s.D < 65) t += "だが、問いは完全には消えていなかった。\n";
-    return t.trim();
-  },
+  title: "第29章：都市の輪郭",
+  preText: () =>
+    "壁、掟、役割、信仰。\n" +
+    "それらが絡み合い、一つの形を成し始めていた。",
   text: () =>
-    "決める者がいて、\n" +
-    "従う者がいる。\n\n" +
-    "それはもはや特別なことではない。\n\n" +
-    "だが、その形が\n" +
-    "どこまで耐えられるのかは、\n" +
-    "まだ誰にも分からなかった。",
+    "人はここに集まり、\n" +
+    "ここで生まれ、ここで死ぬ。\n\n" +
+    "もはや一時の集まりではない。\n" +
+    "都市と呼べるものが、輪郭を帯びていた。\n\n" +
+    "この構造は、\n" +
+    "さらに大きな権力を必要とし始めている。",
   choices: [
     {
-      text: "現状を維持する",
-      detail: "安定を優先する。変化への備えは弱まる。",
+      text: "秩序を強める",
+      detail: "統治を前進させる。",
+      effects: { bias_speed: 1 },
+      next: 30
+    },
+    {
+      text: "制度を精緻化する",
+      detail: "長期運用に備える。",
+      effects: { bias_procedure: 1 },
+      next: 30
+    },
+    {
+      text: "正当性を語り直す",
+      detail: "支配の意味を固める。",
+      effects: { bias_narrative: 1 },
+      next: 30
+    },
+    {
+      text: "拡張を急がない",
+      detail: "内部安定を優先する。",
       effects: { bias_avoidance: 1 },
-      next: 30
-    },
-    {
-      text: "制度を洗練させる",
-      detail: "細部を整え、運用を強化する。",
-      effects: { A: +3 },
-      next: 30
-    },
-    {
-      text: "理念を語り直す",
-      detail: "なぜこの秩序が必要かを再定義する。",
-      effects: { D: +2 },
-      next: 30
-    },
-    {
-      text: "力を強める",
-      detail: "従わせる力を明確にする。恐れが秩序を支える。",
-      effects: { B: +2 },
       next: 30
     }
   ]
 },
 /* ===== 30 ===== */
 {
-  title: "第30章：継がれる立場",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 75) t += "役割は、個人ではなく立場として認識され始めていた。\n";
-    if (s.lineage_strength > 0) t += "血縁による継承が、当然視され始めていた。\n";
-    return t.trim();
-  },
+  title: "第30章：王の座",
+  preText: () =>
+    "都市は拡大し、調整だけでは追いつかなくなっていた。",
   text: () =>
-    "同じ役割を、同じ家の者が担う。\n\n" +
-    "経験は引き継がれ、判断は早くなる。\n" +
-    "だがそれは、選ばれない者を生むことでもあった。\n\n" +
-    "この流れを、どこまで認めるのか。\n" +
-    "今はまだ調整できる段階だった。",
+    "誰か一人が、最終判断を下す必要がある。\n\n" +
+    "その人物は『王』と呼ばれ始めた。\n" +
+    "だが、その座は祝福と危険を同時に伴う。\n\n" +
+    "王は何によって正当化されるのか。\n" +
+    "力か、血か、神意か。\n\n" +
+    "この問いへの答えは、後の争いを予告していた。",
   choices: [
     {
-      text: "継承を公然と認める",
-      detail: "安定と継続性を重視する。だが身分差が固定され始める。",
-      effects: { A: +2, lineage_strength: +2 },
+      text: "軍事力を背景に王を立てる",
+      detail: "秩序と迅速さを優先する。",
+      effects: { bias_speed: 1, B: +2 },
       next: 31
     },
     {
-      text: "能力を条件に残す",
-      detail: "血縁を優先しつつ例外を認める。説明責任が増す。",
-      effects: { D: +2, lineage_strength: +1 },
+      text: "王権の規則を定める",
+      detail: "権限と限界を明文化する。",
+      effects: { bias_procedure: 1, law_strength: +1 },
       next: 31
     },
     {
-      text: "曖昧なまま黙認する",
-      detail: "明文化せず慣例に任せる。衝突は少ないが不満が残る。",
+      text: "神意による正当性を語る",
+      detail: "王を超越的存在として位置づける。",
+      effects: { bias_narrative: 1, belief_strength: +1 },
+      next: 31
+    },
+    {
+      text: "王の権限を限定する",
+      detail: "共同体の合意を重視する。",
       effects: { bias_avoidance: 1 },
-      next: 31
-    },
-    {
-      text: "力で固定する",
-      detail: "疑問を許さず継承を強制する。反発は潜在化する。",
-      effects: { B: +2, D: -1, lineage_strength: +2 },
       next: 31
     }
   ]
@@ -1276,40 +1210,39 @@ const scenarios = [
 
 /* ===== 31 ===== */
 {
-  title: "第31章：生まれの差",
-  preText: (s) => {
-    let t = "";
-    if (s.lineage_strength > 3) t += "生まれが立場を決めるという認識が広がっていた。\n";
-    return t.trim();
-  },
+  title: "第31章：貢納",
+  preText: () =>
+    "王のもとで、都市は一つにまとめられていた。",
   text: () =>
-    "生まれによって、期待される役割が違う。\n\n" +
-    "それは法律ではない。\n" +
-    "だが、多くが理解し、口にしない約束だった。\n\n" +
-    "この差を、どう扱うのかが問われていた。",
+    "維持には資源が必要だった。\n\n" +
+    "穀物、労働、家畜。\n" +
+    "人々はそれを『貢納』として差し出す。\n\n" +
+    "負担は不満を生み、\n" +
+    "同時に国家という形を実感させる。\n\n" +
+    "どのように集め、どのように使うのかが問われた。",
   choices: [
     {
-      text: "秩序として受け入れる",
-      detail: "差を前提として運営する。安定するが流動性は失われる。",
-      effects: { A: +2, lineage_strength: +2 },
+      text: "必要に応じて徴収する",
+      detail: "柔軟だが恣意的。",
+      effects: { bias_speed: 1 },
       next: 32
     },
     {
-      text: "努力で越えられる余地を残す",
-      detail: "例外を認める。希望は生まれるが不満も増える。",
-      effects: { D: +2 },
+      text: "貢納の基準を定める",
+      detail: "不満を抑える。",
+      effects: { bias_procedure: 1 },
       next: 32
     },
     {
-      text: "明文化せずに続ける",
-      detail: "衝突を避けるが、説明できない差が残る。",
-      effects: { bias_avoidance: 1 },
+      text: "貢納の目的を説明する",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
       next: 32
     },
     {
-      text: "区別を徹底する",
-      detail: "役割を明確に分ける。反抗は抑え込まれる。",
-      effects: { B: +2, D: -2 },
+      text: "徴収を最小限にする",
+      detail: "統治の負荷を減らす。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 32
     }
   ]
@@ -1317,37 +1250,38 @@ const scenarios = [
 
 /* ===== 32 ===== */
 {
-  title: "第32章：誓いと契約",
-  preText: () => "",
+  title: "第32章：常備兵",
+  preText: () =>
+    "周辺集団との摩擦は避けられなくなっていた。",
   text: () =>
-    "守ることを誓う者が現れた。\n\n" +
-    "誓いは言葉であり、\n" +
-    "契約は条件だった。\n\n" +
-    "どちらを重く扱うかで、\n" +
-    "秩序の性質は変わっていく。",
+    "戦は偶発的なものではなくなった。\n\n" +
+    "常に備える兵の存在が議論される。\n\n" +
+    "守りは安心を生む。\n" +
+    "だが、兵は統治者に従う。\n\n" +
+    "この力をどう扱うかが、王権の性格を決める。",
   choices: [
     {
-      text: "儀式として誓わせる",
-      detail: "信と忠誠を重視する。象徴的だが曖昧さが残る。",
-      effects: { belief_strength: +2, D: +1 },
+      text: "王直属の兵を置く",
+      detail: "即応力を高める。",
+      effects: { bias_speed: 1, B: +2 },
       next: 33
     },
     {
-      text: "契約として文書化する",
-      detail: "条件と義務を明確にする。制度は強まる。",
-      effects: { law_strength: +2, A: +1 },
+      text: "動員の規則を整える",
+      detail: "暴走を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 33
     },
     {
-      text: "個人の良心に任せる",
-      detail: "強制を避ける。だが裏切りへの備えが弱い。",
+      text: "兵の役割を語る",
+      detail: "恐怖を和らげる。",
+      effects: { bias_narrative: 1 },
+      next: 33
+    },
+    {
+      text: "最小限の防備に留める",
+      detail: "軍事依存を避ける。",
       effects: { bias_avoidance: 1 },
-      next: 33
-    },
-    {
-      text: "力で縛る",
-      detail: "誓いを破れば罰する。恐れが忠誠を支える。",
-      effects: { B: +2, D: -1 },
       next: 33
     }
   ]
@@ -1355,40 +1289,38 @@ const scenarios = [
 
 /* ===== 33 ===== */
 {
-  title: "第33章：武装する者たち",
-  preText: (s) => {
-    let t = "";
-    if (s.B > 72) t += "武装した者の存在は、秩序の中核になっていた。\n";
-    return t.trim();
-  },
+  title: "第33章：征服と統合",
+  preText: () =>
+    "戦は勝利をもたらした。",
   text: () =>
-    "武器を持つ者と、持たない者。\n\n" +
-    "その差は、言葉よりも明確だった。\n\n" +
-    "守るための力は、\n" +
-    "支配する力にもなり得る。",
+    "新たな土地と人々が支配下に入る。\n\n" +
+    "だが、征服は終わりではない。\n" +
+    "統合が始まりだった。\n\n" +
+    "支配される側をどう扱うか。\n" +
+    "それは帝国への第一歩でもあった。",
   choices: [
     {
-      text: "役割として限定する",
-      detail: "武装を職務に限定する。管理は難しい。",
-      effects: { A: +2 },
+      text: "力で従わせる",
+      detail: "反抗を許さない。",
+      effects: { bias_speed: 1, B: +2 },
       next: 34
     },
     {
-      text: "正当性を語る",
-      detail: "なぜ武装が必要かを説明する。納得は広がる。",
-      effects: { D: +2 },
+      text: "統治制度を適用する",
+      detail: "同一の秩序に組み込む。",
+      effects: { bias_procedure: 1 },
       next: 34
     },
     {
-      text: "慣習に任せる",
-      detail: "明確な制限を設けない。力が独り歩きする。",
+      text: "共通の物語を与える",
+      detail: "一体感を作る。",
+      effects: { bias_narrative: 1 },
+      next: 34
+    },
+    {
+      text: "間接統治に任せる",
+      detail: "負担を減らす。",
       effects: { bias_avoidance: 1 },
-      next: 34
-    },
-    {
-      text: "恐怖で抑える",
-      detail: "武力を誇示する。従順さは保たれる。",
-      effects: { B: +3, D: -2 },
       next: 34
     }
   ]
@@ -1396,37 +1328,38 @@ const scenarios = [
 
 /* ===== 34 ===== */
 {
-  title: "第34章：裁きの形",
-  preText: () => "",
+  title: "第34章：法の書",
+  preText: () =>
+    "裁定は増え、口伝では追いつかなくなっていた。",
   text: () =>
-    "争いは避けられなかった。\n\n" +
-    "誰が正しいのか。\n" +
-    "誰が決めるのか。\n\n" +
-    "裁きの方法は、\n" +
-    "秩序そのものを映していた。",
+    "掟は書き留められ、\n" +
+    "誰の目にも触れる形になる。\n\n" +
+    "それは王の恣意を縛り、\n" +
+    "同時に王権を固定する。\n\n" +
+    "法は武器にも盾にもなった。",
   choices: [
     {
-      text: "規則に従う",
-      detail: "定められた手順で裁く。公平だが融通が利かない。",
-      effects: { A: +2 },
+      text: "王の権威を前面に出す",
+      detail: "最終判断を握る。",
+      effects: { bias_speed: 1 },
       next: 35
     },
     {
-      text: "理由を説明する",
-      detail: "判断の根拠を示す。納得は得られやすい。",
-      effects: { D: +2 },
+      text: "法の体系を整える",
+      detail: "予測可能性を高める。",
+      effects: { bias_procedure: 1, law_strength: +1 },
       next: 35
     },
     {
-      text: "前例を優先する",
-      detail: "過去を基準にする。変化に弱い。",
+      text: "法の理念を語る",
+      detail: "支配の正当性を示す。",
+      effects: { bias_narrative: 1 },
+      next: 35
+    },
+    {
+      text: "例外を多く残す",
+      detail: "柔軟性を確保する。",
       effects: { bias_avoidance: 1 },
-      next: 35
-    },
-    {
-      text: "力で決着させる",
-      detail: "迅速だが不満が残る。",
-      effects: { B: +2, D: -2 },
       next: 35
     }
   ]
@@ -1434,40 +1367,38 @@ const scenarios = [
 
 /* ===== 35 ===== */
 {
-  title: "第35章：信じる理由",
-  preText: (s) => {
-    let t = "";
-    if (s.belief_strength > 2) t += "共通の信が、秩序を支え始めていた。\n";
-    return t.trim();
-  },
+  title: "第35章：王と神",
+  preText: () =>
+    "王権と信仰は、互いに無視できなくなっていた。",
   text: () =>
-    "なぜ従うのか。\n\n" +
-    "恐れか。\n" +
-    "慣れか。\n" +
-    "それとも、信じているからか。",
+    "王は神に選ばれた存在か。\n" +
+    "それとも神を守る者か。\n\n" +
+    "この関係の定義は、\n" +
+    "反抗を罪にするかどうかを左右する。\n\n" +
+    "答えは一つではなかった。",
   choices: [
     {
-      text: "信を強める",
-      detail: "共通の価値を前面に出す。結束は強まる。",
-      effects: { belief_strength: +2, D: +1 },
+      text: "王を神意の体現とする",
+      detail: "反逆を冒涜とする。",
+      effects: { bias_speed: 1, belief_strength: +1 },
       next: 36
     },
     {
-      text: "規則を整える",
-      detail: "信よりも制度を重視する。安定する。",
-      effects: { law_strength: +2, A: +1 },
+      text: "宗教と王権を制度化する",
+      detail: "相互監視を行う。",
+      effects: { bias_procedure: 1 },
       next: 36
     },
     {
-      text: "答えを曖昧にする",
-      detail: "問いを先送りする。衝突は減る。",
+      text: "役割の違いを語る",
+      detail: "対立を避ける。",
+      effects: { bias_narrative: 1 },
+      next: 36
+    },
+    {
+      text: "距離を保つ",
+      detail: "一体化を避ける。",
       effects: { bias_avoidance: 1 },
-      next: 36
-    },
-    {
-      text: "力を誇示する",
-      detail: "従わせる理由を力に求める。",
-      effects: { B: +2, D: -1 },
       next: 36
     }
   ]
@@ -1475,35 +1406,38 @@ const scenarios = [
 
 /* ===== 36 ===== */
 {
-  title: "第36章：広がる支配",
-  preText: () => "",
+  title: "第36章：反乱の兆し",
+  preText: () =>
+    "負担と不満は、沈殿していた。",
   text: () =>
-    "従う範囲は広がっていた。\n\n" +
-    "顔も知らぬ者が、\n" +
-    "同じ決定に従っている。",
+    "小規模な反抗が起きる。\n\n" +
+    "すぐに鎮めることはできる。\n" +
+    "だが、理由は残る。\n\n" +
+    "ここでの対応は、\n" +
+    "後の世代に記憶される。",
   choices: [
     {
-      text: "代理を置く",
-      detail: "現地に判断役を置く。制度が拡張される。",
-      effects: { A: +2 },
+      text: "力で鎮圧する",
+      detail: "秩序を守る。",
+      effects: { bias_speed: 1, B: +2 },
       next: 37
     },
     {
-      text: "物語で結ぶ",
-      detail: "共通の物語で結束を保つ。",
-      effects: { D: +2 },
+      text: "原因を制度で処理する",
+      detail: "再発を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 37
     },
     {
-      text: "細かく管理しない",
-      detail: "大枠だけ示す。統一感は弱まる。",
-      effects: { bias_avoidance: 1 },
+      text: "理由を聞き、語る",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
       next: 37
     },
     {
-      text: "力を及ぼす",
-      detail: "武力で影響力を示す。",
-      effects: { B: +2, D: -2 },
+      text: "深追いしない",
+      detail: "表面の安定を保つ。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 37
     }
   ]
@@ -1511,36 +1445,37 @@ const scenarios = [
 
 /* ===== 37 ===== */
 {
-  title: "第37章：距離と不満",
-  preText: () => "",
+  title: "第37章：境界の戦争",
+  preText: () =>
+    "国境は線ではなく、帯だった。",
   text: () =>
-    "遠い場所ほど、\n" +
-    "決定は重く感じられる。\n\n" +
-    "声は小さいが、\n" +
-    "消えてはいなかった。",
+    "小競り合いが続き、\n" +
+    "戦は日常の延長になる。\n\n" +
+    "戦う理由をどう位置づけるか。\n" +
+    "それは内部統合にも影響した。",
   choices: [
     {
-      text: "声を拾う",
-      detail: "不満を聞き取る。正当性は高まる。",
-      effects: { D: +2 },
+      text: "防衛を名目に拡張する",
+      detail: "外圧を利用する。",
+      effects: { bias_speed: 1 },
       next: 38
     },
     {
-      text: "手続きを示す",
-      detail: "決まりを明確にする。制度は強まる。",
-      effects: { A: +2 },
+      text: "軍事と統治を分ける",
+      detail: "暴走を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 38
     },
     {
-      text: "今は見ない",
-      detail: "緊急でないとして先送りする。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "戦の意味を語る",
+      detail: "動員を正当化する。",
+      effects: { bias_narrative: 1 },
       next: 38
     },
     {
-      text: "力で抑える",
-      detail: "不満を抑圧する。反感は潜在化する。",
-      effects: { B: +2, D: -2 },
+      text: "消耗を避ける",
+      detail: "現状維持を選ぶ。",
+      effects: { bias_avoidance: 1 },
       next: 38
     }
   ]
@@ -1548,40 +1483,37 @@ const scenarios = [
 
 /* ===== 38 ===== */
 {
-  title: "第38章：揺らぐ均衡",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 8) t += "未処理の問題が、静かに積み重なっていた。\n";
-    return t.trim();
-  },
+  title: "第38章：王位継承",
+  preText: () =>
+    "王の死は、必ず訪れる。",
   text: () =>
-    "制度、信、力。\n\n" +
-    "どれもが支えであり、\n" +
-    "どれもが重荷になり得る。\n\n" +
-    "均衡は、目に見えないところで揺れていた。",
+    "誰が次に座るのか。\n\n" +
+    "血か、能力か、選出か。\n\n" +
+    "継承の曖昧さは、\n" +
+    "内戦の火種になり得る。",
   choices: [
     {
-      text: "制度を補強する",
-      detail: "細部を整える。管理負担は増す。",
-      effects: { A: +2 },
+      text: "血縁を最優先する",
+      detail: "安定を重視する。",
+      effects: { bias_speed: 1, lineage_strength: +1 },
       next: 39
     },
     {
-      text: "正当性を語る",
-      detail: "意味を再確認する。納得は進む。",
-      effects: { D: +2 },
+      text: "継承規則を明文化する",
+      detail: "争いを防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 39
     },
     {
-      text: "先送りする",
-      detail: "今は耐えられるとして判断を遅らせる。",
+      text: "継承の正当性を語る",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
+      next: 39
+    },
+    {
+      text: "状況対応に任せる",
+      detail: "柔軟性を残す。",
       effects: { bias_avoidance: 1 },
-      next: 39
-    },
-    {
-      text: "力を集中させる",
-      detail: "統制を強める。反発は強まる。",
-      effects: { B: +2, D: -2 },
       next: 39
     }
   ]
@@ -1589,85 +1521,79 @@ const scenarios = [
 
 /* ===== 39 ===== */
 {
-  title: "第39章：形としての支配",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 80) t += "支配は制度として完成しつつあった。\n";
-    if (s.D < 65) t += "だが、納得は必ずしも伴っていなかった。\n";
-    return t.trim();
-  },
+  title: "第39章：王国という形",
+  preText: () =>
+    "王、法、軍、信仰。\n" +
+    "それらは絡み合い、一つの構造を成していた。",
   text: () =>
-    "決める者がいて、\n" +
-    "従う者がいる。\n\n" +
-    "それは、当たり前の風景になった。\n\n" +
-    "だがこの形は、\n" +
-    "次の変化に耐えられるだろうか。",
+    "もはや都市ではない。\n" +
+    "王国と呼ぶべき段階に達していた。\n\n" +
+    "だが、その形はまだ不安定だ。\n" +
+    "この先、拡張か、分裂か。\n\n" +
+    "選択の積み重ねが、\n" +
+    "未来の運命を決めていく。",
   choices: [
     {
-      text: "現状を維持する",
-      detail: "安定を選ぶ。変化への備えは弱まる。",
+      text: "統治をさらに強める",
+      detail: "中央集権を進める。",
+      effects: { bias_speed: 1 },
+      next: 40
+    },
+    {
+      text: "制度を洗練させる",
+      detail: "長期安定を目指す。",
+      effects: { bias_procedure: 1 },
+      next: 40
+    },
+    {
+      text: "正当性を固める",
+      detail: "支配の意味を再確認する。",
+      effects: { bias_narrative: 1 },
+      next: 40
+    },
+    {
+      text: "拡張を抑える",
+      detail: "内部の均衡を保つ。",
       effects: { bias_avoidance: 1 },
-      next: 40
-    },
-    {
-      text: "制度をさらに整える",
-      detail: "官僚的要素を強める。",
-      effects: { A: +3 },
-      next: 40
-    },
-    {
-      text: "理念を語り直す",
-      detail: "支配の理由を再定義する。",
-      effects: { D: +2 },
-      next: 40
-    },
-    {
-      text: "力を明確にする",
-      detail: "従わぬ者への対応を示す。",
-      effects: { B: +2 },
       next: 40
     }
   ]
 },
 /* ===== 40 ===== */
 {
-  title: "第40章：金が足りない",
-  preText: (s) => {
-    let t = "";
-    if (s.B > 75) t += "武装と防衛の維持が、常態となっていた。\n";
-    if (s.A > 75) t += "制度は整っていたが、費用は増え続けていた。\n";
-    return t.trim();
-  },
+  title: "第40章：異質な秩序",
+  preText: () =>
+    "海の向こうから来た秩序は、これまでのものとは決定的に違っていた。",
   text: () =>
-    "守るためには、金が要る。\n\n" +
-    "兵を養い、\n" +
-    "設備を維持し、\n" +
-    "境界を保つ。\n\n" +
-    "これまでのやり方では、\n" +
-    "明らかに足りなくなっていた。",
+    "彼らは道を敷き、測り、記録した。\n" +
+    "争いは裁かれ、税は数えられ、兵は常に整列していた。\n\n" +
+    "それは混乱を終わらせる力を持っていたが、\n" +
+    "同時に、従う理由を奪う力でもあった。\n\n" +
+    "この秩序をどう扱うかは、\n" +
+    "自らをどう定義するかという問いでもあった。",
   choices: [
     {
-      text: "恒常的な徴収を始める",
-      detail: "安定した収入を確保するが、生活への影響は避けられない。",
-      effects: { A: +2, D: -1 },
+      text: "実利を優先し受け入れる",
+      detail: "安定と利益を選ぶ。",
+      effects: { bias_speed: 1 },
       next: 41
     },
     {
-      text: "一時的な負担として説明する",
-      detail: "理由を語ることで理解を求める。",
-      effects: { D: +2 },
+      text: "関係性を制度として整理する",
+      detail: "従属でも対立でもない位置を探る。",
+      effects: { bias_procedure: 1 },
       next: 41
     },
     {
-      text: "曖昧な形で集める",
-      detail: "明確な説明を避ける。不満は見えにくい。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "違いを語り、距離を意識させる",
+      detail: "自分たちの輪郭を保つ。",
+      effects: { bias_narrative: 1 },
       next: 41
     },
     {
-      text: "力で徴収する",
-      detail: "迅速だが反感を買う。",
-      effects: { B: +2, D: -2 },
+      text: "深入りを避ける",
+      detail: "接触を限定する。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 41
     }
   ]
@@ -1675,42 +1601,39 @@ const scenarios = [
 
 /* ===== 41 ===== */
 {
-  title: "第41章：払う理由",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "なぜ負担するのか、理解は十分ではなかった。\n";
-    return t.trim();
-  },
+  title: "第41章：駐屯という現実",
+  preText: () =>
+    "秩序は言葉だけでは維持されなかった。",
   text: () =>
-    "人々は問う。\n\n" +
-    "――なぜ、払わなければならないのか。\n\n" +
-    "守られている実感があれば、\n" +
-    "納得は生まれる。\n\n" +
-    "だが、それが見えなくなれば、\n" +
-    "疑問だけが残る。",
+    "石造りの拠点が築かれ、\n" +
+    "外から来た兵が常駐するようになった。\n\n" +
+    "彼らは争いを抑え、盗みを罰し、\n" +
+    "街道を守った。\n\n" +
+    "だがその姿は、\n" +
+    "支配が現実であることを日々思い出させた。",
   choices: [
     {
-      text: "防衛の成果を示す",
-      detail: "何が守られているのかを具体的に示す。",
-      effects: { D: +2 },
+      text: "秩序維持に積極的に協力する",
+      detail: "安定を最大化する。",
+      effects: { bias_speed: 1, B: +1 },
       next: 42
     },
     {
-      text: "制度として当然とする",
-      detail: "理由を説明せず、義務として扱う。",
-      effects: { A: +2, D: -1 },
+      text: "権限範囲を明文化する",
+      detail: "越権を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 42
     },
     {
-      text: "説明を後回しにする",
-      detail: "今は急務として処理する。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "駐屯の理由を語り続ける",
+      detail: "恐怖を意味に変える。",
+      effects: { bias_narrative: 1 },
       next: 42
     },
     {
-      text: "不満を抑え込む",
-      detail: "異論を力で封じる。",
-      effects: { B: +2, D: -2 },
+      text: "存在感を薄める",
+      detail: "摩擦を避ける。",
+      effects: { bias_avoidance: 1 },
       next: 42
     }
   ]
@@ -1718,37 +1641,39 @@ const scenarios = [
 
 /* ===== 42 ===== */
 {
-  title: "第42章：声を持つ者",
-  preText: () => "",
+  title: "第42章：書かれた法",
+  preText: () =>
+    "裁定は速くなり、予測可能になっていた。",
   text: () =>
-    "負担を求めるなら、\n" +
-    "声を聞くべきではないか。\n\n" +
-    "そう考える者が現れ始めた。\n\n" +
-    "それは要求であり、\n" +
-    "交渉の始まりでもあった。",
+    "文字で書かれた法は、\n" +
+    "誰にとっても同じように適用された。\n\n" +
+    "それは恣意を減らし、\n" +
+    "同時に、慣習の居場所を奪った。\n\n" +
+    "正しさとは何か。\n" +
+    "古い掟と新しい法が、静かに競合していた。",
   choices: [
     {
-      text: "意見を聞く場を設ける",
-      detail: "同意を得る手続きを始める。",
-      effects: { A: +2, D: +1 },
+      text: "新しい法を主とする",
+      detail: "効率と公平を選ぶ。",
+      effects: { bias_speed: 1, law_strength: +1 },
       next: 43
     },
     {
-      text: "限定的に聞く",
-      detail: "有力者のみを対象とする。",
-      effects: { A: +1 },
+      text: "併用の枠組みを整える",
+      detail: "衝突を管理する。",
+      effects: { bias_procedure: 1 },
       next: 43
     },
     {
-      text: "形式だけ整える",
-      detail: "実質的な反映はしない。",
+      text: "慣習の意味を語る",
+      detail: "記憶を守る。",
+      effects: { bias_narrative: 1 },
+      next: 43
+    },
+    {
+      text: "限定的に適用する",
+      detail: "変化を遅らせる。",
       effects: { bias_avoidance: 1 },
-      next: 43
-    },
-    {
-      text: "聞く必要はないとする",
-      detail: "決定権は一方にあると示す。",
-      effects: { B: +2, D: -2 },
       next: 43
     }
   ]
@@ -1756,40 +1681,39 @@ const scenarios = [
 
 /* ===== 43 ===== */
 {
-  title: "第43章：代表という発想",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 78) t += "制度的な調整が求められていた。\n";
-    return t.trim();
-  },
+  title: "第43章：税という数字",
+  preText: () =>
+    "収穫は数えられ、記録された。",
   text: () =>
-    "全員の声を聞くことはできない。\n\n" +
-    "ならば、誰かが代わりに語る。\n\n" +
-    "この考えは、\n" +
-    "秩序を変える可能性を秘めていた。",
+    "穀物、金属、労働。\n" +
+    "それらは価値として換算され、外へ送られた。\n\n" +
+    "見返りは道と安全。\n" +
+    "だが、差し引きは人によって違って見えた。\n\n" +
+    "この負担をどう説明するかが、\n" +
+    "不満の広がりを左右した。",
   choices: [
     {
-      text: "代表を公式に認める",
-      detail: "交渉の窓口を設ける。",
-      effects: { A: +2, D: +1 },
+      text: "現実として受け入れる",
+      detail: "対価を重視する。",
+      effects: { bias_speed: 1 },
       next: 44
     },
     {
-      text: "暫定的な役割とする",
-      detail: "恒常化は避ける。",
-      effects: { bias_avoidance: 1 },
+      text: "徴税基準を交渉する",
+      detail: "不均衡を抑える。",
+      effects: { bias_procedure: 1 },
       next: 44
     },
     {
-      text: "助言として扱う",
-      detail: "決定権は保持する。",
-      effects: { A: +1 },
+      text: "仕組みを説明する",
+      detail: "理解を求める。",
+      effects: { bias_narrative: 1 },
       next: 44
     },
     {
-      text: "危険視する",
-      detail: "力の集中を恐れる。",
-      effects: { B: +2, D: -1 },
+      text: "問題化しない",
+      detail: "摩擦を避ける。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 44
     }
   ]
@@ -1797,37 +1721,39 @@ const scenarios = [
 
 /* ===== 44 ===== */
 {
-  title: "第44章：合意の重み",
-  preText: () => "",
+  title: "第44章：言葉と服",
+  preText: () =>
+    "市場や法廷で、別の言葉が使われ始めていた。",
   text: () =>
-    "合意は、\n" +
-    "決定を遅らせる。\n\n" +
-    "だが、\n" +
-    "合意なき決定は、\n" +
-    "長くは続かない。",
+    "新しい言葉、新しい服装、\n" +
+    "新しい振る舞い。\n\n" +
+    "それらは昇進と安全をもたらしたが、\n" +
+    "同時に、古い自分を遠ざけた。\n\n" +
+    "変わることと、失うことは、\n" +
+    "しばしば同時に起こる。",
   choices: [
     {
-      text: "合意を必須とする",
-      detail: "時間はかかるが正当性は高まる。",
-      effects: { D: +2, A: +1 },
+      text: "新様式を積極的に採用する",
+      detail: "機会を広げる。",
+      effects: { bias_speed: 1 },
       next: 45
     },
     {
-      text: "重要事項のみ合意を取る",
-      detail: "柔軟性を残す。",
-      effects: { A: +2 },
+      text: "受容の基準を設ける",
+      detail: "変化を制御する。",
+      effects: { bias_procedure: 1 },
       next: 45
     },
     {
-      text: "合意を形式化する",
-      detail: "実質より手続きを重視する。",
+      text: "伝統の意味を語る",
+      detail: "喪失感を和らげる。",
+      effects: { bias_narrative: 1 },
+      next: 45
+    },
+    {
+      text: "自然に任せる",
+      detail: "方向付けをしない。",
       effects: { bias_avoidance: 1 },
-      next: 45
-    },
-    {
-      text: "合意を軽視する",
-      detail: "迅速さを優先する。",
-      effects: { B: +2, D: -2 },
       next: 45
     }
   ]
@@ -1835,40 +1761,39 @@ const scenarios = [
 
 /* ===== 45 ===== */
 {
-  title: "第45章：戦いの負担",
-  preText: (s) => {
-    let t = "";
-    if (s.B > 75) t += "防衛は常に想定されていた。\n";
-    return t.trim();
-  },
+  title: "第45章：静かな反発",
+  preText: () =>
+    "変化は、すべての者に歓迎されたわけではなかった。",
   text: () =>
-    "戦いは、\n" +
-    "遠い出来事ではなくなった。\n\n" +
-    "負担は日常に入り込み、\n" +
-    "誰もが無関係ではいられない。",
+    "象徴が壊され、\n" +
+    "古い歌が密かに歌われる。\n\n" +
+    "それは反乱ではない。\n" +
+    "だが、同意でもなかった。\n\n" +
+    "無視すれば広がり、\n" +
+    "抑えれば意味を持つ。",
   choices: [
     {
-      text: "負担を公平に配分する",
-      detail: "納得は広がるが管理は複雑になる。",
-      effects: { D: +2, A: +1 },
+      text: "芽のうちに抑える",
+      detail: "秩序を守る。",
+      effects: { bias_speed: 1, B: +1 },
       next: 46
     },
     {
-      text: "役割ごとに分ける",
-      detail: "効率は良いが不満は残る。",
-      effects: { A: +2 },
+      text: "対処の枠組みを作る",
+      detail: "拡大を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 46
     },
     {
-      text: "慣例に任せる",
-      detail: "調整を避ける。",
-      effects: { bias_avoidance: 1 },
+      text: "理由を語る",
+      detail: "理解を示す。",
+      effects: { bias_narrative: 1 },
       next: 46
     },
     {
-      text: "強制する",
-      detail: "即応性は高い。",
-      effects: { B: +2, D: -2 },
+      text: "表面上は放置する",
+      detail: "緊張を下げる。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 46
     }
   ]
@@ -1876,41 +1801,39 @@ const scenarios = [
 
 /* ===== 46 ===== */
 {
-  title: "第46章：制度の疲れ",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 10) t += "未処理の問題が増えていた。\n";
-    return t.trim();
-  },
+  title: "第46章：撤退の始まり",
+  preText: () =>
+    "外の秩序は、揺らぎ始めていた。",
   text: () =>
-    "決まりは増え、\n" +
-    "調整は重なり、\n" +
-    "判断は遅くなる。\n\n" +
-    "制度は、\n" +
-    "守るためにあるはずだった。",
+    "遠方での戦、内側の争い。\n" +
+    "支配者の視線は別の場所へ向かう。\n\n" +
+    "兵は減り、命令は遅れ、\n" +
+    "空白が生まれ始めた。\n\n" +
+    "この瞬間をどう迎えるかが、\n" +
+    "自立の成否を決める。",
   choices: [
     {
-      text: "整理し直す",
-      detail: "制度を簡素化する。",
-      effects: { A: +2 },
+      text: "素早く引き継ぐ",
+      detail: "空白を埋める。",
+      effects: { bias_speed: 1 },
       next: 47
     },
     {
-      text: "意味を再確認する",
-      detail: "なぜ必要かを語り直す。",
-      effects: { D: +2 },
+      text: "統治を再構築する",
+      detail: "独自の形を作る。",
+      effects: { bias_procedure: 1 },
       next: 47
     },
     {
-      text: "放置する",
-      detail: "今は耐えられると判断する。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "自立を語る",
+      detail: "結束を促す。",
+      effects: { bias_narrative: 1 },
       next: 47
     },
     {
-      text: "力で押し切る",
-      detail: "不満を抑え込む。",
-      effects: { B: +2, D: -2 },
+      text: "様子を見る",
+      detail: "動きを抑える。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 47
     }
   ]
@@ -1918,37 +1841,37 @@ const scenarios = [
 
 /* ===== 47 ===== */
 {
-  title: "第47章：誰のための秩序か",
-  preText: () => "",
+  title: "第47章：分裂の兆候",
+  preText: () =>
+    "中心が弱まると、周縁が動く。",
   text: () =>
-    "秩序は守られている。\n\n" +
-    "だが、\n" +
-    "誰のために。\n\n" +
-    "この問いは、\n" +
-    "もはや無視できなかった。",
+    "各地で独自の判断が下され、\n" +
+    "小さな秩序が生まれる。\n\n" +
+    "それは混乱であり、\n" +
+    "同時に再編の始まりでもあった。",
   choices: [
     {
-      text: "全体の利益を語る",
-      detail: "共通善を強調する。",
-      effects: { D: +2 },
+      text: "力で再統合する",
+      detail: "迅速な統一。",
+      effects: { bias_speed: 1, B: +1 },
       next: 48
     },
     {
-      text: "役割ごとの責任を示す",
-      detail: "分担を明確にする。",
-      effects: { A: +2 },
+      text: "合意の枠組みを作る",
+      detail: "分権的統合。",
+      effects: { bias_procedure: 1 },
       next: 48
     },
     {
-      text: "答えを曖昧にする",
-      detail: "議論を避ける。",
+      text: "共通の記憶を語る",
+      detail: "一体感を保つ。",
+      effects: { bias_narrative: 1 },
+      next: 48
+    },
+    {
+      text: "分立を認める",
+      detail: "衝突を避ける。",
       effects: { bias_avoidance: 1 },
-      next: 48
-    },
-    {
-      text: "疑問を封じる",
-      detail: "問いそのものを危険視する。",
-      effects: { B: +2, D: -2 },
       next: 48
     }
   ]
@@ -1956,40 +1879,39 @@ const scenarios = [
 
 /* ===== 48 ===== */
 {
-  title: "第48章：限界の兆し",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 60) t += "納得は確実に薄れていた。\n";
-    return t.trim();
-  },
+  title: "第48章：新たな脅威",
+  preText: () =>
+    "外の力は去ったが、脅威は残った。",
   text: () =>
-    "秩序は保たれている。\n\n" +
-    "だが、\n" +
-    "支える理由は、\n" +
-    "弱くなっていた。",
+    "海から、森から、\n" +
+    "異なる者たちが現れる。\n\n" +
+    "彼らは秩序を知らず、\n" +
+    "同時に、しばしば自由だった。\n\n" +
+    "守るか、交わるか。\n" +
+    "判断は避けられない。",
   choices: [
     {
-      text: "調整を重ねる",
-      detail: "対話を続ける。",
-      effects: { D: +2 },
+      text: "積極的に迎撃する",
+      detail: "主導権を握る。",
+      effects: { bias_speed: 1 },
       next: 49
     },
     {
-      text: "制度を補強する",
-      detail: "仕組みで支える。",
-      effects: { A: +2 },
+      text: "防衛を制度化する",
+      detail: "持久戦に備える。",
+      effects: { bias_procedure: 1 },
       next: 49
     },
     {
-      text: "様子を見る",
-      detail: "決定を先送りする。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "意味を語る",
+      detail: "恐怖を統合に使う。",
+      effects: { bias_narrative: 1 },
       next: 49
     },
     {
-      text: "力を集中させる",
-      detail: "統制を強める。",
-      effects: { B: +2, D: -2 },
+      text: "最小限に抑える",
+      detail: "消耗を避ける。",
+      effects: { bias_avoidance: 1 },
       next: 49
     }
   ]
@@ -1997,84 +1919,77 @@ const scenarios = [
 
 /* ===== 49 ===== */
 {
-  title: "第49章：次の問い",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 12) t += "未解決の歪みは、限界に近づいていた。\n";
-    return t.trim();
-  },
+  title: "第49章：残されたもの",
+  preText: () =>
+    "外来の秩序は去ったが、痕跡は残った。",
   text: () =>
-    "問いは消えない。\n\n" +
-    "押さえ込めば、\n" +
-    "形を変える。\n\n" +
-    "ここまでの選択は、\n" +
-    "次の時代に、\n" +
-    "確実に影を落とす。",
+    "道、法、言葉、記憶。\n\n" +
+    "それらはもはや外のものではなく、\n" +
+    "自分たちの一部になっていた。\n\n" +
+    "この遺産をどう扱うかが、\n" +
+    "次の時代の姿を決める。",
   choices: [
     {
-      text: "現状を受け入れる",
-      detail: "変化を最小限に抑える。",
+      text: "積極的に継承する",
+      detail: "連続性を保つ。",
+      effects: { bias_speed: 1 },
+      next: 50
+    },
+    {
+      text: "整理して取り込む",
+      detail: "独自性を加える。",
+      effects: { bias_procedure: 1 },
+      next: 50
+    },
+    {
+      text: "意味を語り直す",
+      detail: "物語として昇華する。",
+      effects: { bias_narrative: 1 },
+      next: 50
+    },
+    {
+      text: "距離を置く",
+      detail: "断絶を選ぶ。",
       effects: { bias_avoidance: 1 },
-      next: 50
-    },
-    {
-      text: "制度改革を進める",
-      detail: "次の段階へ備える。",
-      effects: { A: +3 },
-      next: 50
-    },
-    {
-      text: "正当性を再構築する",
-      detail: "支配の理由を問い直す。",
-      effects: { D: +3 },
-      next: 50
-    },
-    {
-      text: "強制力を明確にする",
-      detail: "従わぬ場合の対応を示す。",
-      effects: { B: +3, D: -2 },
       next: 50
     }
   ]
 },
 /* ===== 50 ===== */
 {
-  title: "第50章：遠方からの要求",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 75) t += "判断は遠隔地にも及ぶようになっていた。\n";
-    if (s.D < 65) t += "決定の理由は、必ずしも共有されていなかった。\n";
-    return t.trim();
-  },
+  title: "第50章：空白の時代",
+  preText: () =>
+    "外来の秩序が去ったあと、誰も全体を見渡せなくなっていた。",
   text: () =>
-    "集団の外縁から、要求が届くようになった。\n\n" +
-    "距離は遠く、顔は見えない。\n" +
-    "それでも、資源と人手を求める声は明確だった。\n\n" +
-    "応えるべきか、抑えるべきか。\n" +
-    "この判断は、内と外の境界を再定義する。",
+    "道は残っていたが、守る者はいない。\n" +
+    "法は記録されていたが、裁く者はいない。\n\n" +
+    "人々は生きるために、\n" +
+    "最も近く、最も強い存在に頼るようになった。\n\n" +
+    "秩序は失われたのではなく、\n" +
+    "細かく砕けて散らばっていた。",
   choices: [
     {
-      text: "要求を精査して応じる",
-      detail: "遠方の事情を確認し、必要性に応じて支援する。信頼は高まるが、管理負担が増す。",
-      effects: { A: +2, D: +1 },
+      text: "即応的に治安を確保する",
+      detail: "力による秩序を優先する。",
+      effects: { bias_speed: 1, B: +1 },
       next: 51
     },
     {
-      text: "基準を設けて一律対応する",
-      detail: "距離や関係に関わらず同じ基準を適用する。公平だが、柔軟性を失う。",
-      effects: { A: +3 },
+      text: "地域ごとの統治を整理する",
+      detail: "小さな秩序を束ねる。",
+      effects: { bias_procedure: 1 },
       next: 51
     },
     {
-      text: "理由を説明し制限する",
-      detail: "なぜ応じられないかを語る。理解は得やすいが、不満も残る。",
-      effects: { D: +2 },
+      text: "共通の意味を語る",
+      detail: "散らばった人々を結び直す。",
+      effects: { bias_narrative: 1 },
       next: 51
     },
     {
-      text: "要求を退ける",
-      detail: "内を優先し外を切り捨てる。短期的安定は得られるが、外縁との緊張が高まる。",
-      effects: { B: +2, D: -2 },
+      text: "各地の判断に任せる",
+      detail: "介入を最小限にする。",
+      effects: { bias_avoidance: 1 },
       next: 51
     }
   ]
@@ -2082,40 +1997,37 @@ const scenarios = [
 
 /* ===== 51 ===== */
 {
-  title: "第51章：管理者の増加",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 78) t += "役割は階層として整理されつつあった。\n";
-    return t.trim();
-  },
+  title: "第51章：守る者の台頭",
+  preText: () =>
+    "人々は、守ってくれる者の名を覚え始めていた。",
   text: () =>
-    "判断を行う者が増えた。\n\n" +
-    "すべてを一人で決めることは、もはや不可能だった。\n" +
-    "任せるという行為が、権力の分配を意味し始める。\n\n" +
-    "誰に、どこまで任せるのか。\n" +
-    "その基準が問われていた。",
+    "武器を持ち、従者を率い、\n" +
+    "周囲を防衛できる者が現れた。\n\n" +
+    "彼らは王ではなかったが、\n" +
+    "頼られる存在だった。\n\n" +
+    "守ることは、支配の始まりでもあった。",
   choices: [
     {
-      text: "能力で選ぶ",
-      detail: "成果と経験を基準に任せる。効率は高いが、反感を買うこともある。",
-      effects: { A: +2 },
+      text: "守る者に権限を集中させる",
+      detail: "迅速な防衛を可能にする。",
+      effects: { bias_speed: 1, B: +1 },
       next: 52
     },
     {
-      text: "忠誠で選ぶ",
-      detail: "従順さを重視する。統制は容易だが、判断の質が下がる。",
-      effects: { B: +2, A: -1 },
+      text: "役割と責任を定める",
+      detail: "私的武力を制御する。",
+      effects: { bias_procedure: 1 },
       next: 52
     },
     {
-      text: "合意を重視する",
-      detail: "周囲の納得を得て任命する。正当性は高まるが、時間がかかる。",
-      effects: { D: +2, timePressure: +1 },
+      text: "守る理由を語らせる",
+      detail: "恐怖以外の動機を作る。",
+      effects: { bias_narrative: 1 },
       next: 52
     },
     {
-      text: "暫定的に任せる",
-      detail: "明確な基準を設けず様子を見る。柔軟だが、不安定さが残る。",
+      text: "黙認する",
+      detail: "自然な序列に任せる。",
       effects: { bias_avoidance: 1 },
       next: 52
     }
@@ -2124,40 +2036,38 @@ const scenarios = [
 
 /* ===== 52 ===== */
 {
-  title: "第52章：命令のずれ",
-  preText: (s) => {
-    let t = "";
-    if (s.bias_speed > 3) t += "即断が積み重なり、解釈の幅が生まれていた。\n";
-    return t.trim();
-  },
+  title: "第52章：土地と忠誠",
+  preText: () =>
+    "守りの代価が、はっきりと求められるようになった。",
   text: () =>
-    "同じ命令が、異なる形で実行されていた。\n\n" +
-    "意図は伝わっている。\n" +
-    "だが、細部は現場に委ねられていた。\n\n" +
-    "このずれを、許容するか修正するか。\n" +
-    "判断は秩序の性質を変える。",
+    "土地、収穫、労働。\n" +
+    "それらは保護と引き換えに差し出された。\n\n" +
+    "誰に従うかは、\n" +
+    "どこで生きるかを意味した。\n\n" +
+    "忠誠は選択であり、\n" +
+    "同時に縛りでもあった。",
   choices: [
     {
-      text: "細部まで統一する",
-      detail: "解釈の余地をなくす。秩序は揃うが、現場の判断力が失われる。",
-      effects: { A: +2 },
+      text: "実力に基づく関係を認める",
+      detail: "現実的な主従関係。",
+      effects: { bias_speed: 1 },
       next: 53
     },
     {
-      text: "裁量を認める",
-      detail: "現場判断を尊重する。柔軟だが、ばらつきが残る。",
-      effects: { D: +1 },
-      next: 53
-    },
-    {
-      text: "問題のみ修正する",
-      detail: "重大な逸脱だけを是正する。中庸だが、線引きが難しい。",
+      text: "契約として整理する",
+      detail: "義務と権利を明確化する。",
       effects: { bias_procedure: 1 },
       next: 53
     },
     {
-      text: "黙認する",
-      detail: "介入せず流れに任せる。衝突は避けられるが、不満が溜まる。",
+      text: "忠誠の意味を語る",
+      detail: "単なる服従にしない。",
+      effects: { bias_narrative: 1 },
+      next: 53
+    },
+    {
+      text: "曖昧な関係を維持する",
+      detail: "対立を避ける。",
       effects: { bias_avoidance: 1 },
       next: 53
     }
@@ -2166,39 +2076,39 @@ const scenarios = [
 
 /* ===== 53 ===== */
 {
-  title: "第53章：負担の偏り",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 10) t += "未処理の問題が背景に残っていた。\n";
-    return t.trim();
-  },
+  title: "第53章：信仰の再編",
+  preText: () =>
+    "人々は、目に見えない秩序を求めていた。",
   text: () =>
-    "負担が特定の層に集中していることが、目に見えるようになった。\n\n" +
-    "働き続ける者と、恩恵を受ける者。\n" +
-    "その差は、言葉にされ始めていた。",
+    "戦乱と不安のなかで、\n" +
+    "信仰は慰めであり、規範となった。\n\n" +
+    "それは支配者を正当化し、\n" +
+    "同時に制限もした。\n\n" +
+    "神の名をどう扱うかは、\n" +
+    "権力の性質を左右した。",
   choices: [
     {
-      text: "再配分を行う",
-      detail: "負担と利益を調整する。納得は得られるが、反発も生む。",
-      effects: { D: +2 },
+      text: "支配の正当性に結びつける",
+      detail: "強固な根拠を得る。",
+      effects: { bias_speed: 1, belief_strength: +1 },
       next: 54
     },
     {
-      text: "役割を増やす",
-      detail: "新たな役割を設けて分散する。複雑化が進む。",
-      effects: { A: +2 },
+      text: "制度として整理する",
+      detail: "信仰と統治を分ける。",
+      effects: { bias_procedure: 1 },
       next: 54
     },
     {
-      text: "説明で抑える",
-      detail: "将来の利益を語る。短期的には収まるが、限界がある。",
-      effects: { D: +1 },
+      text: "物語として共有する",
+      detail: "内面の統合を促す。",
+      effects: { bias_narrative: 1, belief_strength: +1 },
       next: 54
     },
     {
-      text: "力で押さえる",
-      detail: "不満を表に出させない。沈静化は早いが、反感が残る。",
-      effects: { B: +2, D: -2 },
+      text: "距離を保つ",
+      detail: "利用を避ける。",
+      effects: { bias_avoidance: 1 },
       next: 54
     }
   ]
@@ -2206,38 +2116,38 @@ const scenarios = [
 
 /* ===== 54 ===== */
 {
-  title: "第54章：記録の価値",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 80) t += "判断は記録され、参照されるようになっていた。\n";
-    return t.trim();
-  },
+  title: "第54章：裁きの所在",
+  preText: () =>
+    "争いは絶えなかった。",
   text: () =>
-    "過去の判断が、参照され始めた。\n\n" +
-    "誰が、いつ、何を決めたのか。\n" +
-    "記録は、権威そのものになりつつあった。",
+    "誰が裁くのか。\n" +
+    "力か、慣習か、信仰か。\n\n" +
+    "裁きは正義である前に、\n" +
+    "秩序の維持手段だった。\n\n" +
+    "どの裁きを選ぶかで、\n" +
+    "人々の恐れるものが変わった。",
   choices: [
     {
-      text: "記録を公式化する",
-      detail: "正しい判断として固定する。安定は増すが、修正が難しくなる。",
-      effects: { A: +3 },
+      text: "力ある者の裁定に任せる",
+      detail: "即断を優先する。",
+      effects: { bias_speed: 1 },
       next: 55
     },
     {
-      text: "参照資料に留める",
-      detail: "過去を参考にするが拘束しない。柔軟性は保たれる。",
+      text: "裁きの手順を定める",
+      detail: "恣意を抑える。",
       effects: { bias_procedure: 1 },
       next: 55
     },
     {
-      text: "語りとして残す",
-      detail: "物語として伝える。意味は残るが、解釈が揺れる。",
-      effects: { D: +2 },
+      text: "裁きの意味を語る",
+      detail: "納得を得る。",
+      effects: { bias_narrative: 1 },
       next: 55
     },
     {
-      text: "重要視しない",
-      detail: "今を優先する。短期的だが、連続性が失われる。",
+      text: "各地に委ねる",
+      detail: "統一を急がない。",
       effects: { bias_avoidance: 1 },
       next: 55
     }
@@ -2246,40 +2156,37 @@ const scenarios = [
 
 /* ===== 55 ===== */
 {
-  title: "第55章：外との比較",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "内の正当性は、揺らぎを見せていた。\n";
-    return t.trim();
-  },
+  title: "第55章：連なり始める系譜",
+  preText: () =>
+    "守る者の地位は、一代限りではなくなっていた。",
   text: () =>
-    "外の集団のやり方が、知られるようになった。\n\n" +
-    "違いは、疑問を生む。\n" +
-    "なぜ、こちらはこうなのか。\n\n" +
-    "比較は、必ず変化を呼ぶ。",
+    "子に継がれ、名が残り、\n" +
+    "血が権威を帯び始める。\n\n" +
+    "人々は安定を感じる一方で、\n" +
+    "選べない支配に慣れていった。",
   choices: [
     {
-      text: "自らを正当化する",
-      detail: "違いを否定せず、こちらの理由を語る。",
-      effects: { D: +2 },
+      text: "世襲を認める",
+      detail: "安定を優先する。",
+      effects: { bias_speed: 1, lineage_strength: +1 },
       next: 56
     },
     {
-      text: "外を取り入れる",
-      detail: "良い部分を模倣する。改善はあるが、混乱も生じる。",
-      effects: { A: +1, bias_procedure: 1 },
+      text: "継承規則を整える",
+      detail: "争いを防ぐ。",
+      effects: { bias_procedure: 1, lineage_strength: +1 },
       next: 56
     },
     {
-      text: "差異を無視する",
-      detail: "比較を避ける。安定は保たれるが、遅れを取る可能性がある。",
+      text: "血の意味を語る",
+      detail: "正当化を図る。",
+      effects: { bias_narrative: 1 },
+      next: 56
+    },
+    {
+      text: "例外を残す",
+      detail: "柔軟性を持たせる。",
       effects: { bias_avoidance: 1 },
-      next: 56
-    },
-    {
-      text: "外を否定する",
-      detail: "優越を主張する。結束は強まるが、孤立を招く。",
-      effects: { B: +2, D: -2 },
       next: 56
     }
   ]
@@ -2287,42 +2194,39 @@ const scenarios = [
 
 /* ===== 56 ===== */
 {
-  title: "第56章：変化への兆し",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 82) t += "制度は成熟し、同時に硬直し始めていた。\n";
-    if (s.D > 75) t += "語られる理由は、広く共有されていた。\n";
-    return t.trim();
-  },
+  title: "第56章：外との衝突",
+  preText: () =>
+    "秩序が固まるほど、外部との摩擦は増えた。",
   text: () =>
-    "問いは、再び浮上していた。\n\n" +
-    "このやり方は、これからも続くのか。\n" +
-    "変えるべきなのか。\n\n" +
-    "まだ決断は迫られていない。\n" +
-    "だが、準備は始まっていた。",
+    "異なる掟、異なる信仰、\n" +
+    "異なる守る者。\n\n" +
+    "境界は曖昧で、\n" +
+    "争いは頻発した。\n\n" +
+    "戦うか、交わるか。\n" +
+    "判断は繰り返された。",
   choices: [
     {
-      text: "現状を磨き上げる",
-      detail: "大きな変更はせず、精度を高める。",
-      effects: { A: +2 },
+      text: "積極的に対抗する",
+      detail: "主導権を握る。",
+      effects: { bias_speed: 1 },
       next: 57
     },
     {
-      text: "改革を検討する",
-      detail: "問題点を洗い出す。時間はかかるが、変化への備えになる。",
-      effects: { D: +1, timePressure: +1 },
+      text: "防衛体制を整える",
+      detail: "消耗を抑える。",
+      effects: { bias_procedure: 1 },
       next: 57
     },
     {
-      text: "外圧を利用する",
-      detail: "外との違いを理由に調整する。",
+      text: "共通点を語る",
+      detail: "衝突を和らげる。",
       effects: { bias_narrative: 1 },
       next: 57
     },
     {
-      text: "判断を先延ばしにする",
-      detail: "今は動かない。静かだが、緊張は残る。",
-      effects: { bias_avoidance: 1, timePressure: +2 },
+      text: "距離を保つ",
+      detail: "関与を減らす。",
+      effects: { bias_avoidance: 1 },
       next: 57
     }
   ]
@@ -2330,39 +2234,37 @@ const scenarios = [
 
 /* ===== 57 ===== */
 {
-  title: "第57章：集団の期待",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 12) t += "未決の課題が、期待と不安を生んでいた。\n";
-    return t.trim();
-  },
+  title: "第57章：定着する慣習",
+  preText: () =>
+    "繰り返された判断は、やがて当たり前になった。",
   text: () =>
-    "人々は、何かが起こることを感じ取っていた。\n\n" +
-    "変化か、継続か。\n" +
-    "そのどちらかが、近づいている。",
+    "人々は理由を考えず、\n" +
+    "決まりだから従うようになった。\n\n" +
+    "それは安定であり、\n" +
+    "同時に問いを失うことでもあった。",
   choices: [
     {
-      text: "期待に応える",
-      detail: "声を拾い、方向性を示す。",
-      effects: { D: +2 },
+      text: "慣習を固定化する",
+      detail: "変化を抑える。",
+      effects: { bias_speed: 1 },
       next: 58
     },
     {
-      text: "秩序を強調する",
-      detail: "今の仕組みの価値を説く。",
-      effects: { A: +2 },
+      text: "見直しの仕組みを作る",
+      detail: "硬直を防ぐ。",
+      effects: { bias_procedure: 1 },
       next: 58
     },
     {
-      text: "静観する",
-      detail: "状況を見極める。",
+      text: "由来を語り直す",
+      detail: "意味を保つ。",
+      effects: { bias_narrative: 1 },
+      next: 58
+    },
+    {
+      text: "疑問を放置する",
+      detail: "摩擦を避ける。",
       effects: { bias_avoidance: 1 },
-      next: 58
-    },
-    {
-      text: "抑え込む",
-      detail: "期待の表出を制限する。",
-      effects: { B: +2, D: -2 },
       next: 58
     }
   ]
@@ -2370,40 +2272,37 @@ const scenarios = [
 
 /* ===== 58 ===== */
 {
-  title: "第58章：意見の分岐",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "意見の隔たりは大きくなっていた。\n";
-    return t.trim();
-  },
+  title: "第58章：広がる差",
+  preText: () =>
+    "秩序は平等を約束しなかった。",
   text: () =>
-    "同じ集団の中で、\n" +
-    "望む未来が分かれ始めていた。\n\n" +
-    "一つにまとめるか。\n" +
-    "違いを抱えたまま進むか。",
+    "土地を持つ者、\n" +
+    "守られるだけの者。\n\n" +
+    "差は目に見え、\n" +
+    "語られない不満が積もっていった。",
   choices: [
     {
-      text: "統一を図る",
-      detail: "共通の方向性を示す。",
-      effects: { A: +2 },
+      text: "差を力で抑える",
+      detail: "反発を恐れる。",
+      effects: { bias_speed: 1 },
       next: 59
     },
     {
-      text: "議論を続ける",
-      detail: "結論を急がず話し合う。",
-      effects: { D: +1, timePressure: +1 },
-      next: 59
-    },
-    {
-      text: "分岐を許容する",
-      detail: "複数の道を認める。",
+      text: "役割として整理する",
+      detail: "構造化する。",
       effects: { bias_procedure: 1 },
       next: 59
     },
     {
-      text: "対立を抑える",
-      detail: "表面化を防ぐ。",
-      effects: { B: +2 },
+      text: "正当性を語る",
+      detail: "納得を求める。",
+      effects: { bias_narrative: 1 },
+      next: 59
+    },
+    {
+      text: "問題化しない",
+      detail: "先送りにする。",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 59
     }
   ]
@@ -2411,83 +2310,81 @@ const scenarios = [
 
 /* ===== 59 ===== */
 {
-  title: "第59章：静かな緊張",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 80) t += "秩序は維持されていたが、硬さが増していた。\n";
-    if (s.timePressure > 14) t += "未決の問題が、沈黙の下で膨らんでいた。\n";
-    return t.trim();
-  },
+  title: "第59章：揺れる均衡",
+  preText: () =>
+    "秩序は存在していたが、脆かった。",
   text: () =>
-    "表面は穏やかだった。\n\n" +
-    "だが、誰もが感じていた。\n" +
-    "次の一手で、流れが変わることを。\n\n" +
-    "この静けさは、永遠ではない。",
+    "守る者、従う者、\n" +
+    "祈る者、戦う者。\n\n" +
+    "それぞれの役割は噛み合っていたが、\n" +
+    "一つ崩れれば全体が揺れた。\n\n" +
+    "次の時代は、\n" +
+    "この均衡の上に築かれる。",
   choices: [
     {
-      text: "次の段階へ進む",
-      detail: "変化を前提に準備を進める。",
-      effects: { A: +1 },
+      text: "力を強める",
+      detail: "不安定さを抑え込む。",
+      effects: { bias_speed: 1 },
       next: 60
     },
     {
-      text: "現状を保つ",
-      detail: "安定を最優先する。",
+      text: "制度を重ねる",
+      detail: "構造で支える。",
+      effects: { bias_procedure: 1 },
+      next: 60
+    },
+    {
+      text: "意味を再定義する",
+      detail: "価値観を揃える。",
+      effects: { bias_narrative: 1 },
+      next: 60
+    },
+    {
+      text: "維持に留める",
+      detail: "大きく動かさない。",
       effects: { bias_avoidance: 1 },
-      next: 60
-    },
-    {
-      text: "語りを強める",
-      detail: "意味と目的を再確認する。",
-      effects: { D: +2 },
-      next: 60
-    },
-    {
-      text: "力を誇示する",
-      detail: "秩序の強さを示す。",
-      effects: { B: +2, D: -1 },
       next: 60
     }
   ]
 },
 /* ===== 60 ===== */
 {
-  title: "第60章：制度の重み",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 82) t += "制度は広く行き渡り、疑われにくい存在になっていた。\n";
-    if (s.D < 65) t += "その理由を説明する言葉は、やや弱まっていた。\n";
-    return t.trim();
-  },
+  title: "第60章：集約される裁定",
+  preText: (s) =>
+    "争いは減っていた。\n" +
+    "それは秩序の成果のように見えた。",
   text: () =>
-    "決まりは守られていた。\n\n" +
-    "守られているがゆえに、\n" +
-    "誰が決めたのかを問う声は減っていた。\n\n" +
-    "重みは安定を生む。\n" +
-    "同時に、修正を困難にする。",
+    "かつては土地ごとに異なっていた裁定が、\n" +
+    "いまや一つの中心で処理されるようになっていた。\n\n" +
+    "判断は速く、結果は明確だった。\n" +
+    "人々は以前よりも長く争わずに済む。\n\n" +
+    "だが同時に、\n" +
+    "裁定がどのような理由で下されたのかを\n" +
+    "理解しようとする者は減っていった。\n\n" +
+    "――決まること自体が、正しさになりつつあった。",
   choices: [
     {
-      text: "制度を尊重し続ける",
-      detail: "変更よりも継続を優先する。信頼は保たれるが、硬直が進む。",
-      effects: { A: +2 },
+      text: "迅速な裁定を最優先する",
+      detail: "判断を集約し、衝突を短期間で終わらせる体制を強める",
+      effects: { bias_speed: 1, B: +2, D: -1 },
       next: 61
     },
     {
-      text: "定期的な見直しを設ける",
-      detail: "制度の再検討を仕組みに組み込む。柔軟性は増すが、負荷も増える。",
-      effects: { A: +1, timePressure: +1 },
+      text: "裁定の手続きを明文化する",
+      detail: "判断を制度として固定し、再現可能な形にする",
+      effects: { bias_procedure: 1, A: +2 },
       next: 61
     },
     {
-      text: "意味を語り直す",
-      detail: "なぜこの制度があるのかを再説明する。",
-      effects: { D: +2 },
+      text: "裁定の理由を説明させる",
+      detail: "納得を伴う服従を維持しようと試みる",
+      effects: { bias_narrative: 1, D: +2 },
       next: 61
     },
     {
-      text: "反対意見を抑える",
-      detail: "疑問の表出を制限する。静かだが、緊張が蓄積する。",
-      effects: { B: +2, D: -2 },
+      text: "当面は現状を維持する",
+      detail: "大きな変更を加えず、安定を優先する",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 61
     }
   ]
@@ -2495,40 +2392,42 @@ const scenarios = [
 
 /* ===== 61 ===== */
 {
-  title: "第61章：教育という装置",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 80) t += "秩序は、学ぶべきものとして扱われ始めていた。\n";
-    return t.trim();
-  },
+  title: "第61章：法の言語",
+  preText: (s) =>
+    "判断は記録され、残されるようになった。",
   text: () =>
-    "次の世代は、\n" +
-    "生まれたときから秩序を前提に育つ。\n\n" +
-    "教える内容は、\n" +
-    "未来の判断を形作る。",
+    "裁定は言葉として書き留められ、\n" +
+    "同じ事例には同じ結論が求められるようになる。\n\n" +
+    "それは公平さを約束する。\n" +
+    "だが同時に、\n" +
+    "その言葉を理解できる者と、\n" +
+    "そうでない者の差を広げていった。\n\n" +
+    "法は平等であるはずだった。\n" +
+    "しかし、法を使える者だけが\n" +
+    "その平等を享受しているようにも見えた。",
   choices: [
     {
-      text: "規範を重視する",
-      detail: "守るべき決まりを中心に教える。安定は続くが、疑問が育ちにくい。",
-      effects: { A: +2 },
+      text: "法文の厳格な適用を徹底する",
+      detail: "例外を減らし、統一的な判断を目指す",
+      effects: { bias_procedure: 1, A: +2 },
       next: 62
     },
     {
-      text: "理由を重視する",
-      detail: "なぜそうなったかを教える。理解は深まるが、問いも増える。",
-      effects: { D: +2 },
+      text: "現場裁量を一定残す",
+      detail: "慣習と法の併存を認める",
+      effects: { bias_speed: 1, D: +1 },
       next: 62
     },
     {
-      text: "実用を優先する",
-      detail: "役立つ知識に絞る。即効性はあるが、全体像が失われる。",
-      effects: { bias_speed: 1 },
+      text: "法の理念を語る",
+      detail: "なぜこの法が存在するのかを説明する",
+      effects: { bias_narrative: 1, D: +2 },
       next: 62
     },
     {
-      text: "教育を制限する",
-      detail: "知を広げすぎない。統制は容易だが、停滞を招く。",
-      effects: { B: +2 },
+      text: "深く立ち入らない",
+      detail: "問題が顕在化するまで様子を見る",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 62
     }
   ]
@@ -2536,40 +2435,41 @@ const scenarios = [
 
 /* ===== 62 ===== */
 {
-  title: "第62章：新しい声",
-  preText: (s) => {
-    let t = "";
-    if (s.D > 75) t += "語ることは、比較的許容されていた。\n";
-    if (s.B > 75) t += "発言には慎重さが求められていた。\n";
-    return t.trim();
-  },
+  title: "第62章：代理の統治",
+  preText: (s) =>
+    "すべてを一人で決めることは不可能だった。",
   text: () =>
-    "新しい考えが語られ始めた。\n\n" +
-    "否定ではない。\n" +
-    "だが、従来とも完全には一致しない。",
+    "判断は分担され、\n" +
+    "権限を持つ代理人たちが配置される。\n\n" +
+    "彼らは中心の名で命じ、\n" +
+    "中心の意思として振る舞った。\n\n" +
+    "だが、人々が日常的に接するのは\n" +
+    "もはや中心そのものではない。\n\n" +
+    "服従は、\n" +
+    "誰に向けられているのか分かりにくくなっていた。",
   choices: [
     {
-      text: "議論の場を与える",
-      detail: "考えを公に検討する。発展の可能性はあるが、対立も生む。",
-      effects: { D: +2 },
+      text: "代理人に強い権限を与える",
+      detail: "迅速な運営を優先する",
+      effects: { bias_speed: 1, B: +1, D: -1 },
       next: 63
     },
     {
-      text: "既存枠に取り込む",
-      detail: "新しい考えを既存制度に組み込む。",
-      effects: { A: +1 },
+      text: "代理人の行動を規則で縛る",
+      detail: "制度による統制を強める",
+      effects: { bias_procedure: 1, A: +2 },
       next: 63
     },
     {
-      text: "静観する",
-      detail: "自然に消えるかを見極める。",
-      effects: { bias_avoidance: 1 },
+      text: "代理人の役割を説明する",
+      detail: "誰の意思なのかを明確にする",
+      effects: { bias_narrative: 1, D: +2 },
       next: 63
     },
     {
-      text: "排除する",
-      detail: "秩序を乱すとして制限する。",
-      effects: { B: +2, D: -2 },
+      text: "現状の運用を黙認する",
+      detail: "問題が起きない限り変更しない",
+      effects: { bias_avoidance: 1, timePressure: +1 },
       next: 63
     }
   ]
@@ -2577,39 +2477,41 @@ const scenarios = [
 
 /* ===== 63 ===== */
 {
-  title: "第63章：経済の自律",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 83) t += "管理は広範囲に及んでいた。\n";
-    return t.trim();
-  },
+  title: "第63章：再編される軍",
+  preText: (s) =>
+    "武力は、もはや私的なものではなかった。",
   text: () =>
-    "物と金の流れが、\n" +
-    "判断者の手を離れ始めていた。\n\n" +
-    "完全な統制は、\n" +
-    "現実的ではなくなりつつある。",
+    "兵は集められ、数えられ、維持される。\n" +
+    "忠誠は個人ではなく役目に向けられる。\n\n" +
+    "これは安定をもたらす。\n" +
+    "だが同時に、\n" +
+    "力が誰のために使われるのかを\n" +
+    "曖昧にしていった。\n\n" +
+    "人々は守られていると感じる。\n" +
+    "しかし、その守りが\n" +
+    "いつ誰に向けられるのかは分からない。",
   choices: [
     {
-      text: "統制を強める",
-      detail: "管理範囲を拡大する。把握はできるが、反発が増える。",
-      effects: { B: +2, A: -1 },
+      text: "軍の統制をさらに強める",
+      detail: "命令系統を単純化する",
+      effects: { bias_speed: 1, B: +2 },
       next: 64
     },
     {
-      text: "規則だけ整える",
-      detail: "枠組みを示し、運用は任せる。",
-      effects: { A: +2 },
+      text: "軍の運用を制度化する",
+      detail: "法と規則で行動を定める",
+      effects: { bias_procedure: 1, A: +2 },
       next: 64
     },
     {
-      text: "自由を認める",
-      detail: "自律的な動きを許容する。活力は生まれるが、不均衡が拡大する。",
-      effects: { D: +1 },
+      text: "軍の役割を公に説明する",
+      detail: "防衛であることを強調する",
+      effects: { bias_narrative: 1, D: +2 },
       next: 64
     },
     {
-      text: "問題化するまで待つ",
-      detail: "今は介入しない。",
+      text: "現状の規模を維持する",
+      detail: "拡大も縮小もしない",
       effects: { bias_avoidance: 1, timePressure: +1 },
       next: 64
     }
@@ -2618,741 +2520,45 @@ const scenarios = [
 
 /* ===== 64 ===== */
 {
-  title: "第64章：不平等の可視化",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 70) t += "納得の言葉は、十分に行き渡っていなかった。\n";
-    return t.trim();
-  },
+  title: "第64章：信仰との距離",
+  preText: (s) =>
+    "信仰は失われていなかった。",
   text: () =>
-    "差は、数字として見えるようになった。\n\n" +
-    "誰が多く持ち、\n" +
-    "誰が持たないのか。\n\n" +
-    "見えた差は、\n" +
-    "必ず説明を要求する。",
+    "人々は祈り、\n" +
+    "秩序の意味を信仰に見出し続けていた。\n\n" +
+    "だが、裁定や統治の根拠は\n" +
+    "次第に信仰から切り離されていく。\n\n" +
+    "支配は神の名を借りなくなり、\n" +
+    "それでも神を否定することはできない。\n\n" +
+    "両者は距離を保ち、\n" +
+    "緊張を孕んだまま並び立つ。",
   choices: [
     {
-      text: "再配分を行う",
-      detail: "差を縮めるために調整する。",
-      effects: { D: +2 },
+      text: "信仰との距離を保つ",
+      detail: "政治と信仰を分ける姿勢を取る",
+      effects: { bias_procedure: 1, D: -1 },
       next: 65
     },
     {
-      text: "機会を整える",
-      detail: "結果ではなく機会の平等を強調する。",
-      effects: { A: +1 },
+      text: "信仰を秩序の補強に使う",
+      detail: "従属を正当化する要素として用いる",
+      effects: { bias_narrative: 1, B: +1 },
       next: 65
     },
     {
-      text: "努力を強調する",
-      detail: "差は努力の結果だと語る。",
-      effects: { D: -1 },
+      text: "信仰の自由を強調する",
+      detail: "統治と切り離すことを語る",
+      effects: { bias_narrative: 1, D: +2 },
       next: 65
     },
     {
-      text: "抑え込む",
-      detail: "不満の表出を制限する。",
-      effects: { B: +2 },
-      next: 65
-    }
-  ]
-},
-
-/* ===== 65 ===== */
-{
-  title: "第65章：信頼の分岐",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 85) t += "秩序は強固だった。\n";
-    if (s.D < 65) t += "だが、その意味は揺らいでいた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "人々は、\n" +
-    "制度を信じているのか。\n" +
-    "それとも、仕方なく従っているのか。\n\n" +
-    "違いは、まだ静かだ。\n" +
-    "だが決定的だ。",
-  choices: [
-    {
-      text: "信頼を再構築する",
-      detail: "対話と説明を重ねる。",
-      effects: { D: +2 },
-      next: 66
-    },
-    {
-      text: "制度を補強する",
-      detail: "違反への対応を明確化する。",
-      effects: { A: +2 },
-      next: 66
-    },
-    {
-      text: "様子を見る",
-      detail: "変化を待つ。",
-      effects: { bias_avoidance: 1 },
-      next: 66
-    },
-    {
-      text: "力を示す",
-      detail: "秩序の強さを示威する。",
-      effects: { B: +2, D: -2 },
-      next: 66
-    }
-  ]
-},
-
-/* ===== 66 ===== */
-{
-  title: "第66章：思想の拡散",
-  preText: (s) => {
-    let t = "";
-    if (s.D > 75) t += "語られる理由は広く共有されていた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "考えは、\n" +
-    "境界を越えて広がった。\n\n" +
-    "もはや、一箇所で止めることはできない。",
-  choices: [
-    {
-      text: "議論を促す",
-      detail: "考えを検討の対象とする。",
-      effects: { D: +2 },
-      next: 67
-    },
-    {
-      text: "枠に収める",
-      detail: "既存秩序に適合させる。",
-      effects: { A: +1 },
-      next: 67
-    },
-    {
-      text: "速度を落とす",
-      detail: "拡散を抑制する。",
-      effects: { bias_avoidance: 1 },
-      next: 67
-    },
-    {
-      text: "封じる",
-      detail: "制限を強化する。",
-      effects: { B: +2, D: -2 },
-      next: 67
-    }
-  ]
-},
-
-/* ===== 67 ===== */
-{
-  title: "第67章：対立の兆候",
-  preText: (s) => {
-    let t = "";
-    if (s.timePressure > 14) t += "未決の課題が積み重なっていた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "意見の違いは、\n" +
-    "立場の違いに変わり始めていた。\n\n" +
-    "まだ衝突ではない。\n" +
-    "だが、準備は整いつつある。",
-  choices: [
-    {
-      text: "調停を行う",
-      detail: "対話による解決を試みる。",
-      effects: { D: +2 },
-      next: 68
-    },
-    {
-      text: "線を引く",
-      detail: "許容範囲を明確にする。",
-      effects: { A: +1 },
-      next: 68
-    },
-    {
-      text: "放置する",
-      detail: "自然な帰結に任せる。",
+      text: "問題を先送りする",
+      detail: "摩擦が起きるまで触れない",
       effects: { bias_avoidance: 1, timePressure: +1 },
-      next: 68
-    },
-    {
-      text: "抑え込む",
-      detail: "表面化を防ぐ。",
-      effects: { B: +2 },
-      next: 68
+      next: 65
     }
   ]
 },
-
-/* ===== 68 ===== */
-{
-  title: "第68章：臨界への接近",
-  preText: (s) => {
-    let t = "";
-    if (s.D < 65) t += "納得は、静かに失われていた。\n";
-    if (s.B > 80) t += "秩序は力に大きく依存していた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "壊れてはいない。\n\n" +
-    "だが、戻る余地は減っていた。\n\n" +
-    "次の判断は、\n" +
-    "長く影響を残す。",
-  choices: [
-    {
-      text: "修復を試みる",
-      detail: "関係の再構築に動く。",
-      effects: { D: +1 },
-      next: 69
-    },
-    {
-      text: "秩序を固める",
-      detail: "揺れを抑える。",
-      effects: { A: +1 },
-      next: 69
-    },
-    {
-      text: "流れに任せる",
-      detail: "変化を受け入れる。",
-      effects: { bias_avoidance: 1 },
-      next: 69
-    },
-    {
-      text: "力を集中させる",
-      detail: "統制を強化する。",
-      effects: { B: +2 },
-      next: 69
-    }
-  ]
-},
-
-/* ===== 69 ===== */
-{
-  title: "第69章：静かな分水嶺",
-  preText: (s) => {
-    let t = "";
-    if (s.A > 85) t += "秩序は外見上、揺るがなかった。\n";
-    if (s.timePressure > 15) t += "だが未決の重みは限界に近づいていた。\n";
-    return t.trim();
-  },
-  text: () =>
-    "今は、まだ続いている。\n\n" +
-    "だが、この形が\n" +
-    "未来まで続く保証はない。\n\n" +
-    "静かなまま、\n" +
-    "分水嶺は越えられた。",
-  choices: [
-    {
-      text: "次の段階へ進む",
-      detail: "変化を前提に進む。",
-      effects: { A: +1 },
-      next: 70
-    },
-    {
-      text: "維持を選ぶ",
-      detail: "今の形を守る。",
-      effects: { bias_avoidance: 1 },
-      next: 70
-    },
-    {
-      text: "語り直す",
-      detail: "意味を再定義する。",
-      effects: { D: +2 },
-      next: 70
-    },
-    {
-      text: "力を示す",
-      detail: "秩序の強さを示す。",
-      effects: { B: +2, D: -1 },
-      next: 70
-    }
-  ]
-},
-/* ===== 70 ===== */
-{
-  title: "第70章：継続している社会",
-
-  preText: (s) => {
-    let t =
-      "この社会は、すでに長い時間を生き延びていた。\n" +
-      "誰か一人の判断ではなく、\n" +
-      "積み重なった決定と妥協の上に、現在が置かれている。\n\n";
-
-    if (s.D >= 65 && s.A >= 65) {
-      t +=
-        "理由は完全ではないが、語られていた。\n" +
-        "制度もまた、硬直しきる前に調整されてきた。\n\n";
-    }
-
-    if (s.B >= 75 && s.D < 60) {
-      t +=
-        "秩序は保たれていた。\n" +
-        "だが、それが納得によるものかどうかは、\n" +
-        "もはや確かめられていなかった。\n\n";
-    }
-
-    if (s.timePressure > 20) {
-      t +=
-        "決定は迅速だった。\n" +
-        "ただし、振り返る余裕は失われつつあった。\n\n";
-    }
-
-    return t.trim();
-  },
-
-  text: (s) => {
-    let t =
-      "人々は、この社会を「当然のもの」として受け取っていた。\n" +
-      "疑問は消えたのではない。\n" +
-      "ただ、問い続ける理由が見えにくくなっていただけだった。\n\n";
-
-    if (s.A < 60) {
-      t +=
-        "制度は存在していたが、\n" +
-        "それがなぜそうなっているのかを説明できる者は少なかった。\n\n";
-    }
-
-    if (s.D < 60) {
-      t +=
-        "語られない理由は、不満を生まなかった。\n" +
-        "それは、期待そのものが調整されていたからだ。\n\n";
-    }
-
-    if (s.A >= 65 && s.D >= 65 && s.timePressure < 15) {
-      t +=
-        "この社会は、変わり続けていたわけではない。\n" +
-        "だが、壊れずに済む程度には、修正され続けていた。\n\n";
-    }
-
-    t +=
-      "ここから先も、この形が続くのかどうかは分からない。\n" +
-      "だが、今はまだ、選べる余地が残っていた。";
-
-    return t;
-  },
-
-  choices: [
-    {
-      text: "制度を点検し、静かな修正を行う",
-      detail:
-        "大きな改革ではなく、\n" +
-        "運用の歪みを一つずつ確認し、調整する。",
-      condition: (s) => s.A >= 60,
-      effects: { A: +2 },
-      next: 71
-    },
-
-    {
-      text: "この社会が続いてきた理由を語り直す",
-      detail:
-        "なぜ崩れなかったのか。\n" +
-        "それを共有することで、理解を更新しようとする。",
-      condition: (s) => s.D >= 60,
-      effects: { D: +2 },
-      next: 71
-    },
-
-    {
-      text: "秩序の維持を優先し、変化を抑える",
-      detail:
-        "揺らぎを危険と見なし、\n" +
-        "現状を守ることに力を注ぐ。",
-      condition: (s) => s.B >= 70,
-      effects: { B: +2, D: -2 },
-      next: 71
-    },
-
-    {
-      text: "大きな判断は行わず、流れに任せる",
-      detail:
-        "問題が顕在化するまで、\n" +
-        "この形を維持し続ける。",
-      effects: { bias_avoidance: +1, timePressure: +2 },
-      next: 71
-    }
-  ]
-},
-/* ===== 71 ===== */
-{
-  title: "第71章：調整の惰性",
-
-  preText: (s) => {
-    let t =
-      "社会は依然として機能していた。\n" +
-      "だが、調整は次第に目的ではなく、\n" +
-      "習慣として行われるようになっていた。\n\n";
-
-    if (s.A >= 65) {
-      t +=
-        "制度はまだ修正可能に見えた。\n" +
-        "ただし、それを担う者は限られていた。\n\n";
-    }
-
-    if (s.timePressure > 18) {
-      t +=
-        "決定は速くなっていた。\n" +
-        "速さが、正しさの代わりになり始めていた。\n\n";
-    }
-
-    return t.trim();
-  },
-
-  text: (s) => {
-    let t =
-      "誰かが止めようとしない限り、\n" +
-      "社会はこのまま進み続けるだろうと思われていた。\n\n";
-
-    if (s.D < 60) {
-      t +=
-        "理由は問われなくなっていた。\n" +
-        "それは安定の証でもあり、危うさの兆しでもあった。\n\n";
-    }
-
-    t +=
-      "ここで何を選ぶかは、\n" +
-      "変化を生むというより、\n" +
-      "余地を残すかどうかに近かった。";
-
-    return t;
-  },
-
-  choices: [
-    {
-      text: "制度の運用を見直し、責任範囲を整理する",
-      detail:
-        "誰がどこまで決めているのかを明確にし、\n" +
-        "属人的な調整を減らそうとする。",
-      condition: (s) => s.A >= 60,
-      effects: { A: +2 },
-      next: 72
-    },
-    {
-      text: "これまでの判断の積み重ねを説明する",
-      detail:
-        "なぜ今の形になったのかを振り返り、\n" +
-        "理解の更新を試みる。",
-      condition: (s) => s.D >= 60,
-      effects: { D: +2 },
-      next: 72
-    },
-    {
-      text: "現状維持を前提に、揺らぎを抑える",
-      detail:
-        "変化よりも安定を優先し、\n" +
-        "不確実な要素を排除する。",
-      condition: (s) => s.B >= 70,
-      effects: { B: +2, D: -2 },
-      next: 72
-    },
-    {
-      text: "特に手を入れず、流れを継続する",
-      detail:
-        "問題が明確になるまで、\n" +
-        "判断を保留する。",
-      effects: { bias_avoidance: +1, timePressure: +2 },
-      next: 72
-    }
-  ]
-},
-
-/* ===== 72 ===== */
-{
-  title: "第72章：役割の固定化",
-
-  preText: (s) => {
-    let t =
-      "社会の中で、\n" +
-      "誰が決め、誰が従うのかは\n" +
-      "以前より明確になっていた。\n\n";
-
-    if (s.A < 60) {
-      t +=
-        "その分担は、文書よりも慣習に依存していた。\n\n";
-    }
-
-    return t.trim();
-  },
-
-  text: (s) => {
-    let t =
-      "役割は安定をもたらした。\n" +
-      "同時に、それは選択肢を減らしていった。\n\n";
-
-    if (s.D >= 65) {
-      t +=
-        "なぜその役割が存在するのかは、\n" +
-        "まだ語ることができていた。\n\n";
-    }
-
-    t +=
-      "役割が固定されるほど、\n" +
-      "そこから外れる想像は難しくなっていった。";
-
-    return t;
-  },
-
-  choices: [
-    {
-      text: "役割の見直しを制度的に行う",
-      detail:
-        "固定された分担を再評価し、\n" +
-        "柔軟性を回復しようとする。",
-      condition: (s) => s.A >= 62,
-      effects: { A: +2 },
-      next: 73
-    },
-    {
-      text: "役割の意味を再度共有する",
-      detail:
-        "なぜその分担が必要なのかを説明し直す。",
-      condition: (s) => s.D >= 62,
-      effects: { D: +2 },
-      next: 73
-    },
-    {
-      text: "役割を前提に秩序を強化する",
-      detail:
-        "分担を揺るがさないことで、\n" +
-        "安定を優先する。",
-      condition: (s) => s.B >= 72,
-      effects: { B: +2, D: -2 },
-      next: 73
-    },
-    {
-      text: "役割の問題を先送りする",
-      detail:
-        "大きな支障が出るまでは、\n" +
-        "現状を維持する。",
-      effects: { bias_avoidance: +1, timePressure: +2 },
-      next: 73
-    }
-  ]
-},
-
-/* ===== 73 ===== */
-{
-  title: "第73章：見えにくい歪み",
-
-  preText: (s) => {
-    let t =
-      "表面上、社会は安定していた。\n" +
-      "だが、調整されなかった部分は\n" +
-      "少しずつ積み重なっていた。\n\n";
-
-    if (s.timePressure > 22) {
-      t +=
-        "判断の速さは、\n" +
-        "問題を覆い隠す役割を果たしていた。\n\n";
-    }
-
-    return t.trim();
-  },
-
-  text: (s) => {
-    let t =
-      "歪みは、すぐには表に出なかった。\n" +
-      "それが問題として認識されるには、\n" +
-      "時間が必要だった。\n\n";
-
-    if (s.D < 60) {
-      t +=
-        "語られない違和感は、\n" +
-        "個人の中に留まり続けていた。\n\n";
-    }
-
-    t +=
-      "この段階では、\n" +
-      "まだ修正可能だと考える者もいた。";
-
-    return t;
-  },
-
-  choices: [
-    {
-      text: "小さな歪みを拾い上げる",
-      detail:
-        "制度の隙間に生じた問題を\n" +
-        "一つずつ調整する。",
-      condition: (s) => s.A >= 63,
-      effects: { A: +2 },
-      next: 74
-    },
-    {
-      text: "違和感を言葉にする場を設ける",
-      detail:
-        "個別の不満を共有し、\n" +
-        "理解に変換しようとする。",
-      condition: (s) => s.D >= 63,
-      effects: { D: +2 },
-      next: 74
-    },
-    {
-      text: "歪みを抑え込み、秩序を優先する",
-      detail:
-        "問題化する前に、\n" +
-        "統制を強める。",
-      condition: (s) => s.B >= 73,
-      effects: { B: +2, D: -2 },
-      next: 74
-    },
-    {
-      text: "深刻化するまで様子を見る",
-      detail:
-        "今は対応せず、\n" +
-        "流れに任せる。",
-      effects: { bias_avoidance: +1, timePressure: +2 },
-      next: 74
-    }
-  ]
-},
-
-/* ===== 74 ===== */
-{
-  title: "第74章：選べるという感覚",
-
-  preText: (s) => {
-    let t =
-      "社会はまだ、自らを修正できると\n" +
-      "感じられていた。\n\n";
-
-    if (s.A < 60 || s.D < 60) {
-      t +=
-        "ただし、その感覚は\n" +
-        "一部の者に限られつつあった。\n\n";
-    }
-
-    return t.trim();
-  },
-
-  text: (s) => {
-    let t =
-      "選択肢が存在することと、\n" +
-      "それを使えることは同じではなかった。\n\n";
-
-    if (s.D >= 65) {
-      t +=
-        "それでも、語ることは可能だった。\n" +
-        "理解を更新する余地は残っていた。\n\n";
-    }
-
-    t +=
-      "ここでの判断は、\n" +
-      "未来を変えるというより、\n" +
-      "可能性を閉じないためのものだった。";
-
-    return t;
-  },
-
-  choices: [
-    {
-      text: "修正可能性を前提に制度を維持する",
-      detail:
-        "壊さず、固めすぎず、\n" +
-        "調整を続ける。",
-      condition: (s) => s.A >= 64,
-      effects: { A: +1 },
-      next: 75
-    },
-    {
-      text: "語りの更新を続ける",
-      detail:
-        "なぜ続いているのかを\n" +
-        "繰り返し共有する。",
-      condition: (s) => s.D >= 64,
-      effects: { D: +1 },
-      next: 75
-    },
-    {
-      text: "秩序を優先し、揺らぎを抑える",
-      detail:
-        "可能性よりも安定を選ぶ。",
-      condition: (s) => s.B >= 74,
-      effects: { B: +1, D: -1 },
-      next: 75
-    },
-    {
-      text: "判断を保留し続ける",
-      detail:
-        "選ばないことで、\n" +
-        "現状を保つ。",
-      effects: { bias_avoidance: +1, timePressure: +2 },
-      next: 75
-    }
-  ]
-},
-
-/* ===== 75 ===== */
-{
-  title: "第75章：続いている理由",
-
-  preText: (s) => {
-    let t =
-      "この社会が続いていること自体が、\n" +
-      "すでに一つの結果だった。\n\n";
-
-    if (s.A >= 65 && s.D >= 65 && s.timePressure < 20) {
-      t +=
-        "壊れずに済んだ理由は、\n" +
-        "完全ではないが説明できた。\n\n";
-    }
-
-    return t.trim();
-  },
-
-  text: (s) => {
-    let t =
-      "なぜ崩れなかったのか。\n" +
-      "それは一つの答えではなかった。\n\n";
-
-    if (s.B >= 75 && s.D < 60) {
-      t +=
-        "力が均衡を保っていた時期もあった。\n" +
-        "だが、それだけでは説明できなかった。\n\n";
-    }
-
-    t +=
-      "この先も続くかどうかは分からない。\n" +
-      "だが、ここまでは確かに、\n" +
-      "選び続けた結果だった。";
-
-    return t;
-  },
-
-  choices: [
-    {
-      text: "次の世代に向け、調整を引き継ぐ",
-      detail:
-        "完成させるのではなく、\n" +
-        "続けられる形を残す。",
-      effects: { A: +1, D: +1 },
-      next: 76
-    },
-    {
-      text: "語られる理由を残す",
-      detail:
-        "完全でなくても、\n" +
-        "説明可能な形を維持する。",
-      effects: { D: +2 },
-      next: 76
-    },
-    {
-      text: "秩序を優先した形を固定する",
-      detail:
-        "変化を抑え、\n" +
-        "安定を選ぶ。",
-      condition: (s) => s.B >= 75,
-      effects: { B: +2, D: -2 },
-      next: 76
-    },
-    {
-      text: "特別な判断は行わない",
-      detail:
-        "この形が続くかどうかを、\n" +
-        "未来に委ねる。",
-      effects: { bias_avoidance: +1, timePressure: +2 },
-      next: 76
-    }
-  ]
-},
-
 
 
 ];
